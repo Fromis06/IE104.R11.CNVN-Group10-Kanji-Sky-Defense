@@ -1,12 +1,12 @@
 (function () {
   'use strict';
-  // chỗ lưu từ sai
+  // lưu được rồi, mà sai cùng từ vẫn thêm 2 lần
   const key = 'ksd-prototype-review-v1';
   let memory = [];
   function load() {
-    return memory.slice();
+    return JSON.parse(localStorage.getItem(key) || '[]');
   }
-  function save(rows) { memory = rows.slice(); }
+  function save(rows) { localStorage.setItem(key, JSON.stringify(rows)); }
   function remember(word) {
     const rows = load();
     rows.push({...word});
