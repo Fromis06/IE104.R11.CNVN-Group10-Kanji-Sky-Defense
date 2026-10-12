@@ -1,0 +1,22 @@
+# Hệ điều hành và trình soạn thảo
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Biến môi trường cục bộ
+.env
+.env.*
+
+# Tệp tạm và nhật ký
+*.log
+*.tmp
+*.temp
+
+# Bản sao dùng khi xuất bản
+/dist/
+
+# Dữ liệu công cụ cục bộ
+/.wrangler/
+/outputs/
+/work/

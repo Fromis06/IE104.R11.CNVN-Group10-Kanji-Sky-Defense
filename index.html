@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chơi · Kanji Sky Defense</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <!-- menu ở đây -->
+  <header><strong>漢 Kanji Sky Defense</strong><nav aria-label="Điều hướng chính"><a href="index.html">Chơi</a> <a href="about.html">Giới thiệu</a> <a href="contact.html">Liên hệ</a></nav></header>
+  <main>
+    <h1>Luyện đọc Kanji</h1>
+    <p>Gõ cách đọc để bảo vệ bầu trời.</p>
+    <div class="setup-layout">
+      <!-- phần chọn từ, để đây trước -->
+      <section id="view-setup" class="setup-card">
+        <h2>Bộ từ mẫu</h2><p>水 / 山 / 学校</p>
+        
+        
+        
+        <button id="start-button" type="button" disabled>Chưa nối logic game</button>
+      </section>
+      <aside class="summary-card"><h2>Luật chơi</h2><p>Study không giới hạn HP. Mỗi lần hiển thị một từ.</p></aside>
+    </div>
+    <section id="view-play" >
+      <h2>Vùng phòng thủ</h2><p id="game-status">Vị trí dự kiến của Canvas</p>
+      <canvas id="game-canvas" width="700" height="360" aria-label="Màn chơi Kanji"></canvas>
+      <form id="answer-form"><label for="answer-input">Cách đọc</label><input id="answer-input" autocomplete="off" disabled><button disabled>Xác nhận</button></form>
+      
+      <p id="feedback" role="status" aria-live="polite"></p>
+    </section>
+    
+  </main>
+  <footer>Kanji Sky Defense</footer>
+</body>
+</html>
