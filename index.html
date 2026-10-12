@@ -8,17 +8,17 @@
   <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-  <!-- menu ở đây -->
-  <header><strong>漢 Kanji Sky Defense</strong><nav aria-label="Điều hướng chính"><a href="index.html">Chơi</a> <a href="about.html">Giới thiệu</a> <a href="contact.html">Liên hệ</a></nav></header>
+  <!-- thêm link tài khoản -->
+  <header><strong>漢 Kanji Sky Defense</strong><nav aria-label="Điều hướng chính"><a href="index.html">Chơi</a> <a href="about.html">Giới thiệu</a> <a href="contact.html">Liên hệ</a> <a href="login.html">Đăng nhập</a> <a href="register.html">Đăng ký</a></nav></header>
   <main>
     <h1>Luyện đọc Kanji</h1>
     <p>Gõ cách đọc để bảo vệ bầu trời.</p>
     <div class="setup-layout">
-      <!-- phần chọn từ, để đây trước -->
+      <!-- chưa gắn nút bắt đầu -->
       <section id="view-setup" class="setup-card">
         <h2>Bộ từ mẫu</h2><p>水 / 山 / 学校</p>
         
-        
+        <label for="mode">Chế độ</label><select id="mode"><option value="study">Study</option><option disabled>Challenge — đang phát triển</option></select>
         
         <button id="start-button" type="button" disabled>Chưa nối logic game</button>
       </section>
