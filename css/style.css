@@ -1,7 +1,14 @@
-/* màu với khoảng cách để ở đây trước */
-body { margin:24px; font-family:Arial,sans-serif; background:#eee; color:#222; }
-header, footer { padding:16px; background:#ddd; }
-nav a { margin-right:12px; }
-button, input, textarea, select { font:inherit; padding:8px; }
-label { display:block; margin:10px 0; }
-main { min-height:65vh; }
+/* đổi sang màu tối, mấy chỗ dưới đang ghi màu lại */
+
+* { box-sizing:border-box; }
+body { margin:0; font-family:Arial,sans-serif; color:#f2ede2; background:#0a0c14; }
+header, footer { padding:20px 32px; background:#181d2b; }
+header { display:flex; justify-content:space-between; gap:20px;  }
+nav a { margin-right:12px; color:#ff8a3d; }
+main { max-width:1100px; margin:auto; padding:32px; min-height:70vh; }
+button, input, textarea, select { font:inherit; padding:10px; border:1px solid #687084; border-radius:4px; }
+button { color:#111; background:#ff8a3d; cursor:pointer; } button:disabled { opacity:.45; cursor:default; }
+label { display:block; margin:12px 0; } input, textarea { max-width:100%; }
+section { margin-bottom:20px; }
+
+
