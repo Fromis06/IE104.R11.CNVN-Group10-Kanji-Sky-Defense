@@ -1,0 +1,7 @@
+/* màu với khoảng cách để ở đây trước */
+body { margin:24px; font-family:Arial,sans-serif; background:#eee; color:#222; }
+header, footer { padding:16px; background:#ddd; }
+nav a { margin-right:12px; }
+button, input, textarea, select { font:inherit; padding:8px; }
+label { display:block; margin:10px 0; }
+main { min-height:65vh; }
