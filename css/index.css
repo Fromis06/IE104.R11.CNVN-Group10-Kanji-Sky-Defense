@@ -1,0 +1,8 @@
+/* khung này đang bị rộng trên điện thoại, chưa biết cách fix, để đó */
+.setup-card, .summary-card { border:1px solid #687084; padding:12px; margin-bottom:16px; }
+
+canvas { display:block; width:700px; background:#101827; border:1px dashed #687084; }
+#answer-form { margin-top:12px; }
+
+
+
