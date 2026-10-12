@@ -1,6 +1,6 @@
-# Kanji Sky Defense — tuần 1
+# Kanji Sky Defense — tuần 2
 
-Dựng index/about tĩnh, đặt vị trí vùng chơi. Thử màu và bố cục với kích thước cố định. Dựng trang liên hệ cùng stylesheet đầu tiên. Thử so đáp án với hai cách đọc Romaji mẫu. Thử danh sách từ sai trong bộ nhớ.
+Thêm chọn Study và hướng dẫn thao tác. Bố cục hai cột, chuyển sang nền tối. Dựng form login/register, thêm trường email liên hệ. Chuẩn hóa khoảng trắng, chữ hoa và thêm gakkou mẫu. Lưu và đọc danh sách thử nghiệm bằng localStorage.
 
 ## Chạy bản tuần này
 
@@ -10,6 +10,6 @@ Chạy độc lập: `node experiments/check-engine.cjs` và `node experiments/c
 
 ## Việc còn thiếu
 
-Trang mới là bản tĩnh; Canvas chưa chạy, chỉ có hai Romaji mẫu, dữ liệu thử mất khi thoát.
+Form tài khoản chưa nối; dữ liệu lưu còn trùng; CSS vẫn lặp màu trực tiếp.
 
 
