@@ -1,14 +1,14 @@
-/* đổi sang màu tối, mấy chỗ dưới đang ghi màu lại */
-
+/* Màu nền, màu chữ và màu nhấn dùng chung cho các trang. */
+:root { --bg:#0a0c14; --panel:#181d2b; --text:#f2ede2; --accent:#ff8a3d; }
 * { box-sizing:border-box; }
-body { margin:0; font-family:Arial,sans-serif; color:#f2ede2; background:#0a0c14; }
-header, footer { padding:20px 32px; background:#181d2b; }
-header { display:flex; justify-content:space-between; gap:20px;  }
-nav a { margin-right:12px; color:#ff8a3d; }
+body { margin:0; font-family:Arial,sans-serif; color:var(--text); background:var(--bg); }
+header, footer { padding:20px 32px; background:var(--panel); }
+header { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+nav a { margin-right:12px; color:var(--accent); }
 main { max-width:1100px; margin:auto; padding:32px; min-height:70vh; }
 button, input, textarea, select { font:inherit; padding:10px; border:1px solid #687084; border-radius:4px; }
 button { color:#111; background:#ff8a3d; cursor:pointer; } button:disabled { opacity:.45; cursor:default; }
 label { display:block; margin:12px 0; } input, textarea { max-width:100%; }
 section { margin-bottom:20px; }
-
+@media(max-width:700px) { main {padding:20px;} header {padding:16px;} }
 
