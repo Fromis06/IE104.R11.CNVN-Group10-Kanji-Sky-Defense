@@ -1,5 +1,5 @@
-/* căn lại cái form này */
-.auth-card { max-width:600px;  padding:16px; border:1px solid #687084; }
+/* Giới hạn chiều rộng nội dung và khoảng cách trường nhập của trang. */
+.auth-card { max-width:880px; margin-inline:auto; padding:20px; border:1px solid #687084; }
 input, textarea { display:block; width:100%; margin-top:6px; }
-
+@media(max-width:680px) { main { padding:16px; } }
 
