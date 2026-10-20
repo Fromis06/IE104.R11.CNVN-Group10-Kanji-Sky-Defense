@@ -1,15 +1,17 @@
 (function () {
   'use strict';
-  // lưu được rồi, mà sai cùng từ vẫn thêm 2 lần
+  // Đọc danh sách từ cần ôn; dữ liệu hỏng thì trả về danh sách trống.
   const key = 'ksd-prototype-review-v1';
   let memory = [];
   function load() {
-    return JSON.parse(localStorage.getItem(key) || '[]');
+    try { const rows=JSON.parse(localStorage.getItem(key) || '[]'); return Array.isArray(rows) ? rows : []; } catch { return []; }
   }
   function save(rows) { localStorage.setItem(key, JSON.stringify(rows)); }
   function remember(word) {
     const rows = load();
-    rows.push({...word});
+    const found = rows.find(row => row.kanji===word.kanji && row.hiragana===word.hiragana);
+    if (found) found.mistakeCount += 1;
+    else rows.push({...word, mistakeCount:1});
     save(rows);
   }
   function clear() { save([]); }
