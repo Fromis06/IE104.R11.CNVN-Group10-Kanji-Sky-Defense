@@ -1,0 +1,6 @@
+<button class="profile-sidebar__menu-item profile-sidebar__menu-item--active" type="button" data-user-panel="account" aria-pressed="true">
+  <svg class="profile-sidebar__icon icon icon--profile" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+    <use href="/assets/profile.svg#icon-profile"></use>
+  </svg>
+  <b class="profile-sidebar__label">Tài khoản</b>
+</button>

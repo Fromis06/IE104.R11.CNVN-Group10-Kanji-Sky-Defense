@@ -1,16 +1,151 @@
 <!doctype html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hồ sơ · Kanji Sky Defense</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/user.css">
-</head>
-<body>
-  <!-- Các trang phụ dùng cùng nhóm liên kết điều hướng. -->
-  <header><strong>漢 Kanji Sky Defense</strong><nav aria-label="Điều hướng chính"><a href="index.html">Chơi</a> <a href="about.html">Giới thiệu</a> <a href="contact.html">Liên hệ</a> <a href="login.html">Đăng nhập</a> <a href="register.html">Đăng ký</a> <a href="user.html">Hồ sơ</a> <a href="privacy.html">Dữ liệu</a></nav></header>
-  <main><h1>Trang cá nhân</h1><div class="account-layout"><aside>Tài khoản · Cài đặt</aside><section><h2>Người học</h2><p>Chưa kết nối tài khoản.</p><label>Tên hiển thị<input disabled placeholder="Người học"></label><h2>Tiến độ</h2><p>Lượt học: — · Độ chính xác: —</p></section></div></main>
-  <footer>Kanji Sky Defense</footer>
-</body>
+  <!-- Metadata và tài nguyên của trang; giữ thứ tự script theo phụ thuộc. -->
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0a0c14">
+    <meta name="description" content="Tài khoản, tiến độ học và thư viện từ đã quên của người chơi Kanji Sky Defense.">
+    <title>Trang cá nhân · Kanji Sky Defense</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <script src="js/preferences.js"></script>
+    <script src="js/icons.js" defer></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/user.css">
+    <script src="js/storage.js" defer></script>
+    <script src="js/utils.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/site.js" defer></script>
+    <script src="js/user.js" defer></script>
+  </head>
+  <body id="user-page" class="page" data-user-area>
+    <!-- Nhận diện website và điều hướng tới các màn hình, trang thông tin và tài khoản. -->
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="index.html">
+          <span class="brand__mark" aria-hidden="true">漢</span>
+          <span><span class="brand__title">KANJI SKY DEFENSE</span><span class="brand__subtitle">Typing defense station</span></span>
+        </a>
+        <div class="site-header__actions">
+          <nav class="page-nav"><a class="page-nav__link" href="index.html">Chơi</a><a class="page-nav__link" href="about.html">Giới thiệu</a><a class="page-nav__link" href="contact.html">Liên hệ</a><a class="page-nav__link" href="privacy.html">Quyền riêng tư</a></nav>
+          <nav class="account-nav" data-auth-nav></nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hồ sơ, tiến độ học, thư viện từ cần ôn và tùy chọn giao diện. -->
+    <main class="user-page">
+      <!-- Thông báo yêu cầu đăng nhập trước khi xem dữ liệu cá nhân. -->
+      <section id="user-gate" class="user-gate user-gate--hidden">
+        <div class="user-gate__mark" aria-hidden="true">認</div>
+        <h1 class="user-gate__title">Đăng nhập để xem tiến độ.</h1>
+        <div class="cluster cluster--justify-center cluster--gap-small cluster--wrap"><a class="button button--accent button--large" href="login.html">Đăng nhập</a><a class="button button--secondary button--large" href="register.html">Tạo tài khoản</a></div>
+      </section>
+
+      <div id="user-dashboard" class="account-layout account-layout--hidden">
+        <!-- Nhận diện người dùng và menu chuyển phần hồ sơ. -->
+        <aside class="profile-sidebar">
+          <div class="profile-sidebar__user">
+            <div class="profile-sidebar__avatar" aria-hidden="true"><img id="sidebar-avatar-image" class="profile-sidebar__avatar-image profile-sidebar__avatar-image--hidden" src="images/favicon.svg" alt=""><span id="sidebar-avatar-fallback" class="profile-sidebar__avatar-fallback">U</span></div>
+            <strong id="sidebar-name" class="profile-sidebar__name">Người học</strong>
+            <span id="sidebar-email" class="profile-sidebar__email"></span>
+          </div>
+
+          <nav class="profile-sidebar__menu">
+            <button class="profile-sidebar__menu-item profile-sidebar__menu-item--active" type="button" data-user-panel="account" aria-pressed="true"><svg class="profile-sidebar__icon icon icon--profile" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-profile"></use></svg><b class="profile-sidebar__label">Tài khoản</b></button>
+            <button class="profile-sidebar__menu-item" type="button" data-user-panel="settings" aria-pressed="false"><svg class="profile-sidebar__icon icon icon--settings" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-settings"></use></svg><b class="profile-sidebar__label">Cài đặt</b></button>
+          </nav>
+
+          <button id="user-logout" class="profile-sidebar__logout" type="button"><svg class="profile-sidebar__icon icon icon--logout" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-logout"></use></svg><b class="profile-sidebar__label">Đăng xuất</b></button>
+        </aside>
+
+        <div class="account-layout__content">
+          <!-- Thông tin tài khoản, ảnh đại diện và dữ liệu học tập. -->
+          <section id="panel-account" class="user-panel" data-user-panel-content="account">
+            <!-- Nhận diện website và điều hướng tới các màn hình, trang thông tin và tài khoản. -->
+            <header class="user-panel__heading"><p class="eyebrow">Tài khoản</p><h1 class="user-panel__title">Thông tin tài khoản</h1></header>
+
+            <div class="account-card">
+              <div class="avatar-editor">
+                <div class="profile-photo" role="img"><img id="profile-avatar-image" class="profile-photo__image profile-photo__image--hidden" src="images/favicon.svg" alt=""><span id="profile-avatar-fallback" class="profile-photo__fallback">U</span></div>
+                <input id="avatar-input" class="visually-hidden" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+                <button id="avatar-button" class="button button--secondary avatar-editor__button" type="button">Đổi ảnh</button>
+                <button id="avatar-remove" class="button button--danger-ghost button--hidden avatar-editor__button" type="button">Xóa ảnh</button>
+                <p id="avatar-status" class="form-status avatar-editor__status"></p>
+              </div>
+
+              <!-- Các trường nhập có nhãn; JavaScript hiển thị kết quả xử lý ngay tại form. -->
+              <form id="account-form" class="account-form">
+                <div class="field"><label class="field__label" for="account-name">Tên người dùng</label><input id="account-name" class="field__control" name="name" autocomplete="name" minlength="2" maxlength="40" required></div>
+                <div class="field"><label class="field__label" for="account-email">Email</label><input id="account-email" class="field__control" name="email" type="email" autocomplete="email" required></div>
+                <div class="field"><label class="field__label" for="account-birthday">Ngày sinh</label><input id="account-birthday" class="field__control" name="birthday" type="date" autocomplete="bday"></div>
+                <div class="field"><label class="field__label" for="account-created">Ngày tham gia</label><input id="account-created" class="field__control field__control--readonly" type="text" readonly></div>
+                <button class="button button--accent account-form__submit" type="submit">Lưu thay đổi</button>
+                <p id="account-status" class="form-status account-form__status"></p>
+              </form>
+            </div>
+
+            <!-- Các chỉ số tổng quan được JavaScript cập nhật từ lịch sử học. -->
+            <section class="stat-grid">
+              <div class="stat-card"><span class="stat-card__label">Phiên học</span><strong id="stat-sessions" class="stat-card__value">0</strong></div>
+              <div class="stat-card"><span class="stat-card__label">Từ đã luyện</span><strong id="stat-words" class="stat-card__value">0</strong></div>
+              <div class="stat-card"><span class="stat-card__label">Độ chính xác</span><strong id="stat-accuracy" class="stat-card__value">0%</strong></div>
+              <div class="stat-card"><span class="stat-card__label">Chuỗi học</span><strong id="stat-streak" class="stat-card__value">0 ngày</strong></div>
+            </section>
+
+            <!-- Biểu đồ số từ luyện theo tuần hoặc tháng. -->
+            <section class="dashboard-card dashboard-card--chart">
+              <div class="dashboard-card__heading">
+                <h2 class="dashboard-card__title">Số từ đã luyện</h2>
+                <div class="segmented-control" role="group">
+                  <button class="segmented-control__option segmented-control__option--active" type="button" data-chart-period="week">Tuần</button>
+                  <button class="segmented-control__option" type="button" data-chart-period="month">Tháng</button>
+                </div>
+              </div>
+              <canvas id="learning-chart" class="learning-chart" role="img"></canvas>
+            </section>
+
+            <!-- Tìm kiếm và quản lý các từ cần ôn của tài khoản hiện tại. -->
+            <section class="dashboard-card dashboard-card--library">
+              <div class="dashboard-card__heading dashboard-card__heading--library">
+                <h2 class="dashboard-card__title">Từ đã quên <span id="library-count" class="word-library__count">0 từ</span></h2>
+                <div class="word-library__actions"><button id="clear-library" class="button button--danger-ghost button--hidden word-library__action" type="button">Xóa tất cả</button><button id="review-now" class="button button--accent button--hidden word-library__action" type="button"><svg class="icon icon--play" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg>Ôn ngay</button></div>
+              </div>
+              <label class="word-library__search" for="library-search"><svg class="word-library__search-icon icon icon--search" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-search"></use></svg><input id="library-search" class="word-library__search-input" type="search" autocomplete="off" placeholder="Tìm Kanji hoặc cách đọc"></label>
+              <div id="forgotten-library" class="word-library__list"></div>
+            </section>
+          </section>
+
+          <!-- Các lựa chọn giao diện, ngôn ngữ và xác nhận thao tác. -->
+          <section id="panel-settings" class="user-panel user-panel--hidden" data-user-panel-content="settings">
+            <!-- Nhận diện website và điều hướng tới các màn hình, trang thông tin và tài khoản. -->
+            <header class="user-panel__heading"><p class="eyebrow">Cài đặt</p><h1 class="user-panel__title">Cài đặt</h1></header>
+
+            <section class="settings-card">
+              <h2 class="settings-card__title">Giao diện</h2>
+              <div class="theme-selector" role="group">
+                <button class="theme-selector__option" type="button" data-theme-option="light" aria-pressed="false"><span class="theme-selector__preview theme-selector__preview--light" aria-hidden="true"></span><b class="theme-selector__label">Sáng</b></button>
+                <button class="theme-selector__option" type="button" data-theme-option="dark" aria-pressed="true"><span class="theme-selector__preview theme-selector__preview--dark" aria-hidden="true"></span><b class="theme-selector__label">Tối</b></button>
+              </div>
+            </section>
+
+            <div class="settings-card settings-card--row">
+              <label class="settings-card__label" for="language-select">Ngôn ngữ</label>
+              <select id="language-select" class="settings-card__select"><option value="vi">Tiếng Việt</option><option disabled value="en">Tiếng Anh</option><option disabled value="ja">Tiếng Nhật</option></select>
+            </div>
+
+            <section class="settings-card">
+              <h2 class="settings-card__title">Tùy chọn</h2>
+              <label class="preference"><b class="preference__label">Giảm chuyển động</b><span class="preference__switch"><input id="reduce-motion" class="preference__input" type="checkbox"><span class="preference__track" aria-hidden="true"></span></span></label>
+              <label class="preference"><b class="preference__label">Hiển thị phím tắt</b><span class="preference__switch"><input id="show-shortcuts" class="preference__input" type="checkbox"><span class="preference__track" aria-hidden="true"></span></span></label>
+              <label class="preference"><b class="preference__label">Xác nhận trước khi xóa</b><span class="preference__switch"><input id="confirm-delete" class="preference__input" type="checkbox"><span class="preference__track" aria-hidden="true"></span></span></label>
+            </section>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Năm bản quyền và liên kết tới các trang thông tin dùng chung. -->
+    <footer class="site-footer"><span class="site-footer__copyright">© <span data-year></span> Kanji Sky Defense</span><nav class="site-footer__nav"><a class="site-footer__link" href="about.html">Giới thiệu</a><a class="site-footer__link" href="contact.html">Liên hệ</a><a class="site-footer__link" href="privacy.html">Quyền riêng tư</a></nav></footer>
+  </body>
 </html>

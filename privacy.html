@@ -1,16 +1,134 @@
 <!doctype html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dữ liệu · Kanji Sky Defense</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/privacy.css">
-</head>
-<body>
-  <!-- Các trang phụ dùng cùng nhóm liên kết điều hướng. -->
-  <header><strong>漢 Kanji Sky Defense</strong><nav aria-label="Điều hướng chính"><a href="index.html">Chơi</a> <a href="about.html">Giới thiệu</a> <a href="contact.html">Liên hệ</a> <a href="login.html">Đăng nhập</a> <a href="register.html">Đăng ký</a> <a href="user.html">Hồ sơ</a> <a href="privacy.html">Dữ liệu</a></nav></header>
-  <main><h1>Dữ liệu trên thiết bị</h1><p>Tiến độ học sẽ lưu trong trình duyệt đang dùng.</p><section><h2>Quyền kiểm soát</h2><p>Có thể xóa danh sách ôn và dữ liệu thử nghiệm trên thiết bị.</p></section></main>
-  <footer>Kanji Sky Defense</footer>
-</body>
+  <!-- Metadata và tài nguyên của trang; giữ thứ tự script theo phụ thuộc. -->
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0a0c14">
+    <meta name="description" content="Chính sách lưu trữ dữ liệu cục bộ và cookie của Kanji Sky Defense.">
+    <title>Quyền riêng tư · Kanji Sky Defense</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <script src="js/preferences.js"></script>
+    <script src="js/icons.js" defer></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/privacy.css">
+    <script src="js/storage.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/site.js" defer></script>
+  </head>
+  <body id="privacy-page" class="page">
+    <!-- Nhận diện website và điều hướng tới các màn hình, trang thông tin và tài khoản. -->
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="index.html">
+          <span class="brand__mark" aria-hidden="true">漢</span>
+          <span><span class="brand__title">KANJI SKY DEFENSE</span><span class="brand__subtitle">Typing defense station</span></span>
+        </a>
+        <div class="site-header__actions">
+          <nav class="page-nav">
+            <a class="page-nav__link" href="index.html">Chơi</a>
+            <a class="page-nav__link" href="about.html">Giới thiệu</a>
+            <a class="page-nav__link" href="contact.html">Liên hệ</a>
+            <a class="page-nav__link page-nav__link--active" href="privacy.html" aria-current="page">Quyền riêng tư</a>
+          </nav>
+          <nav class="account-nav" data-auth-nav></nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Giải thích dữ liệu cục bộ và cách người dùng kiểm soát dữ liệu. -->
+    <main class="privacy-page">
+      <!-- Nhận diện website và điều hướng tới các màn hình, trang thông tin và tài khoản. -->
+      <header class="privacy-page__hero">
+        <p class="eyebrow">Quyền riêng tư</p>
+        <h1 class="privacy-page__title">Chính sách lưu trữ dữ liệu</h1>
+        <p class="privacy-page__lead">Kanji Sky Defense là ứng dụng web chạy trực tiếp trong trình duyệt. Phiên bản hiện tại không có backend và không gửi dữ liệu học tập hoặc tài khoản của bạn lên máy chủ của ứng dụng.</p>
+        <p class="privacy-page__updated">Cập nhật lần cuối: 12/09/2026</p>
+      </header>
+
+      <div class="privacy-layout">
+        <!-- Thông tin bổ trợ và điều hướng theo nội dung trang. -->
+        <aside class="privacy-summary">
+          <span class="privacy-summary__icon" aria-hidden="true"><svg class="icon icon--privacy" viewBox="0 0 24 24" width="20" height="20" focusable="false"><use href="#icon-privacy"></use></svg></span>
+          <h2 class="privacy-summary__title">Tóm tắt nhanh</h2>
+          <ul class="privacy-summary__list">
+            <li class="privacy-summary__item">Dữ liệu được lưu trên thiết bị bằng <code>localStorage</code>.</li>
+            <li class="privacy-summary__item">Ứng dụng hiện không tự đặt cookie.</li>
+            <li class="privacy-summary__item">Không có quảng cáo hoặc công cụ theo dõi bên thứ ba.</li>
+            <li class="privacy-summary__item">Bạn có thể xóa dữ liệu qua phần cài đặt trình duyệt.</li>
+          </ul>
+        </aside>
+
+        <div class="privacy-policy">
+          <!-- Các loại dữ liệu website lưu trên thiết bị. -->
+          <section class="privacy-policy__section" id="data-we-store">
+            <span class="privacy-policy__number">01</span>
+            <div class="privacy-policy__content">
+              <h2 class="privacy-policy__title">Dữ liệu được lưu</h2>
+              <p class="privacy-policy__text">Khi bạn sử dụng các tính năng tương ứng, trình duyệt có thể lưu tên hiển thị, email, mã băm mật khẩu, ngày sinh, ảnh đại diện, ngày tạo tài khoản và mã phiên đăng nhập. Ứng dụng cũng lưu cài đặt giao diện, ngôn ngữ, tùy chọn truy cập, thống kê học tập và danh sách từ cần ôn.</p>
+              <p class="privacy-policy__text">Không nên sử dụng mật khẩu thật hoặc mật khẩu đang dùng cho dịch vụ khác. Hệ thống tài khoản chỉ là mô phỏng phía trình duyệt và không thay thế cơ chế xác thực có máy chủ.</p>
+            </div>
+          </section>
+
+          <!-- Mục đích sử dụng dữ liệu học tập và tùy chọn. -->
+          <section class="privacy-policy__section" id="storage-purpose">
+            <span class="privacy-policy__number">02</span>
+            <div class="privacy-policy__content">
+              <h2 class="privacy-policy__title">Mục đích lưu trữ</h2>
+              <p class="privacy-policy__text">Dữ liệu cục bộ được dùng để duy trì đăng nhập, khôi phục lựa chọn giao diện, hiển thị tiến độ và giúp bạn tiếp tục ôn những từ đã trả lời sai. File CSV và nội dung góp ý chỉ được xử lý trong trình duyệt; biểu mẫu liên hệ sao chép nội dung vào clipboard và không tự gửi đi.</p>
+            </div>
+          </section>
+
+          <!-- Thông tin về cookie và cách lưu trữ tại trình duyệt. -->
+          <section class="privacy-policy__section" id="cookies">
+            <span class="privacy-policy__number">03</span>
+            <div class="privacy-policy__content">
+              <h2 class="privacy-policy__title">Cookie và theo dõi</h2>
+              <p class="privacy-policy__text">Mã nguồn hiện tại không tạo cookie và không tích hợp quảng cáo, phân tích hành vi hoặc tracker bên thứ ba. Nếu cách triển khai website thay đổi và bắt đầu sử dụng cookie, chính sách này cần được cập nhật trước khi áp dụng.</p>
+            </div>
+          </section>
+
+          <!-- Thời gian lưu giữ và quyền chủ động xóa dữ liệu. -->
+          <section class="privacy-policy__section" id="retention-control">
+            <span class="privacy-policy__number">04</span>
+            <div class="privacy-policy__content">
+              <h2 class="privacy-policy__title">Thời gian lưu và quyền kiểm soát</h2>
+              <p class="privacy-policy__text"><code>localStorage</code> thường tiếp tục tồn tại sau khi đóng và mở lại trình duyệt. Dữ liệu được giữ cho đến khi ứng dụng xóa mục tương ứng, trình duyệt tự dọn dữ liệu, hoặc bạn xóa dữ liệu website trong phần quyền riêng tư của trình duyệt. Đăng xuất chỉ xóa phiên đăng nhập, không xóa hồ sơ đã lưu.</p>
+            </div>
+          </section>
+
+          <!-- Giới hạn bảo vệ dữ liệu của phiên bản frontend. -->
+          <section class="privacy-policy__section" id="security">
+            <span class="privacy-policy__number">05</span>
+            <div class="privacy-policy__content">
+              <h2 class="privacy-policy__title">Bảo mật và giới hạn</h2>
+              <p class="privacy-policy__text">Dữ liệu cục bộ thuộc origin của website và không được ứng dụng tự động gửi kèm mọi yêu cầu như cookie. Tuy vậy, người có quyền truy cập thiết bị, hồ sơ trình duyệt hoặc mã chạy trong cùng origin có thể tiếp cận dữ liệu này. Không lưu thông tin nhạy cảm trong ứng dụng.</p>
+            </div>
+          </section>
+
+          <!-- Cập nhật chính sách và kênh liên hệ. -->
+          <section class="privacy-policy__section" id="changes-contact">
+            <span class="privacy-policy__number">06</span>
+            <div class="privacy-policy__content">
+              <h2 class="privacy-policy__title">Thay đổi và liên hệ</h2>
+              <p class="privacy-policy__text">Chính sách có thể được cập nhật khi chức năng lưu trữ hoặc cách triển khai thay đổi. Ngày cập nhật mới nhất sẽ luôn được ghi ở đầu trang. Nếu có câu hỏi, bạn có thể chuẩn bị nội dung tại trang <a class="privacy-policy__link" href="contact.html">Liên hệ</a>.</p>
+            </div>
+          </section>
+
+          <!-- Nguồn tham khảo giúp làm rõ cơ chế lưu dữ liệu trình duyệt. -->
+          <section class="privacy-policy__references" aria-labelledby="reference-title">
+            <h2 id="reference-title" class="privacy-policy__references-title">Tham khảo kỹ thuật</h2>
+            <p class="privacy-policy__text">Thông tin về cơ chế lưu trữ được tham khảo từ tài liệu Web Storage và HTTP Cookie của MDN.</p>
+            <div class="privacy-policy__reference-links">
+              <a class="privacy-policy__reference" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API" target="_blank" rel="noreferrer">MDN · Web Storage API</a>
+              <a class="privacy-policy__reference" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies" target="_blank" rel="noreferrer">MDN · HTTP cookies</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Năm bản quyền và liên kết tới các trang thông tin dùng chung. -->
+    <footer class="site-footer"><span class="site-footer__copyright">© <span data-year></span> Kanji Sky Defense</span><nav class="site-footer__nav"><a class="site-footer__link" href="about.html">Giới thiệu</a><a class="site-footer__link" href="contact.html">Liên hệ</a><a class="site-footer__link" href="privacy.html">Quyền riêng tư</a></nav></footer>
+  </body>
 </html>
