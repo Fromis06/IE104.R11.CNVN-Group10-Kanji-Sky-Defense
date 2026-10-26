@@ -1,16 +1,55 @@
 <!doctype html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Đăng ký · Kanji Sky Defense</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/auth.css">
-</head>
-<body>
-  <!-- Các trang phụ dùng cùng nhóm liên kết điều hướng. -->
-  <header><strong>漢 Kanji Sky Defense</strong><nav aria-label="Điều hướng chính"><a href="index.html">Chơi</a> <a href="about.html">Giới thiệu</a> <a href="contact.html">Liên hệ</a> <a href="login.html">Đăng nhập</a> <a href="register.html">Đăng ký</a> <a href="user.html">Hồ sơ</a> <a href="privacy.html">Dữ liệu</a></nav></header>
-  <main><h1>Tạo tài khoản</h1><form class="auth-card"><label>Tên<input name="name" required minlength="2"></label><label>Email<input name="email" type="email" required></label><label>Mật khẩu<input name="password" type="password" required minlength="6"></label><label>Nhập lại mật khẩu<input name="confirmPassword" type="password" required></label><button type="button" disabled>Đang dựng biểu mẫu</button></form><p>Chưa lưu tài khoản ở bản giao diện này.</p></main>
-  <footer>Kanji Sky Defense</footer>
-</body>
+  <!-- Metadata và tài nguyên của trang; giữ thứ tự script theo phụ thuộc. -->
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0a0c14">
+    <meta name="description" content="Tạo tài khoản Kanji Sky Defense.">
+    <title>Đăng ký · Kanji Sky Defense</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <script src="js/preferences.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <script src="js/storage.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/site.js" defer></script>
+  </head>
+  <body id="register-page" class="page">
+    <!-- Nhận diện website và điều hướng tới các màn hình, trang thông tin và tài khoản. -->
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="index.html">
+          <span class="brand__mark" aria-hidden="true">漢</span>
+          <span><span class="brand__title">KANJI SKY DEFENSE</span><span class="brand__subtitle">Typing defense station</span></span>
+        </a>
+        <div class="site-header__actions">
+          <nav class="page-nav"><a class="page-nav__link" href="index.html">Chơi</a><a class="page-nav__link" href="about.html">Giới thiệu</a><a class="page-nav__link" href="contact.html">Liên hệ</a><a class="page-nav__link" href="privacy.html">Quyền riêng tư</a></nav>
+          <nav class="account-nav" data-auth-nav></nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Biểu mẫu tạo tài khoản cục bộ và kiểm tra xác nhận mật khẩu. -->
+    <main class="auth-page">
+      <section class="auth-page__intro">
+        <h1 class="auth-page__title">Biến mỗi lần chơi thành kiến thức</h1>
+      </section>
+
+      <!-- Các trường nhập có nhãn; JavaScript hiển thị kết quả xử lý ngay tại form. -->
+      <form class="auth-card" data-auth-form="register">
+        <div class="auth-card__heading"><p class="eyebrow">Tạo tài khoản</p><h2 class="auth-card__title">Đăng ký</h2></div>
+        <div class="field"><label class="field__label" for="register-name">Tên hiển thị</label><input id="register-name" class="field__control" name="name" autocomplete="name" minlength="2" maxlength="40" required></div>
+        <div class="field"><label class="field__label" for="register-email">Email</label><input id="register-email" class="field__control" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label class="field__label" for="register-password">Mật khẩu</label><input id="register-password" class="field__control" name="password" type="password" autocomplete="new-password" minlength="6" required></div>
+        <div class="field"><label class="field__label" for="register-confirm">Xác nhận mật khẩu</label><input id="register-confirm" class="field__control" name="confirmPassword" type="password" autocomplete="new-password" minlength="6" required></div>
+        <button class="button button--accent button--large button--full" type="submit">Tạo tài khoản</button>
+        <p class="form-status" data-auth-status></p>
+        <p class="auth-card__switch">Đã có tài khoản? <a class="auth-card__link" href="login.html">Đăng nhập</a></p>
+      </form>
+    </main>
+
+    <!-- Năm bản quyền và liên kết tới các trang thông tin dùng chung. -->
+    <footer class="site-footer"><span class="site-footer__copyright">© <span data-year></span> Kanji Sky Defense</span><nav class="site-footer__nav"><a class="site-footer__link" href="about.html">Giới thiệu</a><a class="site-footer__link" href="contact.html">Liên hệ</a><a class="site-footer__link" href="privacy.html">Quyền riêng tư</a></nav></footer>
+  </body>
 </html>

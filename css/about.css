@@ -1,0 +1,31 @@
+/* Giới thiệu mục tiêu học tập, hướng dẫn thao tác và ba chế độ chơi. */
+#about-page .about-page { width: 100%; max-width: 1120px; min-height: calc(100vh - 150px); margin: auto; padding: 4.5rem 2rem; }
+#about-page .about-page__hero { max-width: 760px; }
+#about-page .about-page__title { max-width: 720px; margin: .8rem 0 0; font-size: clamp(2.4rem, 6.5vw, 4.4rem); line-height: 1; letter-spacing: -.04em; }
+#about-page .about-page__description { max-width: 640px; margin: 1.25rem 0 0; color: var(--muted); font-size: 1.05rem; line-height: 1.7; }
+#about-page .about-page__action { margin-top: 1.75rem; }
+
+#about-page .feature-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 4rem; border: 1px solid var(--line-soft); border-radius: 2px; }
+#about-page .feature-card { padding: 1.5rem; border-left: 1px solid var(--line-soft); background: var(--panel); }
+#about-page .feature-card:first-child { border-left: 0; }
+#about-page .feature-card__number { color: var(--accent); font-family: var(--font-mono); font-size: .78rem; font-weight: 700; }
+#about-page .feature-card__title { margin: 1.1rem 0 .55rem; font-size: 1.05rem; }
+#about-page .feature-card__description { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.65; }
+#about-page .feature-card__description code { padding: .1rem .3rem; color: var(--accent-soft); background: var(--surface-soft); font-family: var(--font-mono); }
+
+#about-page .mode-explainer { display: grid; grid-template-columns: .9fr 1.1fr; gap: 3rem; margin-top: 3rem; padding: 2rem; border: 1px solid var(--line-soft); border-radius: 2px; background: var(--panel-deep); }
+#about-page .mode-explainer__title { margin: .6rem 0 0; font-size: 1.7rem; line-height: 1.2; }
+#about-page .mode-explainer__list { display: grid; gap: 1rem; margin: 0; }
+#about-page .mode-explainer__item { display: grid; grid-template-columns: 100px 1fr; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line-soft); }
+#about-page .mode-explainer__item:last-child { padding-bottom: 0; border-bottom: 0; }
+#about-page .mode-explainer__term { color: var(--accent-soft); font-family: var(--font-mono); font-weight: 700; }
+#about-page .mode-explainer__description { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.55; }
+
+
+
+
+
+
+
+/* Khoảng cách dòng trang phụ còn cần cân lại với phần nội dung chính. */
+main { line-height: 1.7; }

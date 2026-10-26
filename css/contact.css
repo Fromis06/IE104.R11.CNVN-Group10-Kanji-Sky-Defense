@@ -1,5 +1,17 @@
-/* Giới hạn chiều rộng nội dung và khoảng cách trường nhập của trang. */
-.contact-form { max-width:880px; margin-inline:auto; padding:20px; border:1px solid #687084; }
-input, textarea { display:block; width:100%; margin-top:6px; }
-@media(max-width:680px) { main { padding:16px; } }
+/* Biểu mẫu soạn nội dung góp ý để sao chép và gửi qua kênh liên hệ. */
+#contact-page .contact-page { display: grid; width: 100%; max-width: 1080px; min-height: calc(100vh - 150px); margin: auto; padding: 4.5rem 2rem; grid-template-columns: .9fr 1.1fr; gap: 3.5rem; align-items: start; }
+#contact-page .contact-page__title { max-width: 640px; margin: .8rem 0 0; font-size: clamp(2.3rem, 5.5vw, 3.8rem); line-height: 1; letter-spacing: -.04em; }
+#contact-page .contact-page__description { max-width: 600px; margin: 1.25rem 0 0; color: var(--muted); font-size: 1.05rem; line-height: 1.7; }
+#contact-page .privacy-note { display: flex; margin-top: 2rem; gap: .8rem; padding: 1rem; border: 1px solid var(--line-soft); border-left: 2px solid var(--accent); color: var(--accent-soft); background: var(--surface-soft); }
+#contact-page .privacy-note__icon { color: var(--icon-accent); }
+#contact-page .privacy-note__text { margin: 0; color: var(--muted); font-size: .85rem; line-height: 1.55; }
+#contact-page .contact-form { display: grid; gap: 1.1rem; padding: 1.5rem; border: 1px solid var(--line); background: var(--panel); }
 
+
+
+
+
+
+
+/* Khoảng cách dòng trang phụ còn cần cân lại với phần nội dung chính. */
+main { line-height: 1.7; }
