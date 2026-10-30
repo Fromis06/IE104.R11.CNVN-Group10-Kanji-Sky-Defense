@@ -1,15 +1,13 @@
-# Kanji Sky Defense — tuần 2
+# Kanji Sky Defense — tuần 6
 
-Thêm chọn Study và hướng dẫn thao tác. Bố cục hai cột, chuyển sang nền tối. Dựng form login/register, thêm trường email liên hệ. Chuẩn hóa khoảng trắng, chữ hoa và thêm gakkou mẫu. Lưu và đọc danh sách thử nghiệm bằng localStorage.
+Chuyển sang cấu trúc đầy đủ setup/play/review. Ghép CSS component bản desktop; chưa đủ breakpoint. Ghép các trang tài khoản/thông tin và bộ tài nguyên hiện tại. Tích hợp ba chế độ, nhiều mục tiêu và IME; renderer còn đơn giản. Nối đăng ký, đăng nhập, lưu trữ, hồ sơ; API tùy chọn tiếng Việt.
 
 ## Chạy bản tuần này
 
-Phục vụ thư mục này bằng máy chủ HTTP tĩnh. Các trang HTML chưa nạp JavaScript thử nghiệm.
-
-Chạy độc lập: `node experiments/check-engine.cjs` và `node experiments/check-storage.cjs`.
+Phục vụ thư mục này bằng máy chủ HTTP tĩnh. Mở index.html để kiểm tra luồng chơi đã tích hợp.
 
 ## Việc còn thiếu
 
-Form tài khoản chưa nối; dữ liệu lưu còn trùng; CSS vẫn lặp màu trực tiếp.
+Đã tích hợp chức năng chính nhưng renderer đơn giản, bước thời gian cố định; chưa dịch, biểu đồ chỉ báo số tổng; responsive còn thiếu.
 
 

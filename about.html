@@ -1,16 +1,71 @@
 <!doctype html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Giới thiệu · Kanji Sky Defense</title>
-  <link rel="stylesheet" href="css/style.css">
-  
-</head>
-<body>
-  <!-- thêm link tài khoản -->
-  <header><strong>漢 Kanji Sky Defense</strong><nav aria-label="Điều hướng chính"><a href="index.html">Chơi</a> <a href="about.html">Giới thiệu</a> <a href="contact.html">Liên hệ</a> <a href="login.html">Đăng nhập</a> <a href="register.html">Đăng ký</a></nav></header>
-  <main><h1>Học Kanji qua thao tác gõ</h1><section><h2>Cách chơi</h2><p>Chọn bộ từ, bắt đầu nhiệm vụ và gõ Hiragana hoặc các từ Romaji mẫu.</p></section></main>
-  <footer>Kanji Sky Defense</footer>
-</body>
+  <!-- Metadata và tài nguyên của trang; giữ thứ tự script theo phụ thuộc. -->
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0a0c14">
+    <meta name="description" content="Tìm hiểu cách Kanji Sky Defense giúp bạn luyện đọc Kanji.">
+    <title>Giới thiệu · Kanji Sky Defense</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <script src="js/preferences.js"></script>
+    <script src="js/icons.js" defer></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/about.css">
+    <script src="js/storage.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/site.js" defer></script>
+  </head>
+  <body id="about-page" class="page">
+    <!-- Nhận diện website và điều hướng tới các màn hình, trang thông tin và tài khoản. -->
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="index.html">
+          <span class="brand__mark" aria-hidden="true">漢</span>
+          <span><span class="brand__title">KANJI SKY DEFENSE</span><span class="brand__subtitle">Typing defense station</span></span>
+        </a>
+        <div class="site-header__actions">
+          <nav class="page-nav">
+            <a class="page-nav__link" href="index.html">Chơi</a>
+            <a class="page-nav__link page-nav__link--active" href="about.html" aria-current="page">Giới thiệu</a>
+            <a class="page-nav__link" href="contact.html">Liên hệ</a>
+            <a class="page-nav__link" href="privacy.html">Quyền riêng tư</a>
+          </nav>
+          <nav class="account-nav" data-auth-nav></nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Giới thiệu mục tiêu học tập, hướng dẫn thao tác và ba chế độ chơi. -->
+    <main class="about-page">
+      <!-- Giới thiệu mục đích và giá trị học tập của trò chơi. -->
+      <section class="about-page__hero">
+        <p class="eyebrow">Về trò chơi</p>
+        <h1 class="about-page__title">Ghi nhớ cách đọc bằng trò chơi</h1>
+        <p class="about-page__description">Kanji Sky Defense biến mỗi từ vựng thành một mục tiêu đang tiến về phòng tuyến. Bạn đọc Kanji, gõ cách đọc và bảo vệ bầu trời an toàn.</p>
+        <a class="button button--primary button--large about-page__action" href="index.html"><svg class="icon icon--play" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg>Bắt đầu nhiệm vụ</a>
+      </section>
+
+      <!-- Tóm tắt các bước nạp từ, nhập cách đọc và ôn lại. -->
+      <section class="feature-list">
+        <article class="feature-card"><span class="feature-card__number">01</span><h2 class="feature-card__title">Chọn bộ từ</h2><p class="feature-card__description">Chơi ngay với 12 từ mẫu hoặc nạp CSV gồm hai cột <code>kanji,hiragana</code>.</p></article>
+        <article class="feature-card"><span class="feature-card__number">02</span><h2 class="feature-card__title">Gõ cách đọc</h2><p class="feature-card__description">Nhập trực tiếp Hiragana hoặc gõ Romaji. Trò chơi tự chuyển đổi để so sánh đáp án.</p></article>
+        <article class="feature-card"><span class="feature-card__number">03</span><h2 class="feature-card__title">Ôn từ đã lỡ</h2><p class="feature-card__description">Mọi đáp án sai và mục tiêu vượt phòng tuyến đều có thể được học lại !</p></article>
+      </section>
+
+      <!-- So sánh quy tắc Study, Challenge và Endless. -->
+      <section class="mode-explainer">
+        <div class="mode-explainer__intro"><p class="eyebrow">3 chế độ chơi</p><h2 class="mode-explainer__title">Chọn chế độ chơi phù hợp với nhu cầu của bạn</h2></div>
+        <dl class="mode-explainer__list">
+          <div class="mode-explainer__item"><dt class="mode-explainer__term">Study</dt><dd class="mode-explainer__description">Không giới hạn HP, phù hợp để làm quen bộ từ mới.</dd></div>
+          <div class="mode-explainer__item"><dt class="mode-explainer__term">Challenge</dt><dd class="mode-explainer__description">Hoàn thành với số HP đã chọn.</dd></div>
+          <div class="mode-explainer__item"><dt class="mode-explainer__term">Endless</dt><dd class="mode-explainer__description">Từ vựng lặp liên tục, có thể bật hoặc tắt giới hạn HP.</dd></div>
+        </dl>
+      </section>
+      <p>Bản nội dung đang được nhóm rà soát.</p>
+    </main>
+
+    <!-- Năm bản quyền và liên kết tới các trang thông tin dùng chung. -->
+    <footer class="site-footer"><span class="site-footer__copyright">© <span data-year></span> Kanji Sky Defense</span><nav class="site-footer__nav"><a class="site-footer__link" href="about.html">Giới thiệu</a><a class="site-footer__link" href="contact.html">Liên hệ</a><a class="site-footer__link" href="privacy.html">Quyền riêng tư</a></nav></footer>
+  </body>
 </html>
