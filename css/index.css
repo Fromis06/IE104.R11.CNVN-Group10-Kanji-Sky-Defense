@@ -1,8 +1,196 @@
-/* Bố cục thiết lập và vùng chơi; chia cột theo chiều rộng màn hình. */
-.setup-card, .summary-card { border:1px solid #687084; padding:20px; margin-bottom:16px; }
-.setup-layout { display:grid; grid-template-columns:2fr 1fr; gap:20px; }
-canvas { display:block; width:100%; max-width:700px; background:#101827; border:1px dashed #687084; }
-#answer-form { margin-top:12px; }
-@media(max-width:700px) { .setup-layout {grid-template-columns:1fr;} }
-#game-status {font-variant-numeric:tabular-nums;} #feedback {min-height:24px;color:#ffb06b;} [hidden] {display:none!important;}
+/* Các phần thiết lập, chơi và học lại. */
+/* Thanh chuyển màn hình và huy hiệu số từ cần ôn. */
+#home-page .nav-tabs { display: flex; align-items: center; gap: .25rem; padding: .25rem; border: 1px solid var(--line-soft); border-radius: 4px; background: var(--surface-soft); }
+#home-page .nav-tabs__button { display: flex; min-height: 36px; align-items: center; gap: .5rem; padding: 0 .75rem; border: 0; border-radius: 3px; color: var(--muted); background: transparent; font-size: .875rem; font-weight: 700; transition: .16s ease; }
+#home-page .nav-tabs__button:not(:disabled):hover { color: var(--text-strong); background: var(--surface-hover); }
+#home-page .nav-tabs__button--active { color: var(--accent-ink); background: var(--accent); }
+#home-page .nav-tabs__badge { padding: .08rem .42rem; border-radius: 999px; color: var(--red); background: color-mix(in srgb, var(--red) 15%, transparent); font-family: var(--font-mono); font-size: .7rem; }
+#home-page .nav-tabs__button--active .nav-tabs__badge { color: var(--accent-ink); background: color-mix(in srgb, var(--accent-ink) 14%, transparent); }
+#home-page .nav-tabs__badge--hidden { display: none !important; }
+
+/* Khung trang thiết lập và phần giới thiệu nhiệm vụ. */
+#home-page .view { width: 100%; }
+#home-page .view--setup { max-width: 1280px; margin: auto; padding: 3rem 2rem; }
+#home-page .setup-intro { max-width: 680px; margin-bottom: 2rem; }
+#home-page .setup-intro__title, #home-page .review-panel__title { margin: .6rem 0 0; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; letter-spacing: -.03em; }
+#home-page .setup-intro__description, #home-page .review-panel__description { margin: .85rem 0 0; color: var(--muted); font-size: 1rem; line-height: 1.55; }
+
+/* Chia phần thiết lập và cột tóm tắt. */
+#home-page .setup-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 1.25rem; align-items: start; }
+#home-page .setup-layout__steps { display: grid; gap: 1.25rem; }
+#home-page .setup-card { position: relative; display: flex; gap: 1rem; padding: 1.25rem; border: 1px solid var(--line-soft); border-left: 2px solid color-mix(in srgb, var(--accent) 45%, transparent); border-radius: 2px; background: var(--panel); }
+#home-page .setup-card--hidden { display: none !important; }
+#home-page .setup-card__step { display: grid; width: 2.25rem; height: 2.25rem; flex: 0 0 auto; place-items: center; border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); font-family: var(--font-mono); font-size: .75rem; font-weight: 700; }
+#home-page .setup-card__content { min-width: 0; flex: 1; }
+#home-page .setup-card__title { max-width: 540px; margin: .5rem 0 0; overflow: hidden; color: var(--text-strong); font-size: 1.2rem; text-overflow: ellipsis; white-space: nowrap; }
+#home-page .helper { margin: .3rem 0 0; color: var(--dim); font-size: .85rem; line-height: 1.5; }
+
+/* Gợi ý định dạng CSV và nhãn dữ liệu. */
+#home-page .format-note { display: flex; margin-top: 1rem; align-items: center; gap: .75rem; padding: .75rem; border: 1px solid var(--line-soft); border-radius: 3px; color: var(--muted); background: var(--surface-soft); font-size: .85rem; }
+#home-page .format-note__icon { color: var(--icon-accent); font-size: 1.1rem; }
+#home-page .format-note__code { padding: .28rem .5rem; border-radius: 2px; color: var(--accent-soft); background: var(--surface); font-family: var(--font-mono); }
+
+/* Thẻ chọn chế độ và dấu hiệu lựa chọn hiện tại. */
+#home-page .mode-selector { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; margin-top: 1rem; }
+#home-page .mode-card { position: relative; display: flex; min-height: 190px; flex-direction: column; align-items: flex-start; padding: 1rem; border: 1px solid var(--line-soft); border-radius: 2px; color: var(--text-strong); background: var(--surface-soft); text-align: left; transition: border-color .16s ease, background .16s ease; }
+#home-page .mode-card:hover { border-color: var(--line); }
+#home-page .mode-card--active { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 9%, transparent); }
+#home-page .mode-card__icon { display: grid; width: 2.4rem; height: 2.4rem; margin-bottom: .8rem; place-items: center; border-radius: 2px; color: var(--icon-accent); background: color-mix(in srgb, var(--accent) 12%, transparent); font-size: 1.1rem; }
+#home-page .mode-card__subtitle { margin-top: .15rem; color: var(--muted); font-size: .82rem; font-weight: 700; }
+#home-page .mode-card__description { margin-top: .35rem; color: var(--dim); font-size: .82rem; line-height: 1.55; }
+#home-page .mode-card__check { position: absolute; top: .75rem; right: .75rem; display: none; color: var(--icon-accent); }
+#home-page .mode-card--active .mode-card__check { display: block; }
+
+/* Các lựa chọn tốc độ rơi. */
+#home-page .speed-selector { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; margin-top: 1rem; }
+#home-page .speed-selector__option { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; gap: .25rem; padding: .85rem; border: 1px solid var(--line-soft); border-radius: 2px; color: var(--muted); background: var(--surface-soft); text-align: left; transition: .16s ease; }
+#home-page .speed-selector__icon { display: inline-block; min-height: 20px; font-family: var(--font-mono); font-size: 1rem; font-weight: 700; line-height: 20px; letter-spacing: .04em; }
+#home-page .speed-selector__description { max-width: 100%; overflow: hidden; color: var(--dim); font-size: .78rem; text-overflow: ellipsis; white-space: nowrap; }
+#home-page .speed-selector__option--active { border-color: var(--launch); color: var(--launch-hover); background: color-mix(in srgb, var(--launch) 10%, transparent); }
+
+/* Công tắc HP và bộ tăng giảm số mạng. */
+#home-page .hp-toggle { display: inline-flex; align-items: center; gap: .55rem; padding: .45rem .7rem; border: 1px solid var(--line-soft); border-radius: 999px; color: var(--muted); background: transparent; font-size: .8rem; }
+#home-page .hp-toggle__indicator { width: .6rem; height: .6rem; border-radius: 999px; background: var(--dim); }
+#home-page .hp-toggle--active { border-color: color-mix(in srgb, var(--accent) 55%, transparent); color: var(--accent-soft); background: color-mix(in srgb, var(--accent) 9%, transparent); }
+#home-page .hp-toggle--active .hp-toggle__indicator { background: var(--accent); }
+#home-page .hp-toggle--hidden, #home-page .hp-counter--hidden { display: none !important; }
+#home-page .hp-counter { display: flex; align-items: center; gap: 1rem; margin-top: 1.25rem; }
+#home-page .hp-counter__button { display: grid; width: 2.4rem; height: 2.4rem; place-items: center; border: 1px solid var(--line); border-radius: 2px; color: var(--text); background: var(--surface-soft); font-size: 1.2rem; font-weight: 700; }
+#home-page .hp-counter__button:hover { border-color: color-mix(in srgb, var(--accent) 50%, transparent); color: var(--accent); }
+#home-page .hp-counter__value { display: flex; min-width: 6rem; align-items: center; justify-content: center; gap: .5rem; color: var(--launch); font-family: var(--font-mono); font-size: 1.4rem; }
+
+/* Thẻ tóm tắt và hành động bắt đầu nhiệm vụ. */
+#home-page .summary-card { position: sticky; top: 1.5rem; padding: 1.25rem; border: 1px solid var(--line); clip-path: polygon(0 0, calc(100% - var(--notch)) 0, 100% var(--notch), 100% 100%, 0 100%); background: var(--panel); }
+#home-page .summary-card__list { display: grid; gap: 1rem; margin: 1.25rem 0 0; }
+#home-page .summary-card__item { display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: .88rem; }
+#home-page .summary-card__term { color: var(--dim); font-family: var(--font-mono); font-size: .78rem; }
+#home-page .summary-card__value { margin: 0; color: var(--text); font-weight: 700; }
+#home-page .summary-card__divider { height: 1px; margin: 1.25rem 0; background: var(--line); }
+#home-page .summary-card__tip { display: flex; align-items: flex-start; gap: .75rem; padding: .8rem; border-radius: 2px; color: var(--muted); background: var(--surface-soft); font-size: .82rem; line-height: 1.55; }
+#home-page .summary-card__tip-icon { color: var(--icon-accent); font-size: 1rem; }
+#home-page .summary-card__tip-text b { color: var(--text); }
+#home-page .summary-card__start-button { margin-top: 1.25rem; }
+
+#home-page .view--hidden { display: none !important; }
+/* Vùng chơi và các thành phần điều khiển phiên game. */
+#home-page .view--play { max-width: 1480px; margin: auto; padding: 1rem 2rem; }
+#home-page .play-toolbar { display: flex; margin-bottom: .75rem; align-items: center; justify-content: space-between; gap: .75rem; }
+#home-page .game-shell { overflow: hidden; border: 1px solid var(--line); border-radius: 2px; background: var(--panel-deep); }
+#home-page .game-status { display: flex; min-height: 56px; align-items: center; justify-content: space-between; gap: .75rem; padding: .75rem 1.25rem; border-bottom: 1px solid var(--line); background: var(--panel); }
+#home-page .game-status__stats { display: flex; align-items: center; gap: 1.5rem; color: var(--dim); font-family: var(--font-mono); font-size: .78rem; font-weight: 700; }
+#home-page .game-status__value { display: inline-flex; margin-left: .25rem; align-items: center; gap: .25rem; color: var(--text-strong); }
+#home-page .game-status__value--combo { color: var(--accent); }
+#home-page .game-status__mode { padding: .3rem .65rem; border-radius: 2px; color: var(--accent-soft); background: color-mix(in srgb, var(--accent) 12%, transparent); font-family: var(--font-mono); }
+#home-page .game-status__hp { display: inline-flex; align-items: center; gap: .3rem; color: var(--launch); }
+#home-page .game-status__hp--unlimited { color: var(--accent); }
+#home-page .game-status__remaining { color: var(--dim); font-family: var(--font-mono); font-size: .72rem; font-weight: 700; letter-spacing: .06em; }
+/* Nền, Canvas và vùng hiển thị mục tiêu. */
+#home-page .game-field {
+  position: relative;
+  height: clamp(430px, calc(100dvh - 270px), 760px);
+  min-height: 430px;
+  overflow: hidden;
+  background-color: var(--panel-deep);
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--accent) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 5%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px, 48px 48px;
+}
+#home-page .game-field::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 100%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 46%),
+              radial-gradient(circle at 50% 50%, transparent 20%, color-mix(in srgb, black 42%, transparent) 100%);
+}
+
+#home-page .game-field {
+  position: relative;
+  overflow: hidden;
+}
+
+#home-page .game-field::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150vmax;
+  height: 150vmax;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+  border: 2px solid var(--accent);
+  background: radial-gradient(
+    circle,
+    transparent 50%,
+    color-mix(in srgb, var(--accent) 15%, transparent) 95%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  animation: sonar-ping 4s cubic-bezier(0.1, 0.5, 0.4, 1) infinite;
+}
+
+@keyframes sonar-ping {
+  0% {
+    transform: translate(-50%, -50%) scale(0.05);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+@keyframes radar-sweep { to { transform: rotate(360deg); } }
+:root[data-reduce-motion="true"] #home-page .game-field::after { animation: none; display: none; }
+#home-page .game-field__canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+#home-page .game-field__sector { position: absolute; inset-inline: 0; top: 1.25rem; color: var(--dim); font-family: var(--font-mono); font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-align: center; text-transform: uppercase; pointer-events: none; }
+#home-page .game-overlay { position: absolute; z-index: 10; inset: 0; display: grid; place-items: center; padding: 1.5rem; background: color-mix(in srgb, var(--bg) 78%, transparent); backdrop-filter: blur(2px); }
+#home-page .game-overlay--hidden { display: none !important; }
+#home-page .game-overlay__content { max-width: 440px; text-align: center; }
+#home-page .game-overlay__icon { display: grid; width: 52px; height: 52px; margin: 0 auto 1rem; place-items: center; border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); color: var(--accent-soft); background: color-mix(in srgb, var(--accent) 10%, transparent); font-size: 1.4rem; font-weight: 700; }
+#home-page .game-overlay__title { margin: .5rem 0 0; color: var(--text-strong); font-size: 1.9rem; }
+#home-page .game-overlay__description { margin: .75rem 0 0; color: var(--muted); font-size: .9rem; }
+#home-page .answer-area { display: flex; align-items: stretch; gap: .5rem; padding: .75rem; border-top: 1px solid var(--line); background: var(--panel); }
+/* Ô nhập đáp án, xem trước cách đọc và phản hồi đúng/sai. */
+#home-page .answer-form { min-width: 0; flex: 1; padding: .75rem; border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); border-radius: 2px; background: var(--input-bg); transition: .16s ease; }
+#home-page .answer-form--wrong { border-color: var(--red); }
+#home-page .answer-form--correct { border-color: var(--green); }
+#home-page .answer-form__meta { display: flex; margin-bottom: .35rem; align-items: center; justify-content: space-between; gap: 1rem; color: var(--dim); font-family: var(--font-mono); font-size: .74rem; font-weight: 700; }
+#home-page .answer-form__target { letter-spacing: .1em; text-transform: uppercase; }
+#home-page .answer-form__feedback { max-width: 60%; overflow: hidden; text-align: right; text-overflow: ellipsis; white-space: nowrap; }
+#home-page .answer-form--wrong .answer-form__feedback { color: var(--red); }
+#home-page .answer-form--correct .answer-form__feedback { color: var(--green); }
+#home-page .answer-form__row { display: flex; align-items: center; gap: .75rem; }
+#home-page .answer-form__keyboard-icon { color: var(--accent); }
+#home-page .answer-form__input { height: 36px; min-width: 0; flex: 1; padding: 0; border: 0; outline: 0; color: var(--text-strong); background: transparent; font-family: var(--font-mono); font-size: 1rem; font-weight: 700; letter-spacing: .04em; }
+#home-page .answer-form__input::placeholder { color: var(--dim); }
+#home-page .answer-form__preview { display: inline-flex; flex: 0 0 auto; align-items: center; gap: .35rem; padding: .35rem .7rem; border-radius: 2px; color: var(--accent-soft); background: color-mix(in srgb, var(--accent) 10%, transparent); font-family: "Yu Gothic UI", sans-serif; font-size: .9rem; font-weight: 700; }
+#home-page .answer-form__preview--hidden { display: none !important; }
+#home-page kbd { padding: .12rem .35rem; border: 1px solid var(--line); border-radius: 2px; font-family: var(--font-mono); font-size: .7rem; font-weight: 700; }
+#home-page .button--target { min-height: 72px; flex: 0 0 auto; }
+
+#home-page .view--review { max-width: 1100px; margin: auto; padding: 3rem 2rem; }
+#home-page .review-panel__heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; }
+#home-page .review-panel__actions--hidden { display: none !important; }
+#home-page .review-list { margin-top: 2rem; overflow: hidden; border: 1px solid var(--line); border-radius: 2px; background: var(--panel); }
+#home-page .review-list__header { display: grid; grid-template-columns: 1fr auto; padding: .8rem 1.25rem; border-bottom: 1px solid var(--line); color: var(--dim); font-family: var(--font-mono); font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+#home-page .review-list__item { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--line-soft); }
+#home-page .review-list__item:last-child { border-bottom: 0; }
+#home-page .review-list__item:hover { background: var(--surface-soft); }
+#home-page .review-list__word { display: flex; align-items: center; gap: 1rem; }
+#home-page .review-list__kanji { display: grid; min-width: 6rem; padding: .55rem .75rem; place-items: center; border: 1px solid var(--line); border-radius: 2px; color: var(--text-strong); background: var(--surface-soft); font-family: "Yu Gothic UI", sans-serif; font-size: 1.25rem; font-weight: 700; }
+#home-page .review-list__reading { color: var(--accent-soft); font-family: "Yu Gothic UI", sans-serif; font-size: .9rem; font-weight: 700; letter-spacing: .04em; }
+#home-page .review-list__count { padding: .3rem .7rem; border-radius: 999px; color: var(--red); background: color-mix(in srgb, var(--red) 10%, transparent); font-family: var(--font-mono); font-size: .8rem; font-weight: 700; }
+#home-page .empty-state { display: grid; min-height: 320px; margin-top: 2rem; place-items: center; padding: 2rem; border: 1px dashed var(--line); border-radius: 2px; background: color-mix(in srgb, var(--panel) 60%, transparent); text-align: center; }
+#home-page .empty-state__icon { margin-bottom: .8rem; color: var(--icon-accent); font-size: 2.5rem; }
+#home-page .empty-state__title { margin: 0; font-size: 1.25rem; }
+#home-page .empty-state__description { margin: .5rem 0 0; color: var(--dim); font-size: .88rem; }
+#home-page .empty-state__action { margin-top: 1.25rem; }
+#home-page.page--play-active .site-footer { display: none; }
+
+
+
+
+
 

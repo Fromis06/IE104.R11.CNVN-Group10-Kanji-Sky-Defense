@@ -1,5 +1,119 @@
-/* Giới hạn chiều rộng nội dung và khoảng cách trường nhập của trang. */
-.account-layout { max-width:880px; margin-inline:auto; padding:20px; border:1px solid #687084; }
-input, textarea { display:block; width:100%; margin-top:6px; }
-@media(max-width:680px) { main { padding:16px; } }
+/* Phần thông tin người dùng. */
+/* Khung hồ sơ, có phần dành cho người chưa đăng nhập. */
+#user-page .user-page { width: 100%; max-width: 1240px; min-height: calc(100vh - 150px); margin: auto; padding: 2.5rem 2rem 4rem; }
+#user-page .user-gate { display: grid; max-width: 620px; min-height: 620px; margin: auto; place-items: center; align-content: center; gap: 1rem; text-align: center; }
+#user-page .user-gate--hidden { display: none !important; }
+#user-page .user-gate__mark { display: grid; width: 64px; height: 64px; margin-bottom: .5rem; place-items: center; border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); color: var(--accent-soft); background: color-mix(in srgb, var(--accent) 9%, transparent); font-family: "Yu Gothic UI", sans-serif; font-size: 1.7rem; font-weight: 700; }
+#user-page .user-gate__title { margin: 0; font-size: clamp(1.9rem, 5vw, 3.2rem); }
 
+/* Bố cục sidebar và nội dung hồ sơ. */
+#user-page .account-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 1rem; align-items: start; }
+#user-page .account-layout--hidden { display: none !important; }
+#user-page .profile-sidebar { position: sticky; top: 1rem; display: flex; min-height: 520px; flex-direction: column; padding: 1rem; border: 1px solid var(--line-soft); background: var(--panel); }
+#user-page .profile-sidebar__user { display: grid; min-width: 0; justify-items: center; padding: .6rem .35rem 1.25rem; text-align: center; }
+#user-page .profile-sidebar__avatar { position: relative; display: grid; width: 72px; height: 72px; overflow: hidden; place-items: center; border: 2px solid color-mix(in srgb, var(--accent) 55%, transparent); border-radius: 50%; color: var(--accent-ink); background: var(--accent); font-size: 1.5rem; font-weight: 700; }
+#user-page .profile-sidebar__avatar-image, #user-page .profile-photo__image { width: 100%; height: 100%; object-fit: cover; }
+#user-page .profile-sidebar__avatar-image:not([src]), #user-page .profile-photo__image:not([src]), #user-page .profile-sidebar__avatar-image--hidden, #user-page .profile-sidebar__avatar-fallback--hidden, #user-page .profile-photo__image--hidden, #user-page .profile-photo__fallback--hidden { display: none; }
+#user-page .profile-sidebar__name { max-width: 100%; margin-top: .8rem; overflow: hidden; color: var(--text-strong); font-size: 1rem; text-overflow: ellipsis; white-space: nowrap; }
+#user-page .profile-sidebar__email { max-width: 100%; margin-top: .25rem; overflow: hidden; color: var(--muted); font-family: var(--font-mono); font-size: .76rem; text-overflow: ellipsis; white-space: nowrap; }
+#user-page .profile-sidebar__menu { display: grid; gap: .3rem; padding-top: .9rem; border-top: 1px solid var(--line-soft); }
+#user-page .profile-sidebar__menu-item, #user-page .profile-sidebar__logout { display: flex; width: 100%; min-height: 44px; align-items: center; gap: .7rem; padding: .7rem .8rem; border: 0; color: var(--muted); background: transparent; text-align: left; }
+#user-page .profile-sidebar__icon { width: 1.15rem; height: 1.15rem; color: var(--icon-muted); text-align: center; }
+#user-page .profile-sidebar__menu-item:hover, #user-page .profile-sidebar__logout:hover { color: var(--text-strong); background: var(--surface-hover); }
+#user-page .profile-sidebar__menu-item--active { border-left: 2px solid var(--accent); color: var(--accent-soft); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+#user-page .profile-sidebar__menu-item--active .profile-sidebar__icon { color: var(--icon-accent); }
+#user-page .profile-sidebar__logout { margin-top: auto; border-top: 1px solid var(--line-soft); color: var(--red); }
+
+#user-page .account-layout__content { min-width: 0; }
+#user-page .user-panel { display: grid; gap: 1rem; }
+#user-page .user-panel--hidden { display: none !important; }
+#user-page .user-panel__heading { padding: .4rem .3rem .2rem; }
+#user-page .user-panel__title { margin: .4rem 0 0; font-size: clamp(1.65rem, 4vw, 2.3rem); letter-spacing: -.03em; }
+#user-page .account-card, #user-page .dashboard-card, #user-page .settings-card { border: 1px solid var(--line-soft); background: var(--panel); }
+#user-page .account-card { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 1.5rem; padding: 1.4rem; }
+#user-page .avatar-editor { display: flex; min-width: 0; flex-direction: column; align-items: center; gap: .65rem; padding: .25rem; }
+#user-page .profile-photo { position: relative; display: grid; width: 120px; height: 120px; overflow: hidden; place-items: center; margin-bottom: .25rem; border: 3px solid color-mix(in srgb, var(--accent) 48%, transparent); border-radius: 50%; color: var(--accent-ink); background: var(--accent); font-size: 2.3rem; font-weight: 700; }
+#user-page .avatar-editor__button { width: 120px; }
+#user-page .avatar-editor__status { width: 100%; text-align: center; }
+#user-page .account-form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-content: start; }
+#user-page .account-form__submit { justify-self: start; }
+#user-page .account-form__status { align-self: center; }
+
+/* Các thẻ thống kê tiến độ học. */
+#user-page .stat-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line-soft); }
+#user-page .stat-card { display: grid; gap: .35rem; padding: 1.1rem; border-left: 1px solid var(--line-soft); background: var(--panel); }
+#user-page .stat-card:first-child { border-left: 0; }
+#user-page .stat-card__label { color: var(--muted); font-family: var(--font-mono); font-size: .74rem; font-weight: 600; }
+#user-page .stat-card__value { color: var(--text-strong); font-size: 1.7rem; letter-spacing: -.02em; }
+
+/* Thẻ nội dung dashboard và điều khiển khoảng thời gian. */
+#user-page .dashboard-card { padding: 1.35rem; }
+#user-page .dashboard-card__heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+#user-page .dashboard-card__title, #user-page .settings-card__title { margin: 0; font-size: 1.1rem; }
+#user-page .segmented-control { display: flex; padding: .2rem; border: 1px solid var(--line); background: var(--surface-soft); }
+#user-page .segmented-control__option { min-height: 32px; padding: 0 .75rem; border: 0; color: var(--muted); background: transparent; font-size: .85rem; font-weight: 700; }
+#user-page .segmented-control__option--active { color: var(--accent-ink); background: var(--accent); }
+#user-page .learning-chart { display: block; width: 100%; height: 280px; margin-top: .8rem; }
+
+/* Thư viện từ cần ôn, ô tìm kiếm và hành động xóa. */
+#user-page .dashboard-card__heading--library { align-items: center; }
+#user-page .word-library__count { display: inline-flex; margin-left: .45rem; padding: .2rem .5rem; vertical-align: middle; color: var(--accent-soft); background: color-mix(in srgb, var(--accent) 10%, transparent); font-family: var(--font-mono); font-size: .74rem; }
+#user-page .word-library__actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+#user-page .word-library__search { display: flex; width: min(460px, 100%); min-height: 44px; margin-top: 1rem; align-items: center; gap: .65rem; padding: 0 .85rem; border: 1px solid var(--line); color: var(--accent); background: var(--input-bg); }
+#user-page .word-library__search:focus-within { border-color: var(--accent); }
+#user-page .word-library__search-input { min-width: 0; flex: 1; border: 0; outline: 0; color: var(--text); background: transparent; }
+#user-page .word-library__search-input::placeholder { color: var(--dim); }
+#user-page .word-library__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .7rem; margin-top: 1rem; }
+#user-page .word-library__item { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: .75rem; padding: .9rem; border: 1px solid var(--line-soft); background: var(--surface-soft); }
+#user-page .word-library__item--best-match { border-color: color-mix(in srgb, var(--accent) 58%, transparent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+#user-page .word-library__pair { display: flex; min-width: 0; align-items: baseline; gap: .65rem; }
+#user-page .word-library__kanji { color: var(--text-strong); font-family: "Yu Gothic UI", sans-serif; font-size: 1.3rem; }
+#user-page .word-library__reading { overflow: hidden; color: var(--accent-soft); font-size: .88rem; text-overflow: ellipsis; white-space: nowrap; }
+#user-page .word-library__count-badge { padding: .3rem .7rem; color: var(--red); background: color-mix(in srgb, var(--red) 10%, transparent); font-family: var(--font-mono); font-size: .78rem; font-weight: 700; }
+#user-page .word-library__remove { display: grid; width: 28px; height: 28px; place-items: center; border: 0; color: var(--dim); background: transparent; font-size: 1.2rem; }
+#user-page .word-library__remove:hover { color: var(--red); background: color-mix(in srgb, var(--red) 10%, transparent); }
+#user-page .word-library__empty { display: flex; grid-column: 1 / -1; min-height: 120px; align-items: center; justify-content: center; gap: 1rem; border: 1px dashed var(--line); color: var(--accent-soft); }
+#user-page .word-library__empty-icon { font-family: "Yu Gothic UI", sans-serif; font-size: 2rem; }
+#user-page .word-library__empty-message { color: var(--text); }
+
+#user-page .settings-card { padding: 1.35rem; }
+#user-page .settings-card__title { margin-bottom: 1rem; }
+#user-page .theme-selector { display: grid; grid-template-columns: repeat(2, minmax(0, 220px)); gap: .8rem; }
+#user-page .theme-selector__option { display: grid; gap: .65rem; padding: .8rem; border: 1px solid var(--line); color: var(--muted); background: var(--surface-soft); text-align: left; }
+#user-page .theme-selector__option--active { border-color: var(--accent); color: var(--accent-soft); }
+#user-page .theme-selector__preview { position: relative; display: block; height: 72px; overflow: hidden; }
+#user-page .theme-selector__preview::before { position: absolute; top: 12px; left: 12px; width: 45%; height: 7px; content: ""; }
+#user-page .theme-selector__preview::after { position: absolute; right: 12px; bottom: 12px; left: 12px; height: 30px; content: ""; }
+#user-page .theme-selector__preview--light { border: 1px solid #cbb894; background: #f6f1e6; }
+#user-page .theme-selector__preview--light::before { background: #c85a17; }
+#user-page .theme-selector__preview--light::after { background: #ece2cc; }
+#user-page .theme-selector__preview--dark { border: 1px solid #2c2f42; background: #0a0c14; }
+#user-page .theme-selector__preview--dark::before { background: #ff8a3d; }
+#user-page .theme-selector__preview--dark::after { background: #1c1f2f; }
+#user-page .settings-card--row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+#user-page .settings-card__label { font-weight: 700; }
+#user-page .settings-card__select { min-width: 220px; min-height: 44px; padding: 0 .8rem; border: 1px solid var(--line); color: var(--text); background: var(--input-bg); }
+#user-page .preference { display: flex; min-height: 52px; align-items: center; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--line-soft); cursor: pointer; }
+#user-page .preference:first-of-type { border-top: 0; }
+#user-page .preference__label { font-size: .9rem; }
+#user-page .preference__switch { position: relative; width: 44px; height: 24px; flex: 0 0 auto; }
+#user-page .preference__input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+#user-page .preference__track { position: absolute; inset: 0; background: var(--surface-hover); transition: .18s ease; }
+#user-page .preference__track::after { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; content: ""; background: var(--muted); transition: .18s ease; }
+#user-page .preference__input:checked + .preference__track { background: color-mix(in srgb, var(--accent) 30%, var(--surface-hover)); }
+#user-page .preference__input:checked + .preference__track::after { transform: translateX(20px); background: var(--accent); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Khoảng cách dòng trang phụ còn cần cân lại với phần nội dung chính. */
+main { line-height: 1.7; }
