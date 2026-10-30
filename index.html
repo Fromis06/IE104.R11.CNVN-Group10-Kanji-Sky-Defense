@@ -1,41 +1,223 @@
 <!doctype html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Chơi · Kanji Sky Defense</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/index.css">
-</head>
-<body>
-  <!-- Điều hướng chung của website. -->
-  <header><strong>漢 Kanji Sky Defense</strong><nav aria-label="Điều hướng chính"><a href="index.html">Chơi</a> <a href="about.html">Giới thiệu</a> <a href="contact.html">Liên hệ</a> <a href="login.html">Đăng nhập</a> <a href="register.html">Đăng ký</a> <a href="user.html">Hồ sơ</a> <a href="privacy.html">Dữ liệu</a></nav></header>
-  <main>
-    <h1>Thiết lập nhiệm vụ</h1>
-    <p>Chọn bộ từ và chế độ trước khi bắt đầu.</p>
-    <div class="setup-layout">
-      <!-- Chọn nguồn từ và chế độ trước khi bắt đầu chơi. -->
-      <section id="view-setup" class="setup-card">
-        <h2>Bộ từ mẫu</h2><p>水 / 山 / 学校</p>
-        <label for="csv-input">Nạp bộ từ CSV</label><input id="csv-input" type="file" accept=".csv" disabled><p id="source-notice">Nạp file chưa được tích hợp.</p>
-        <label for="mode">Chế độ</label><select id="mode"><option value="study">Study</option><option disabled>Challenge — đang phát triển</option></select>
-        <p>Endless sẽ được triển khai sau khi kiểm tra xong một wave.</p>
-        <button id="start-button" type="button" >Bắt đầu</button>
+  <!-- Metadata và tài nguyên của trang; giữ thứ tự script theo phụ thuộc. -->
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0a0c14">
+    <meta name="description" content="Luyện đọc Kanji bằng một trận chiến phòng thủ trên bầu trời.">
+    <title>Kanji Sky Defense</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <script src="js/preferences.js"></script>
+    <script src="js/icons.js" defer></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/storage.js" defer></script>
+    <script src="js/utils.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/site.js" defer></script>
+    <script src="js/app.js" defer></script>
+  </head>
+  <body id="home-page" class="page">
+    <input id="csv-input" class="visually-hidden" type="file" accept=".csv,text/csv">
+
+    <!-- Nhận diện website và điều hướng tới các màn hình, trang thông tin và tài khoản. -->
+    <header class="site-header">
+      <div class="site-header__inner">
+        <button class="brand" type="button" data-view="setup">
+          <span class="brand__mark" aria-hidden="true">漢</span>
+          <span>
+            <span class="brand__title">KANJI SKY DEFENSE</span>
+            <span class="brand__subtitle">Typing defense station</span>
+          </span>
+        </button>
+        <div class="site-header__actions">
+          <nav class="nav-tabs">
+            <button class="nav-tabs__button nav-tabs__button--active" type="button" data-view="setup"><svg class="icon icon--settings" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-settings"></use></svg><span class="nav-tabs__label">Thiết lập</span></button>
+            <button id="nav-play" class="nav-tabs__button" type="button" data-view="play" disabled><svg class="icon icon--target" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-target"></use></svg><span class="nav-tabs__label">Chơi</span></button>
+            <button class="nav-tabs__button" type="button" data-view="review"><svg class="icon icon--book-open" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-book-open"></use></svg><span class="nav-tabs__label">Học lại</span><span id="review-badge" class="nav-tabs__badge nav-tabs__badge--hidden">0</span></button>
+          </nav>
+          <nav class="account-nav" data-auth-nav>
+            <a class="account-nav__link" href="login.html">Đăng nhập</a>
+            <a class="account-nav__link account-nav__link--primary" href="register.html">Đăng ký</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Thiết lập nhiệm vụ, vùng chơi Canvas và danh sách từ cần ôn. -->
+    <main>
+      <!-- Chọn nguồn từ, chế độ, tốc độ và HP trước khi chơi. -->
+      <section id="view-setup" class="view view--setup">
+        <div class="setup-intro">
+          <p class="eyebrow">Thiết lập nhiệm vụ</p>
+          <h1 class="setup-intro__title">Chọn cách bạn muốn học.</h1>
+          <p class="setup-intro__description">Nạp bộ từ của riêng bạn, chọn chế độ và tốc độ. Bản tích hợp — nội dung hướng dẫn đang rà soát.</p>
+        </div>
+
+        <div class="setup-layout">
+          <div class="setup-layout__steps">
+            <article class="setup-card">
+              <div class="setup-card__step">01</div>
+              <div class="setup-card__content">
+                <div class="cluster cluster--spread cluster--start cluster--gap-large cluster--wrap">
+                  <div class="layout-item layout-item--shrinkable">
+                    <p class="eyebrow">Dữ liệu từ vựng</p>
+                    <h2 id="source-label" class="setup-card__title">Bộ mẫu · 12 từ</h2>
+                    <p id="source-notice" class="helper">Bạn có thể chơi ngay hoặc nạp file CSV riêng.</p>
+                  </div>
+                  <div class="cluster cluster--gap-small cluster--wrap">
+                    <button id="upload-button" class="button button--secondary" type="button"><svg class="icon icon--upload" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-upload"></use></svg>Nạp CSV</button>
+                    <button id="download-button" class="button button--ghost" type="button"><svg class="icon icon--download" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-download"></use></svg>CSV mẫu</button>
+                  </div>
+                </div>
+                <div class="format-note"><svg class="format-note__icon icon icon--table" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-table"></use></svg>Hai cột UTF-8: <code class="format-note__code">kanji,hiragana</code></div>
+              </div>
+            </article>
+
+            <article class="setup-card">
+              <div class="setup-card__step">02</div>
+              <div class="setup-card__content">
+                <h2 class="eyebrow">Chế độ chơi</h2>
+                <div class="mode-selector">
+                  <button class="mode-card mode-card--active" type="button" data-mode="study" aria-checked="true">
+                    <span class="mode-card__icon" aria-hidden="true"><svg class="icon icon--book-open" viewBox="0 0 24 24" width="20" height="20" focusable="false"><use href="#icon-book-open"></use></svg></span><strong class="mode-card__title">Study</strong><span class="mode-card__subtitle">Học không áp lực</span><span class="mode-card__description">Không có HP. Từ bị bỏ lỡ hoặc trả lời sai sẽ tự động vào Học lại.</span><svg class="mode-card__check icon icon--check" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg>
+                  </button>
+                  <button class="mode-card" type="button" data-mode="challenge" aria-checked="false">
+                    <span class="mode-card__icon" aria-hidden="true"><svg class="icon icon--sword" viewBox="0 0 24 24" width="20" height="20" focusable="false"><use href="#icon-sword"></use></svg></span><strong class="mode-card__title">Challenge</strong><span class="mode-card__subtitle">Vượt qua một bộ từ</span><span class="mode-card__description">Có HP tùy chỉnh. Hoàn thành toàn bộ bộ từ trước khi phòng tuyến thất thủ.</span><svg class="mode-card__check icon icon--check" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg>
+                  </button>
+                  <button class="mode-card" type="button" data-mode="endless" aria-checked="false">
+                    <span class="mode-card__icon" aria-hidden="true"><svg class="icon icon--infinity" viewBox="0 0 24 24" width="20" height="20" focusable="false"><use href="#icon-infinity"></use></svg></span><strong class="mode-card__title">Endless</strong><span class="mode-card__subtitle">Chơi không giới hạn</span><span class="mode-card__description">Từ vựng lặp vô tận. Bạn có thể bật hoặc tắt giới hạn HP.</span><svg class="mode-card__check icon icon--check" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <article class="setup-card">
+              <div class="setup-card__step">03</div>
+              <div class="setup-card__content">
+                <h2 class="eyebrow">Tốc độ rơi</h2>
+                <div class="speed-selector">
+                  <button class="speed-selector__option" type="button" data-difficulty="easy" aria-checked="false"><span class="speed-selector__icon" aria-hidden="true">!</span><strong class="speed-selector__title">Dễ</strong><span class="speed-selector__description">24 giây tới vạch</span></button>
+                  <button class="speed-selector__option speed-selector__option--active" type="button" data-difficulty="normal" aria-checked="true"><span class="speed-selector__icon" aria-hidden="true">!!</span><strong class="speed-selector__title">Vừa</strong><span class="speed-selector__description">16 giây tới vạch</span></button>
+                  <button class="speed-selector__option" type="button" data-difficulty="hard" aria-checked="false"><span class="speed-selector__icon" aria-hidden="true">!!!</span><strong class="speed-selector__title">Khó</strong><span class="speed-selector__description">11 giây tới vạch</span></button>
+                </div>
+              </div>
+            </article>
+
+            <article id="hp-card" class="setup-card setup-card--hidden">
+              <div class="setup-card__step">04</div>
+              <div class="setup-card__content">
+                <div class="cluster cluster--spread cluster--center cluster--gap-large cluster--wrap">
+                  <div>
+                    <h2 class="eyebrow">Giới hạn HP</h2>
+                    <p id="hp-note" class="helper helper--spaced">Challenge luôn sử dụng HP.</p>
+                  </div>
+                  <button id="hp-toggle" class="hp-toggle hp-toggle--hidden" type="button" aria-pressed="false"><span class="hp-toggle__indicator" aria-hidden="true"></span><b class="hp-toggle__label">Không HP</b></button>
+                </div>
+                <div id="hp-counter" class="hp-counter">
+                  <button id="hp-minus" class="hp-counter__button" type="button"><svg class="icon icon--minus" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-minus"></use></svg></button>
+                  <div class="hp-counter__value"><svg class="icon icon--heart" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-heart"></use></svg><b id="hp-value">3</b></div>
+                  <button id="hp-plus" class="hp-counter__button" type="button"><svg class="icon icon--plus" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-plus"></use></svg></button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Tóm tắt cấu hình đang chọn và nút bắt đầu nhiệm vụ. -->
+          <aside class="summary-card">
+            <p class="eyebrow">Tóm tắt nhiệm vụ</p>
+            <dl class="summary-card__list">
+              <div class="summary-card__item"><dt class="summary-card__term">Bộ từ</dt><dd id="summary-words" class="summary-card__value">12 từ</dd></div>
+              <div class="summary-card__item"><dt class="summary-card__term">Chế độ</dt><dd id="summary-mode" class="summary-card__value">Study</dd></div>
+              <div class="summary-card__item"><dt class="summary-card__term">Tốc độ</dt><dd id="summary-speed" class="summary-card__value">Vừa</dd></div>
+              <div class="summary-card__item"><dt class="summary-card__term">HP</dt><dd id="summary-hp" class="summary-card__value">Không giới hạn</dd></div>
+            </dl>
+            <div class="summary-card__divider"></div>
+            <div class="summary-card__tip"><svg class="summary-card__tip-icon icon icon--keyboard" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-keyboard"></use></svg><span class="summary-card__tip-text">Chấp nhận cả <b>Hiragana</b> và <b>Romaji</b>. Nhấn Enter để xác nhận.</span></div>
+            <button id="start-button" class="button button--primary button--full button--large summary-card__start-button" type="button"><svg class="icon icon--play" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg>BẮT ĐẦU NHIỆM VỤ</button>
+          </aside>
+        </div>
       </section>
-      <aside class="summary-card"><h2>Luật chơi</h2><p>Study không giới hạn HP. Mỗi lần hiển thị một từ.</p></aside>
-    </div>
-    <section id="view-play" hidden>
-      <h2>Vùng phòng thủ</h2><p id="game-status">Chờ bắt đầu</p>
-      <canvas id="game-canvas" width="700" height="360" aria-label="Màn chơi Kanji"></canvas>
-      <form id="answer-form"><label for="answer-input">Cách đọc</label><input id="answer-input" autocomplete="off" ><button >Xác nhận</button></form>
-      
-      <p id="feedback" role="status" aria-live="polite"></p>
-    </section>
-    <section id="view-review"><h2>Học lại</h2><ul id="review-list"></ul><p>Từ sai được ghi lại khi game đã tích hợp.</p></section>
-  </main>
-  <footer>Kanji Sky Defense</footer>
-  <script src="js/utils.js"></script>
-  <script src="js/storage.js"></script>
-  <script src="js/app.js"></script>
-</body>
+
+      <!-- HUD, Canvas, lớp phủ trạng thái và ô nhập đáp án của phiên chơi. -->
+      <section id="view-play" class="view view--play view--hidden">
+        <div class="play-toolbar">
+          <button class="button button--ghost" type="button" data-view="setup"><svg class="icon icon--arrow-left" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-arrow-left"></use></svg>Thiết lập</button>
+          <div class="cluster cluster--gap-small">
+            <button id="pause-button" class="button button--secondary" type="button"><svg class="icon icon--pause" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-pause"></use></svg><b>Tạm dừng</b></button>
+            <button id="restart-button" class="button button--secondary" type="button"><svg class="icon icon--refresh" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-refresh"></use></svg>Chơi lại</button>
+          </div>
+        </div>
+
+        <div class="game-shell">
+          <div class="game-status">
+            <div class="game-status__stats">
+              <span id="game-mode" class="game-status__mode">Study</span>
+              <span id="game-hp" class="game-status__hp"><svg class="icon icon--infinity" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-infinity"></use></svg><span>Không HP</span></span>
+              <span class="game-status__metric">ĐIỂM <b id="game-score" class="game-status__value">0</b></span>
+              <span class="game-status__metric">COMBO <b id="game-combo" class="game-status__value game-status__value--combo"><svg class="icon icon--combo" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-combo"></use></svg><span>0</span></b></span>
+            </div>
+            <div id="game-remaining" class="game-status__remaining">12 từ còn lại</div>
+          </div>
+          <div id="game-field" class="game-field">
+            <canvas id="game-canvas" class="game-field__canvas"></canvas>
+            <div id="sector-label" class="game-field__sector">Airspace 01 · Study sector</div>
+
+            <div id="game-overlay" class="game-overlay game-overlay--hidden">
+              <div class="game-overlay__content">
+                <div id="overlay-icon" class="game-overlay__icon" aria-hidden="true"><svg class="icon icon--pause" viewBox="0 0 24 24" width="20" height="20" focusable="false"><use href="#icon-pause"></use></svg></div>
+                <p id="overlay-eyebrow" class="eyebrow">Đã tạm dừng</p>
+                <h2 id="overlay-title" class="game-overlay__title">Nhiệm vụ tạm nghỉ</h2>
+                <p id="overlay-copy" class="game-overlay__description">Tiếp tục khi bạn đã sẵn sàng.</p>
+                <div class="cluster cluster--justify-center cluster--gap-small cluster--top-gap-large">
+                  <button id="overlay-primary" class="button button--accent" type="button"><svg class="icon icon--play" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg><span>Tiếp tục</span></button>
+                  <button id="overlay-review" class="button button--secondary button--hidden" type="button"><svg class="icon icon--book-open" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-book-open"></use></svg><span>Học lại</span></button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="answer-area">
+            <!-- Ô nhập HTML hỗ trợ IME; JavaScript xử lý sự kiện gửi để chấm đáp án. -->
+            <form id="answer-form" class="answer-form">
+              <div class="answer-form__meta"><span id="target-label" class="answer-form__target">Đang tìm mục tiêu</span><span id="feedback" class="answer-form__feedback">Nhập Hiragana hoặc Romaji, rồi nhấn Enter.</span></div>
+              <div class="answer-form__row">
+                <svg class="answer-form__keyboard-icon icon icon--keyboard" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-keyboard"></use></svg>
+                <input id="answer-input" class="answer-form__input" lang="ja" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="gakkou hoặc がっこう" disabled>
+                <span id="answer-preview" class="answer-form__preview answer-form__preview--hidden"></span>
+                <button id="answer-submit" class="button button--accent" type="submit" disabled>Xác nhận <kbd class="button__shortcut">Enter</kbd></button>
+              </div>
+            </form>
+            <button id="cycle-button" class="button button--target button--secondary" type="button" disabled><svg class="icon icon--target" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-target"></use></svg><span class="button__label">Đổi mục tiêu</span><kbd class="button__shortcut">Tab</kbd></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Danh sách từ sai/bỏ lỡ cùng hành động xóa và học lại. -->
+      <section id="view-review" class="view view--review view--hidden review-panel">
+        <div class="review-panel__heading">
+          <div>
+            <p class="eyebrow">Bộ nhớ học tập</p>
+            <h1 class="review-panel__title">Học lại các từ đã lỡ.</h1>
+            <p class="review-panel__description">Sai khi nhấn Enter hoặc để từ vượt phòng tuyến đều được ghi lại tại đây.</p>
+          </div>
+          <div id="review-actions" class="cluster cluster--gap-small review-panel__actions review-panel__actions--hidden">
+            <button id="clear-review" class="button button--danger-ghost" type="button"><svg class="icon icon--trash" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-trash"></use></svg>Xóa lịch sử</button>
+            <button id="study-review" class="button button--accent" type="button"><svg class="icon icon--play" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg>Học ngay</button>
+          </div>
+        </div>
+        <div id="review-content" class="review-panel__content"></div>
+      </section>
+    </main>
+    <!-- Năm bản quyền và liên kết tới các trang thông tin dùng chung. -->
+    <footer class="site-footer">
+      <span class="site-footer__copyright">© <span data-year></span> Kanji Sky Defense</span>
+      <nav class="site-footer__nav">
+        <a class="site-footer__link" href="about.html">Giới thiệu</a>
+        <a class="site-footer__link" href="contact.html">Liên hệ</a>
+        <a class="site-footer__link" href="privacy.html">Quyền riêng tư</a>
+      </nav>
+    </footer>
+  </body>
 </html>
