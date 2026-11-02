@@ -37,8 +37,11 @@
 #not-found-page .error-card__description { max-width: 480px; margin: 1rem auto 1.75rem; color: var(--muted); font-size: 1rem; line-height: 1.7; }
 #not-found-page .error-card__actions { position: relative; z-index: 1; }
 
-
-
+/* Điều chỉnh bố cục cho ngưỡng màn hình này để nội dung dễ đọc và thao tác. */
+@media (max-width: 680px) {
+  #not-found-page .error-page { padding: 2rem 1rem; }
+  #not-found-page .error-card { padding: 2.25rem 1.25rem 2.5rem; }
+}
 
 /* Khoảng cách dòng trang phụ còn cần cân lại với phần nội dung chính. */
 main { line-height: 1.7; }

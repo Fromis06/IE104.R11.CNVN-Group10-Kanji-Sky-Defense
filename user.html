@@ -71,7 +71,7 @@
                 <input id="avatar-input" class="visually-hidden" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
                 <button id="avatar-button" class="button button--secondary avatar-editor__button" type="button">Đổi ảnh</button>
                 <button id="avatar-remove" class="button button--danger-ghost button--hidden avatar-editor__button" type="button">Xóa ảnh</button>
-                <p id="avatar-status" class="form-status avatar-editor__status"></p>
+                <p id="avatar-status" class="form-status avatar-editor__status" role="status" aria-live="polite"></p>
               </div>
 
               <!-- Các trường nhập có nhãn; JavaScript hiển thị kết quả xử lý ngay tại form. -->
@@ -81,7 +81,7 @@
                 <div class="field"><label class="field__label" for="account-birthday">Ngày sinh</label><input id="account-birthday" class="field__control" name="birthday" type="date" autocomplete="bday"></div>
                 <div class="field"><label class="field__label" for="account-created">Ngày tham gia</label><input id="account-created" class="field__control field__control--readonly" type="text" readonly></div>
                 <button class="button button--accent account-form__submit" type="submit">Lưu thay đổi</button>
-                <p id="account-status" class="form-status account-form__status"></p>
+                <p id="account-status" class="form-status account-form__status" role="status" aria-live="polite"></p>
               </form>
             </div>
 
@@ -131,7 +131,7 @@
 
             <div class="settings-card settings-card--row">
               <label class="settings-card__label" for="language-select">Ngôn ngữ</label>
-              <select id="language-select" class="settings-card__select"><option value="vi">Tiếng Việt</option><option disabled value="en">Tiếng Anh</option><option disabled value="ja">Tiếng Nhật</option></select>
+              <select id="language-select" class="settings-card__select"><option value="vi">Tiếng Việt</option><option value="en">Tiếng Anh</option><option value="ja">Tiếng Nhật</option></select>
             </div>
 
             <section class="settings-card">
