@@ -143,16 +143,38 @@
     return fields;
   }
 
-  /* Kiểm tra tên cột và dòng trống; chưa xử lý nháy kép và từ trùng. */
+  /* Kiểm tra hai cột, bỏ dòng thiếu dữ liệu và loại trùng trước khi nạp bộ từ. */
   function parseVocabularyCsv(raw) {
-    const lines=raw.trim().split(/\r?\n/);
-    if(lines.shift().toLowerCase()!=='kanji,hiragana') throw new Error('Dòng đầu phải gồm đúng hai cột: kanji,hiragana');
-    const result=lines.map(line=>line.split(',')).filter(cells=>cells.length===2&&cells[0]&&cells[1]).map(cells=>({kanji:cells[0].trim(),hiragana:normalizeAnswer(cells[1])}));
-    if(!result.length) throw new Error('Không tìm thấy dòng từ vựng hợp lệ.');
-    return result;
+    const rawLines = raw.replace(/^\uFEFF/, '').split(/\r?\n/);
+    const lines = [];
+    for (let index = 0; index < rawLines.length; index += 1) {
+      if (rawLines[index].trim()) lines.push(rawLines[index]);
+    }
+    if (lines.length < 2) throw new Error('File CSV chưa có dữ liệu từ vựng.');
+    const headers = parseCsvLine(lines[0]);
+    for (let index = 0; index < headers.length; index += 1) headers[index] = headers[index].toLowerCase();
+    if (headers.length !== 2 || headers[0] !== 'kanji' || headers[1] !== 'hiragana') {
+      throw new Error('Dòng đầu phải gồm đúng hai cột: kanji,hiragana');
+    }
+    const seen = {};
+    const vocabulary = [];
+    for (let index = 1; index < lines.length; index += 1) {
+      const fields = parseCsvLine(lines[index]);
+      if (fields.length === 2 && fields[0] && fields[1]) {
+        const item = { kanji: fields[0].trim(), hiragana: normalizeAnswer(fields[1]) };
+        const key = item.kanji + '\u0000' + item.hiragana;
+        if (!Object.prototype.hasOwnProperty.call(seen, key)) {
+          seen[key] = true;
+          vocabulary.push(item);
+        }
+      }
+      if (vocabulary.length >= 5000) break;
+    }
+    if (!vocabulary.length) throw new Error('Không tìm thấy dòng từ vựng hợp lệ.');
+    return vocabulary;
   }
 
-  /* Đảo thứ tự bằng sort trước, chưa chắc cách này chia đều. */
+  /* Xáo trộn trên bản sao; sort ngẫu nhiên vẫn có thể làm lệch phân phối. */
   function shuffled(items) {
     // Sort ngẫu nhiên chưa cho phân phối đều; cần thay cách xáo trộn.
     return items.slice().sort(function () { return Math.random() - .5; });
@@ -192,7 +214,7 @@
     return 1 + editDistance(target, normalizedQuery) / Math.max(target.length, normalizedQuery.length);
   }
 
-  /* Tìm chữ có chứa phần nhập vào, gõ gần giống thì chưa ra. */
+  /* Lọc theo chuỗi chứa; chưa hỗ trợ tìm gần đúng hoặc chuyển Romaji trong truy vấn. */
   function rankBySimilarity(items, query, getValues) {
     const needle=String(query).trim().toLowerCase();
     return items.filter(item=>!needle||[].concat(getValues(item)).some(value=>String(value).toLowerCase().includes(needle))).map(item=>({item,score:0}));

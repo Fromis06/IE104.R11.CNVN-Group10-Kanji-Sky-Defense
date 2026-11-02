@@ -17,7 +17,7 @@
   function t(source, variables) {
     return preferences.t(source, variables);
   }
-  /* Bộ từ mặc định nếu chưa nạp file. */
+  /* Bộ từ mẫu và cấu hình mặc định để bắt đầu chơi khi chưa nạp CSV. */
   const SAMPLE_WORDS = [
     { kanji: '水', hiragana: 'みず' },
     { kanji: '山', hiragana: 'やま' },
@@ -48,7 +48,7 @@
     endless: { label: 'Endless' },
   };
 
-  /* Gom trạng thái màn hình với điểm số ở đây cho dễ tìm. */
+  /* Trạng thái giao diện và tiến độ phiên chơi; các hàm render đọc dữ liệu tại đây. */
   const state = {
     view: 'setup',
     words: SAMPLE_WORDS.slice(),
@@ -84,7 +84,7 @@
     previousTime: performance.now(),
   };
 
-  /* Lấy sẵn các phần tử cần dùng. */
+  /* Lưu tham chiếu DOM dùng thường xuyên, tránh truy vấn lại trong vòng lặp game. */
   const elements = {
     fileInput: $('#csv-input'),
     sourceLabel: $('#source-label'),
@@ -151,7 +151,7 @@
     else button.replaceChildren(icon, label);
   }
 
-  /* Cho con trỏ vào ô nhập, điện thoại bị bật bàn phím hơi sớm, để xem lại. */
+  /* Tự lấy focus ô nhập; còn phải kiểm tra hành vi bàn phím trên thiết bị cảm ứng. */
   function focusAnswerOnDesktop(delay) {
     // Trên điện thoại còn tự bật bàn phím khi chuyển màn, cần xem lại.
     setTimeout(function () { elements.answerInput.focus(); }, delay);
@@ -292,7 +292,7 @@
     setTimeout(function () { elements.answerInput.focus(); }, 0);
   }
 
-  /* Cùng một từ thì tăng số lần sai, không thêm dòng mới. */
+  /* Gộp từ sai theo cặp Kanji/cách đọc và tăng số lần cần ôn. */
   function saveFailedWord(word) {
     let existing = null;
     for (let index = 0; index < state.review.length; index += 1) {
@@ -327,7 +327,7 @@
     }, 1200);
   }
 
-  /* Reset trạng thái rồi lấy bộ từ để bắt đầu. */
+  /* Khởi tạo phiên chơi mới từ nguồn từ vựng và quy tắc chế độ được chọn. */
   function startGame(source, modeOverride) {
     if (source === undefined) source = state.words;
     const selectedMode = modeOverride || state.mode;
@@ -356,7 +356,7 @@
     focusAnswerOnDesktop(100);
   }
 
-  /* Đổi giữa đang chơi và tạm dừng. */
+  /* Đổi trạng thái chạy/tạm dừng và đồng bộ các nút điều khiển. */
   function togglePause() {
     if (state.status === 'playing') state.status = 'paused';
     else if (state.status === 'paused') state.status = 'playing';
@@ -389,7 +389,7 @@
     updateGameStatus();
   }
 
-  /* Đang ghép chữ thì đừng chấm, chờ nhập xong. */
+  /* Bỏ qua khi IME đang ghép chữ; chuẩn hóa cách đọc rồi chấm mục tiêu hiện tại. */
   function submitAnswer() {
     if (state.status !== 'playing' || state.composing) return;
     const enemy = findEnemy(game.targetId);
@@ -487,7 +487,7 @@
     return Math.min(canvasWidth / 2, enemyWidth / 2 + 20 * objectScale);
   }
 
-  /* Chỉnh lại Canvas theo khung đang hiển thị. */
+  /* Đồng bộ kích thước Canvas với vùng hiển thị và tỉ lệ điểm ảnh thiết bị. */
   function resizeCanvas() {
     const bounds = elements.canvas.getBoundingClientRect();
     if (bounds.width < 1 || bounds.height < 1) return;
@@ -614,21 +614,137 @@
     game.lasers = livingLasers;
   }
 
-  /* Vẽ nền và các từ; mới đổi màu để nhận ra mục tiêu đang chọn. */
-  function drawWorld() {
-    const {width,height}=game.size;
-    context.clearRect(0,0,width,height);
-    context.fillStyle='#0c0e17'; context.fillRect(0,0,width,height);
-    context.strokeStyle='#ff8a3d'; context.beginPath(); context.moveTo(0,height-92*game.objectScale); context.lineTo(width,height-92*game.objectScale); context.stroke();
-    for(const enemy of game.enemies) {
-      context.fillStyle=enemy.id===game.targetId?'#ff8a3d':'#f2ede2';
-      context.font=(28*game.objectScale)+'px sans-serif'; context.fillText(enemy.kanji,enemy.x,enemy.y);
+  /* Vẽ nền, phòng tuyến, mục tiêu, đường ngắm và hiệu ứng trong một khung hình. */
+  function drawWorld(time) {
+    const width = game.size.width;
+    const height = game.size.height;
+    if (width < 1 || height < 1) return;
+    const defenseY = height - 92 * game.objectScale;
+    context.clearRect(0, 0, width, height);
+    context.save();
+    context.fillStyle = 'rgba(148, 163, 184, .18)';
+    for (let index = 0; index < 42; index += 1) {
+      const x = (index * 137.5) % Math.max(width, 1);
+      const y = (index * 83.7) % Math.max(height - 80 * game.objectScale, 1);
+      context.globalAlpha = .55 + Math.sin(time / 800 + index) * .35;
+      const starSize = (index % 5 === 0 ? 2 : 1) * game.objectScale;
+      context.fillRect(x, y, starSize, starSize);
     }
+    context.restore();
+    context.save();
+    context.strokeStyle = 'rgba(251, 113, 133, .72)';
+    context.lineWidth = game.objectScale;
+    context.setLineDash([9 * game.objectScale, 9 * game.objectScale]);
+    context.beginPath();
+    context.moveTo(0, defenseY);
+    context.lineTo(width, defenseY);
+    context.stroke();
+    context.setLineDash([]);
+    context.fillStyle = 'rgba(251, 113, 133, .72)';
+    context.font = '800 ' + 9 * game.objectScale + 'px system-ui';
+    context.fillText('DEFENSE LINE', 18 * game.objectScale, defenseY + 20 * game.objectScale);
+    context.restore();
+    const target = findEnemy(game.targetId);
+    if (target) {
+      context.save();
+      context.strokeStyle = 'rgba(103, 232, 249, .2)';
+      context.lineWidth = game.objectScale;
+      context.beginPath();
+      context.moveTo(width / 2, height - 38 * game.objectScale);
+      context.lineTo(target.x, target.y + target.height / 2);
+      context.stroke();
+      context.restore();
+    }
+    for (let index = 0; index < game.enemies.length; index += 1) {
+      const enemy = game.enemies[index];
+      const isTarget = enemy.id === game.targetId;
+      const left = enemy.x - enemy.width / 2;
+      const top = enemy.y - enemy.height / 2;
+      const size = game.objectScale;
+      context.save();
+      if (isTarget) {
+        context.shadowColor = '#22d3ee';
+        context.shadowBlur = 24;
+      }
+      context.fillStyle = isTarget ? 'rgba(12, 31, 46, .97)' : 'rgba(12, 25, 39, .92)';
+      context.strokeStyle = isTarget ? '#67e8f9' : 'rgba(100, 116, 139, .55)';
+      context.lineWidth = (isTarget ? 2 : 1) * size;
+      context.beginPath();
+      context.roundRect(left, top, enemy.width, enemy.height, 20 * size);
+      context.fill();
+      context.stroke();
+      context.shadowBlur = 0;
+      context.fillStyle = isTarget ? '#f8fafc' : '#cbd5e1';
+      const fontSize = (enemy.kanji.length > 4 ? 24 : enemy.kanji.length > 2 ? 29 : 34) * size;
+      context.font = '800 ' + fontSize + 'px "Yu Gothic UI", "Noto Sans JP", sans-serif';
+      context.textAlign = 'center';
+      context.textBaseline = 'middle';
+      context.fillText(enemy.kanji, enemy.x, enemy.y - 3 * size, enemy.width - 12 * size);
+      if (isTarget) {
+        const preview = elements.answerPreview.textContent.trim();
+        const isPrefix = normalizeAnswer(enemy.hiragana).startsWith(normalizeAnswer(preview));
+        const progress = isPrefix ? Math.min(1, preview.length / Math.max(enemy.hiragana.length, 1)) : 0;
+        context.fillStyle = 'rgba(15, 23, 42, .95)';
+        context.fillRect(left + 13 * size, top + enemy.height - 11 * size, enemy.width - 26 * size, 3 * size);
+        context.fillStyle = isPrefix ? '#67e8f9' : '#fb7185';
+        context.fillRect(left + 13 * size, top + enemy.height - 11 * size, (enemy.width - 26 * size) * progress, 3 * size);
+        context.font = '800 ' + 9 * size + 'px system-ui';
+        context.fillText('TARGET', enemy.x, top - 13 * size);
+        if (preview) {
+          context.fillStyle = isPrefix ? '#a5f3fc' : '#fda4af';
+          context.font = '700 ' + 14 * size + 'px "Yu Gothic UI", sans-serif';
+          context.fillText(preview, enemy.x, top + enemy.height + 17 * size, enemy.width);
+        }
+      }
+      context.restore();
+    }
+    for (let index = 0; index < game.lasers.length; index += 1) {
+      const laser = game.lasers[index];
+      context.save();
+      context.globalAlpha = Math.min(1, laser.life * 7);
+      context.strokeStyle = '#a5f3fc';
+      context.shadowColor = '#22d3ee';
+      context.shadowBlur = 16;
+      context.lineWidth = 3 * game.objectScale;
+      context.beginPath();
+      context.moveTo(laser.x1, laser.y1);
+      context.lineTo(laser.x2, laser.y2);
+      context.stroke();
+      context.restore();
+    }
+    for (let index = 0; index < game.particles.length; index += 1) {
+      const particle = game.particles[index];
+      context.save();
+      context.globalAlpha = Math.min(1, particle.life * 2);
+      context.fillStyle = particle.color;
+      context.shadowColor = particle.color;
+      context.shadowBlur = 8;
+      context.fillRect(particle.x, particle.y, 3 * game.objectScale, 3 * game.objectScale);
+      context.restore();
+    }
+    context.save();
+    context.translate(width / 2, height - 36 * game.objectScale);
+    context.scale(game.objectScale, game.objectScale);
+    context.fillStyle = '#e0f2fe';
+    context.shadowColor = '#67e8f9';
+    context.shadowBlur = 18;
+    context.beginPath();
+    context.moveTo(0, -24);
+    context.lineTo(34, 18);
+    context.lineTo(12, 10);
+    context.lineTo(0, 21);
+    context.lineTo(-12, 10);
+    context.lineTo(-34, 18);
+    context.closePath();
+    context.fill();
+    context.fillStyle = '#fb7185';
+    context.fillRect(-3, -16, 6, 17);
+    context.restore();
   }
 
-  /* Đang lấy mỗi frame là 0.016 giây, máy chạy nhanh có thể rơi nhanh hơn. */
+  /* Tính thời gian từ frame trước; chưa giới hạn khi tab bị ngắt lâu. */
   function animationLoop(time) {
-    const delta = .016;
+    const delta = (time - game.previousTime) / 1000;
     game.previousTime = time;
     updateWorld(delta);
     drawWorld(time);
