@@ -25,11 +25,19 @@
 #privacy-page .privacy-policy__reference { padding: .55rem .75rem; border: 1px solid var(--line); color: var(--accent-soft); font-size: .82rem; font-weight: 700; text-decoration: none; }
 #privacy-page .privacy-policy__reference:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, transparent); }
 
+/* Điều chỉnh bố cục cho ngưỡng màn hình này để nội dung dễ đọc và thao tác. */
+@media (max-width: 900px) {
+  #privacy-page .privacy-page { padding-left: 1rem; padding-right: 1rem; }
+  #privacy-page .privacy-layout { grid-template-columns: 1fr; }
+  #privacy-page .privacy-summary { position: static; }
+}
 
-
-
-
-
+/* Điều chỉnh bố cục cho ngưỡng màn hình này để nội dung dễ đọc và thao tác. */
+@media (max-width: 680px) {
+  #privacy-page .privacy-page { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+  #privacy-page .privacy-policy__section { grid-template-columns: 1fr; padding: 1.2rem; }
+  #privacy-page .privacy-policy__references { padding: 1.2rem; }
+}
 
 /* Khoảng cách dòng trang phụ còn cần cân lại với phần nội dung chính. */
 main { line-height: 1.7; }

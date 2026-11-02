@@ -1,5 +1,5 @@
-/* Phần thông tin người dùng. */
-/* Khung hồ sơ, có phần dành cho người chưa đăng nhập. */
+/* Hồ sơ, tiến độ học, thư viện từ cần ôn và tùy chọn giao diện. */
+/* Khung trang cá nhân và trạng thái yêu cầu đăng nhập. */
 #user-page .user-page { width: 100%; max-width: 1240px; min-height: calc(100vh - 150px); margin: auto; padding: 2.5rem 2rem 4rem; }
 #user-page .user-gate { display: grid; max-width: 620px; min-height: 620px; margin: auto; place-items: center; align-content: center; gap: 1rem; text-align: center; }
 #user-page .user-gate--hidden { display: none !important; }
@@ -102,17 +102,48 @@
 #user-page .preference__track::after { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; content: ""; background: var(--muted); transition: .18s ease; }
 #user-page .preference__input:checked + .preference__track { background: color-mix(in srgb, var(--accent) 30%, var(--surface-hover)); }
 #user-page .preference__input:checked + .preference__track::after { transform: translateX(20px); background: var(--accent); }
+#user-page .preference__input:focus-visible + .preference__track { outline: 2px solid var(--accent); outline-offset: 3px; }
 
+/* Điều chỉnh bố cục cho ngưỡng màn hình này để nội dung dễ đọc và thao tác. */
+@media (max-width: 1000px) {
+  #user-page .account-layout { grid-template-columns: 1fr; }
+  #user-page .profile-sidebar { position: static; min-height: 0; flex-direction: row; align-items: center; gap: 1rem; }
+  #user-page .profile-sidebar__user { display: grid; grid-template-columns: 52px minmax(0, 1fr); justify-items: start; padding: 0; text-align: left; }
+  #user-page .profile-sidebar__avatar { width: 52px; height: 52px; grid-row: 1 / 3; margin-right: .7rem; }
+  #user-page .profile-sidebar__name { margin-top: .15rem; }
+  #user-page .profile-sidebar__menu { display: flex; margin-left: auto; padding: 0; border: 0; }
+  #user-page .profile-sidebar__menu-item { width: auto; }
+  #user-page .profile-sidebar__logout { width: auto; margin: 0; border: 0; }
+}
 
+/* Điều chỉnh bố cục cho ngưỡng màn hình này để nội dung dễ đọc và thao tác. */
+@media (max-width: 900px) {
+  #user-page .user-page { padding-left: 1rem; padding-right: 1rem; }
+  #user-page .word-library__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 
+/* Điều chỉnh bố cục cho ngưỡng màn hình này để nội dung dễ đọc và thao tác. */
+@media (max-width: 720px) {
+  #user-page .profile-sidebar { flex-wrap: wrap; }
+  #user-page .profile-sidebar__user { flex: 1 1 100%; }
+  #user-page .profile-sidebar__menu { flex: 1; margin-left: 0; }
+  #user-page .profile-sidebar__menu-item { flex: 1; justify-content: center; }
+  #user-page .profile-sidebar__logout .profile-sidebar__label { display: none; }
+  #user-page .account-card { grid-template-columns: 1fr; }
+  #user-page .avatar-editor { padding-bottom: 1rem; border-bottom: 1px solid var(--line-soft); }
+  #user-page .account-form { grid-template-columns: 1fr; }
+  #user-page .account-form__submit { width: 100%; }
+  #user-page .stat-grid { grid-template-columns: 1fr 1fr; }
+  #user-page .stat-card:nth-child(2) { border-left: 0; }
+  #user-page .word-library__list { grid-template-columns: 1fr; }
+  #user-page .dashboard-card__heading { align-items: flex-start; flex-direction: column; }
+  #user-page .word-library__actions, #user-page .word-library__action { width: 100%; }
+  #user-page .theme-selector { grid-template-columns: 1fr 1fr; }
+  #user-page .settings-card--row { align-items: stretch; flex-direction: column; }
+  #user-page .settings-card__select { width: 100%; }
+}
 
-
-
-
-
-
-
-
+/* Điều chỉnh bố cục cho ngưỡng màn hình này để nội dung dễ đọc và thao tác. */
 
 
 /* Khoảng cách dòng trang phụ còn cần cân lại với phần nội dung chính. */

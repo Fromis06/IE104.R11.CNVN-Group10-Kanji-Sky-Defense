@@ -13,8 +13,11 @@
 #login-page .auth-card__switch, #register-page .auth-card__switch { margin: 0; color: var(--muted); font-size: .9rem; text-align: center; }
 #login-page .auth-card__link, #register-page .auth-card__link { color: var(--accent-soft); font-weight: 700; }
 
-
-
+/* Điều chỉnh bố cục cho ngưỡng màn hình này để nội dung dễ đọc và thao tác. */
+@media (max-width: 900px) {
+  #login-page .auth-page, #register-page .auth-page { grid-template-columns: 1fr; gap: 2.5rem; padding: 2.5rem 1rem; }
+  #login-page .auth-page__title, #register-page .auth-page__title { font-size: clamp(2.2rem, 9vw, 3.6rem); }
+}
 
 /* Khoảng cách dòng trang phụ còn cần cân lại với phần nội dung chính. */
 main { line-height: 1.7; }
