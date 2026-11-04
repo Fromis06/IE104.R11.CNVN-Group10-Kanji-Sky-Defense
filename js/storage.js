@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  /* Các khóa lưu dữ liệu trong trình duyệt. */
+  /* Tên khóa có phiên bản để phân biệt tài khoản, phiên đăng nhập, học lại và thống kê. */
   const KEYS = Object.freeze({
     users: 'kanji-sky-defense-users-v1',
     session: 'kanji-sky-defense-session-v1',
@@ -176,7 +176,7 @@
     return users[index];
   }
 
-  /* Thêm id vào khóa để không lẫn từ của hai tài khoản. */
+  /* Tách khóa học lại giữa khách và từng tài khoản để tránh trộn tiến độ. */
   function scopeId() {
     return getSessionId() || 'guest';
   }
@@ -185,7 +185,7 @@
     return KEYS.review + ':' + scopeId();
   }
 
-  /* Đọc từ đã lưu, có hỗ trợ chuyển khóa cũ. */
+  /* Đọc danh sách cần ôn và chuyển dữ liệu từ khóa cũ nếu cần. */
   function loadReview() {
     const key = reviewKey();
     const current = localStorage.getItem(key);

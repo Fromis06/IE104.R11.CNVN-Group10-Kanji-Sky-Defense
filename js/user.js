@@ -129,14 +129,106 @@
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   }
 
-  /* Tạm in tổng số từ, chưa vẽ biểu đồ. */
+  /* Vẽ trục, đường biểu diễn và nhãn thống kê theo kích thước Canvas. */
   function drawChart() {
-    const canvas=document.querySelector('#learning-chart');
-    const context=canvas.getContext('2d');
-    canvas.width=600; canvas.height=240;
-    context.clearRect(0,0,600,240); context.fillStyle=cssVariable('--accent');
-    const points=chartPoints(chartPeriod);
-    context.font='18px sans-serif'; context.fillText('Số từ luyện: '+points.reduce((n,p)=>n+p.value,0),20,80);
+    const canvas = document.querySelector('#learning-chart');
+    const bounds = canvas.getBoundingClientRect();
+    if (bounds.width < 1 || bounds.height < 1) return;
+    const context = canvas.getContext('2d');
+    const ratio = window.devicePixelRatio || 1;
+    canvas.width = Math.max(1, Math.round(bounds.width * ratio));
+    canvas.height = Math.max(1, Math.round(bounds.height * ratio));
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+    const points = chartPoints(chartPeriod);
+    const width = bounds.width;
+    const height = bounds.height;
+    const padding = { top: 24, right: 20, bottom: 42, left: 42 };
+    const chartWidth = width - padding.left - padding.right;
+    const chartHeight = height - padding.top - padding.bottom;
+    let maxValue = 5;
+    for (let index = 0; index < points.length; index += 1) maxValue = Math.max(maxValue, points[index].value);
+    const accent = cssVariable('--accent');
+    const accentSoft = cssVariable('--accent-soft');
+    const muted = cssVariable('--muted');
+    const chartGrid = cssVariable('--chart-grid');
+    const panel = cssVariable('--panel');
+
+    context.clearRect(0, 0, width, height);
+    context.font = '12px system-ui';
+    context.textAlign = 'right';
+    context.textBaseline = 'middle';
+    for (let index = 0; index <= 4; index += 1) {
+      const y = padding.top + chartHeight * (index / 4);
+      const value = Math.round(maxValue * (1 - index / 4));
+      context.strokeStyle = chartGrid;
+      context.beginPath();
+      context.moveTo(padding.left, y);
+      context.lineTo(width - padding.right, y);
+      context.stroke();
+      context.fillStyle = muted;
+      context.fillText(String(value), padding.left - 10, y);
+    }
+
+    const coordinates = [];
+    for (let index = 0; index < points.length; index += 1) {
+      const point = points[index];
+      coordinates.push({
+        label: point.label,
+        value: point.value,
+        x: padding.left + chartWidth * (index / Math.max(1, points.length - 1)),
+        y: padding.top + chartHeight * (1 - point.value / maxValue),
+      });
+    }
+
+    const gradient = context.createLinearGradient(0, padding.top, 0, height - padding.bottom);
+    gradient.addColorStop(0, cssVariable('--chart-fill'));
+    gradient.addColorStop(1, 'transparent');
+    context.beginPath();
+    for (let index = 0; index < coordinates.length; index += 1) {
+      const point = coordinates[index];
+      if (index === 0) context.moveTo(point.x, point.y);
+      else context.lineTo(point.x, point.y);
+    }
+    context.lineTo(coordinates[coordinates.length - 1].x, height - padding.bottom);
+    context.lineTo(coordinates[0].x, height - padding.bottom);
+    context.closePath();
+    context.fillStyle = gradient;
+    context.fill();
+
+    context.beginPath();
+    for (let index = 0; index < coordinates.length; index += 1) {
+      const point = coordinates[index];
+      if (index === 0) context.moveTo(point.x, point.y);
+      else context.lineTo(point.x, point.y);
+    }
+    context.strokeStyle = accent;
+    context.lineWidth = 3;
+    context.lineJoin = 'round';
+    context.stroke();
+
+    for (let index = 0; index < coordinates.length; index += 1) {
+      const point = coordinates[index];
+      context.beginPath();
+      context.arc(point.x, point.y, 4, 0, Math.PI * 2);
+      context.fillStyle = panel;
+      context.fill();
+      context.strokeStyle = accentSoft;
+      context.lineWidth = 2;
+      context.stroke();
+      context.fillStyle = muted;
+      context.textAlign = 'center';
+      context.textBaseline = 'top';
+      context.fillText(point.label, point.x, height - padding.bottom + 14);
+    }
+
+    const periodLabel = chartPeriod === 'week' ? t('7 ngày') : t('30 ngày');
+    const labels = [];
+    for (let index = 0; index < points.length; index += 1) {
+      labels.push(points[index].label + ' ' + t('{count} từ', { count: points[index].value }));
+    }
+    const values = labels.join(', ');
+    canvas.setAttribute('aria-label', t('Biểu đồ {period}: {values}', { period: periodLabel, values }));
   }
 
   /* Tổng hợp lượt học, số từ, độ chính xác và chuỗi ngày lên các thẻ thống kê. */
