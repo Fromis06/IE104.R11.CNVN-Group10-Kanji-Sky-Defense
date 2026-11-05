@@ -1,6 +1,6 @@
 /* Giao diện dùng chung và các quy tắc hiển thị toàn website. */
 
-/* Các màu và cỡ dùng chung. */
+/* Token màu, phông chữ và kích thước dùng chung cho theme tối. */
 :root {
   color-scheme: dark;
   --bg: #0a0c14;
@@ -37,8 +37,36 @@
 
 }
 
-/* Màu khi chuyển sang giao diện sáng. */
-
+/* Ghi đè token cho theme sáng, giữ nguyên cấu trúc component. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f6f1e6;
+  --panel: #fffdf8;
+  --panel-deep: #efe7d5;
+  --surface: rgba(255, 255, 255, .7);
+  --surface-soft: rgba(35, 26, 12, .05);
+  --surface-hover: #ece2cc;
+  --header-bg: rgba(246, 241, 230, .95);
+  --line: rgba(41, 31, 15, .22);
+  --line-soft: rgba(41, 31, 15, .1);
+  --text: #241b0f;
+  --text-strong: #120d06;
+  --muted: #695f4d;
+  --dim: #8a8067;
+  --accent: #c85a17;
+  --accent-soft: #a3480f;
+  --accent-ink: #fffaf0;
+  --icon-accent: #a3480f;
+  --icon-muted: #695f4d;
+  --red: #b8283b;
+  --green: #146b48;
+  --launch: #c62d3f;
+  --launch-hover: #d94656;
+  --input-bg: #fffdf8;
+  --shadow: 0 16px 32px rgba(35, 26, 12, .14);
+  --chart-grid: rgba(41, 31, 15, .14);
+  --chart-fill: rgba(200, 90, 23, .16);
+}
 
 /* Thiết lập nền tảng, form, focus bàn phím và khả năng chọn văn bản. */
 * { box-sizing: border-box; }
@@ -61,6 +89,7 @@ body {
 button, input, textarea, select { font: inherit; }
 button { cursor: pointer; }
 button:disabled { cursor: not-allowed; opacity: .38; }
+button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 a { color: inherit; }
 ::selection { color: var(--accent-ink); background: var(--accent); }
 
@@ -155,7 +184,7 @@ a.brand { text-decoration: none; }
 .account-nav__avatar--has-image { color: transparent; }
 .account-nav__name { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-/* Các kiểu nút, rê chuột và nút bị khóa. */
+/* Các biến thể nút và phản hồi khi hover, nhấn hoặc vô hiệu hóa. */
 .button { display: inline-flex; min-height: 40px; align-items: center; justify-content: center; gap: .5rem; padding: .58rem .95rem; border: 1px solid transparent; border-radius: 4px; color: var(--text); background: transparent; font-size: .875rem; font-weight: 700; text-decoration: none; transition: border-color .16s ease, background .16s ease, color .16s ease, transform .16s ease; }
 .button:not(:disabled):active { transform: translateY(1px); }
 .button--secondary { border-color: var(--line); background: var(--surface); }
@@ -192,10 +221,14 @@ a.brand { text-decoration: none; }
 :root[data-show-shortcuts="false"] kbd { display: none !important; }
 :root[data-reduce-motion="true"] *, :root[data-reduce-motion="true"] *::before, :root[data-reduce-motion="true"] *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
 
+/* Điều chỉnh bố cục cho ngưỡng màn hình này để nội dung dễ đọc và thao tác. */
+@media (max-width: 900px) {
+  .site-header__inner, .site-footer { padding-left: 1rem; padding-right: 1rem; }
+  .site-header__inner { flex-wrap: wrap; padding-top: .65rem; padding-bottom: .65rem; }
+  .site-header__actions { flex: 1 1 100%; justify-content: space-between; }
+}
 
-
-
-
+/* Điều chỉnh bố cục cho ngưỡng màn hình này để nội dung dễ đọc và thao tác. */
 
 
 /* Giảm hiệu ứng theo tùy chọn trợ năng của hệ điều hành. */
