@@ -1,4 +1,4 @@
-/* Các phần thiết lập, chơi và học lại. */
+/* Thiết lập nhiệm vụ, vùng chơi Canvas và danh sách từ cần ôn. */
 /* Thanh chuyển màn hình và huy hiệu số từ cần ôn. */
 #home-page .nav-tabs { display: flex; align-items: center; gap: .25rem; padding: .25rem; border: 1px solid var(--line-soft); border-radius: 4px; background: var(--surface-soft); }
 #home-page .nav-tabs__button { display: flex; min-height: 36px; align-items: center; gap: .5rem; padding: 0 .75rem; border: 0; border-radius: 3px; color: var(--muted); background: transparent; font-size: .875rem; font-weight: 700; transition: .16s ease; }
@@ -15,7 +15,7 @@
 #home-page .setup-intro__title, #home-page .review-panel__title { margin: .6rem 0 0; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; letter-spacing: -.03em; }
 #home-page .setup-intro__description, #home-page .review-panel__description { margin: .85rem 0 0; color: var(--muted); font-size: 1rem; line-height: 1.55; }
 
-/* Chia phần thiết lập và cột tóm tắt. */
+/* Bố cục các bước thiết lập và tóm tắt cấu hình. */
 #home-page .setup-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 1.25rem; align-items: start; }
 #home-page .setup-layout__steps { display: grid; gap: 1.25rem; }
 #home-page .setup-card { position: relative; display: flex; gap: 1rem; padding: 1.25rem; border: 1px solid var(--line-soft); border-left: 2px solid color-mix(in srgb, var(--accent) 45%, transparent); border-radius: 2px; background: var(--panel); }
@@ -189,8 +189,15 @@
 #home-page .empty-state__action { margin-top: 1.25rem; }
 #home-page.page--play-active .site-footer { display: none; }
 
+/* Điều chỉnh bố cục cho ngưỡng màn hình này để nội dung dễ đọc và thao tác. */
+@media (max-width: 900px) {
+  #home-page .view--setup, #home-page .view--play, #home-page .view--review { padding-left: 1rem; padding-right: 1rem; }
+  #home-page .setup-layout { grid-template-columns: 1fr; }
+  #home-page .summary-card { position: static; }
+  #home-page .game-field { min-height: 0; }
+  #home-page .game-status__stats { gap: .8rem; }
+  #home-page .game-status__remaining { display: none; }
+}
 
-
-
-
+/* Điều chỉnh bố cục cho ngưỡng màn hình này để nội dung dễ đọc và thao tác. */
 
