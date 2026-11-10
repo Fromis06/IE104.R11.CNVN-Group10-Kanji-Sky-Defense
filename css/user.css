@@ -144,7 +144,10 @@
 }
 
 /* Điều chỉnh bố cục cho ngưỡng màn hình này để nội dung dễ đọc và thao tác. */
-
-
-/* Khoảng cách dòng trang phụ còn cần cân lại với phần nội dung chính. */
-main { line-height: 1.7; }
+@media (max-width: 430px) {
+  #user-page .user-page { padding-top: 1rem; }
+  #user-page .profile-sidebar__menu-item .profile-sidebar__icon { display: none; }
+  #user-page .stat-grid, #user-page .theme-selector { grid-template-columns: 1fr; }
+  #user-page .stat-card { border-left: 0; border-top: 1px solid var(--line-soft); }
+  #user-page .stat-card:first-child { border-top: 0; }
+}
