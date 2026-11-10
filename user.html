@@ -27,8 +27,8 @@
           <span><span class="brand__title">KANJI SKY DEFENSE</span><span class="brand__subtitle">Typing defense station</span></span>
         </a>
         <div class="site-header__actions">
-          <nav class="page-nav"><a class="page-nav__link" href="index.html">Chơi</a><a class="page-nav__link" href="about.html">Giới thiệu</a><a class="page-nav__link" href="contact.html">Liên hệ</a><a class="page-nav__link" href="privacy.html">Quyền riêng tư</a></nav>
-          <nav class="account-nav" data-auth-nav></nav>
+          <nav class="page-nav" aria-label="Điều hướng chính"><a class="page-nav__link" href="index.html">Chơi</a><a class="page-nav__link" href="about.html">Giới thiệu</a><a class="page-nav__link" href="contact.html">Liên hệ</a><a class="page-nav__link" href="privacy.html">Quyền riêng tư</a></nav>
+          <nav class="account-nav" data-auth-nav aria-label="Tài khoản"></nav>
         </div>
       </div>
     </header>
@@ -51,7 +51,7 @@
             <span id="sidebar-email" class="profile-sidebar__email"></span>
           </div>
 
-          <nav class="profile-sidebar__menu">
+          <nav class="profile-sidebar__menu" aria-label="Trang cá nhân">
             <button class="profile-sidebar__menu-item profile-sidebar__menu-item--active" type="button" data-user-panel="account" aria-pressed="true"><svg class="profile-sidebar__icon icon icon--profile" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-profile"></use></svg><b class="profile-sidebar__label">Tài khoản</b></button>
             <button class="profile-sidebar__menu-item" type="button" data-user-panel="settings" aria-pressed="false"><svg class="profile-sidebar__icon icon icon--settings" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-settings"></use></svg><b class="profile-sidebar__label">Cài đặt</b></button>
           </nav>
@@ -67,7 +67,7 @@
 
             <div class="account-card">
               <div class="avatar-editor">
-                <div class="profile-photo" role="img"><img id="profile-avatar-image" class="profile-photo__image profile-photo__image--hidden" src="images/favicon.svg" alt=""><span id="profile-avatar-fallback" class="profile-photo__fallback">U</span></div>
+                <div class="profile-photo" role="img" aria-label="Ảnh đại diện"><img id="profile-avatar-image" class="profile-photo__image profile-photo__image--hidden" src="images/favicon.svg" alt=""><span id="profile-avatar-fallback" class="profile-photo__fallback">U</span></div>
                 <input id="avatar-input" class="visually-hidden" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
                 <button id="avatar-button" class="button button--secondary avatar-editor__button" type="button">Đổi ảnh</button>
                 <button id="avatar-remove" class="button button--danger-ghost button--hidden avatar-editor__button" type="button">Xóa ảnh</button>
@@ -86,7 +86,7 @@
             </div>
 
             <!-- Các chỉ số tổng quan được JavaScript cập nhật từ lịch sử học. -->
-            <section class="stat-grid">
+            <section class="stat-grid" aria-label="Tổng quan tiến độ">
               <div class="stat-card"><span class="stat-card__label">Phiên học</span><strong id="stat-sessions" class="stat-card__value">0</strong></div>
               <div class="stat-card"><span class="stat-card__label">Từ đã luyện</span><strong id="stat-words" class="stat-card__value">0</strong></div>
               <div class="stat-card"><span class="stat-card__label">Độ chính xác</span><strong id="stat-accuracy" class="stat-card__value">0%</strong></div>
@@ -97,12 +97,12 @@
             <section class="dashboard-card dashboard-card--chart">
               <div class="dashboard-card__heading">
                 <h2 class="dashboard-card__title">Số từ đã luyện</h2>
-                <div class="segmented-control" role="group">
+                <div class="segmented-control" role="group" aria-label="Khoảng thời gian biểu đồ">
                   <button class="segmented-control__option segmented-control__option--active" type="button" data-chart-period="week">Tuần</button>
                   <button class="segmented-control__option" type="button" data-chart-period="month">Tháng</button>
                 </div>
               </div>
-              <canvas id="learning-chart" class="learning-chart" role="img"></canvas>
+              <canvas id="learning-chart" class="learning-chart" role="img" aria-label="Biểu đồ tiến độ học"></canvas>
             </section>
 
             <!-- Tìm kiếm và quản lý các từ cần ôn của tài khoản hiện tại. -->
@@ -123,7 +123,7 @@
 
             <section class="settings-card">
               <h2 class="settings-card__title">Giao diện</h2>
-              <div class="theme-selector" role="group">
+              <div class="theme-selector" role="group" aria-label="Giao diện">
                 <button class="theme-selector__option" type="button" data-theme-option="light" aria-pressed="false"><span class="theme-selector__preview theme-selector__preview--light" aria-hidden="true"></span><b class="theme-selector__label">Sáng</b></button>
                 <button class="theme-selector__option" type="button" data-theme-option="dark" aria-pressed="true"><span class="theme-selector__preview theme-selector__preview--dark" aria-hidden="true"></span><b class="theme-selector__label">Tối</b></button>
               </div>
@@ -146,6 +146,6 @@
     </main>
 
     <!-- Năm bản quyền và liên kết tới các trang thông tin dùng chung. -->
-    <footer class="site-footer"><span class="site-footer__copyright">© <span data-year></span> Kanji Sky Defense</span><nav class="site-footer__nav"><a class="site-footer__link" href="about.html">Giới thiệu</a><a class="site-footer__link" href="contact.html">Liên hệ</a><a class="site-footer__link" href="privacy.html">Quyền riêng tư</a></nav></footer>
+    <footer class="site-footer"><span class="site-footer__copyright">© <span data-year></span> Kanji Sky Defense</span><nav class="site-footer__nav" aria-label="Thông tin"><a class="site-footer__link" href="about.html">Giới thiệu</a><a class="site-footer__link" href="contact.html">Liên hệ</a><a class="site-footer__link" href="privacy.html">Quyền riêng tư</a></nav></footer>
   </body>
 </html>

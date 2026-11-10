@@ -38,6 +38,3 @@
   #privacy-page .privacy-policy__section { grid-template-columns: 1fr; padding: 1.2rem; }
   #privacy-page .privacy-policy__references { padding: 1.2rem; }
 }
-
-/* Khoảng cách dòng trang phụ còn cần cân lại với phần nội dung chính. */
-main { line-height: 1.7; }

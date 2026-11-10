@@ -42,6 +42,3 @@
   #not-found-page .error-page { padding: 2rem 1rem; }
   #not-found-page .error-card { padding: 2.25rem 1.25rem 2.5rem; }
 }
-
-/* Khoảng cách dòng trang phụ còn cần cân lại với phần nội dung chính. */
-main { line-height: 1.7; }

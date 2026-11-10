@@ -37,6 +37,3 @@
   #about-page .mode-explainer { gap: 2rem; margin-top: 2.5rem; padding: 1.25rem; }
   #about-page .mode-explainer__item { grid-template-columns: 80px 1fr; }
 }
-
-/* Khoảng cách dòng trang phụ còn cần cân lại với phần nội dung chính. */
-main { line-height: 1.7; }

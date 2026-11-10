@@ -16,6 +16,3 @@
 @media (max-width: 680px) {
   #contact-page .contact-page { padding-top: 2.5rem; padding-bottom: 2.5rem; }
 }
-
-/* Khoảng cách dòng trang phụ còn cần cân lại với phần nội dung chính. */
-main { line-height: 1.7; }

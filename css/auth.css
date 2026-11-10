@@ -18,6 +18,3 @@
   #login-page .auth-page, #register-page .auth-page { grid-template-columns: 1fr; gap: 2.5rem; padding: 2.5rem 1rem; }
   #login-page .auth-page__title, #register-page .auth-page__title { font-size: clamp(2.2rem, 9vw, 3.6rem); }
 }
-
-/* Khoảng cách dòng trang phụ còn cần cân lại với phần nội dung chính. */
-main { line-height: 1.7; }
