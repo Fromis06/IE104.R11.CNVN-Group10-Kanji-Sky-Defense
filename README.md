@@ -1,6 +1,6 @@
-# Kanji Sky Defense — tuần 6
+# Kanji Sky Defense — tuần 8
 
-Chuyển sang cấu trúc đầy đủ setup/play/review. Ghép CSS component bản desktop; chưa đủ breakpoint. Ghép các trang tài khoản/thông tin và bộ tài nguyên hiện tại. Tích hợp ba chế độ, nhiều mục tiêu và IME; renderer còn đơn giản. Nối đăng ký, đăng nhập, lưu trữ, hồ sơ; API tùy chọn tiếng Việt.
+Bổ sung vai trò trợ năng cho nhóm chọn chế độ và thông báo game. Hoàn thiện focus và trạng thái thành phần. Mở chọn ngôn ngữ, bố cục mobile phụ và nạp bảng wireframe. Parser CSV chuẩn hơn: BOM, ngoặc kép, loại trùng, giới hạn từ. Tích hợp từ điển VI/EN/JA, biểu đồ đầy đủ và wireframe động.
 
 ## Chạy bản tuần này
 
@@ -8,6 +8,6 @@ Phục vụ thư mục này bằng máy chủ HTTP tĩnh. Mở index.html để 
 
 ## Việc còn thiếu
 
-Đã tích hợp chức năng chính nhưng renderer đơn giản, bước thời gian cố định; chưa dịch, biểu đồ chỉ báo số tổng; responsive còn thiếu.
+Parser đã chắc hơn; tìm kiếm mới dùng chuỗi chứa; mobile game chưa hoàn thiện; tự focus còn làm bật bàn phím ảo.
 
 

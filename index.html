@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0a0c14">
     <meta name="description" content="Luyện đọc Kanji bằng một trận chiến phòng thủ trên bầu trời.">
+    <meta property="og:title" content="Kanji Sky Defense">
+    <meta property="og:description" content="Gõ Hiragana. Bảo vệ bầu trời.">
+    <meta property="og:image" content="images/og.png">
+    <meta name="twitter:card" content="summary_large_image">
     <title>Kanji Sky Defense</title>
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
     <script src="js/preferences.js"></script>
@@ -79,14 +83,14 @@
               <div class="setup-card__step">02</div>
               <div class="setup-card__content">
                 <h2 class="eyebrow">Chế độ chơi</h2>
-                <div class="mode-selector">
-                  <button class="mode-card mode-card--active" type="button" data-mode="study" aria-checked="true">
+                <div class="mode-selector" role="radiogroup">
+                  <button class="mode-card mode-card--active" type="button" data-mode="study" role="radio" aria-checked="true">
                     <span class="mode-card__icon" aria-hidden="true"><svg class="icon icon--book-open" viewBox="0 0 24 24" width="20" height="20" focusable="false"><use href="#icon-book-open"></use></svg></span><strong class="mode-card__title">Study</strong><span class="mode-card__subtitle">Học không áp lực</span><span class="mode-card__description">Không có HP. Từ bị bỏ lỡ hoặc trả lời sai sẽ tự động vào Học lại.</span><svg class="mode-card__check icon icon--check" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg>
                   </button>
-                  <button class="mode-card" type="button" data-mode="challenge" aria-checked="false">
+                  <button class="mode-card" type="button" data-mode="challenge" role="radio" aria-checked="false">
                     <span class="mode-card__icon" aria-hidden="true"><svg class="icon icon--sword" viewBox="0 0 24 24" width="20" height="20" focusable="false"><use href="#icon-sword"></use></svg></span><strong class="mode-card__title">Challenge</strong><span class="mode-card__subtitle">Vượt qua một bộ từ</span><span class="mode-card__description">Có HP tùy chỉnh. Hoàn thành toàn bộ bộ từ trước khi phòng tuyến thất thủ.</span><svg class="mode-card__check icon icon--check" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg>
                   </button>
-                  <button class="mode-card" type="button" data-mode="endless" aria-checked="false">
+                  <button class="mode-card" type="button" data-mode="endless" role="radio" aria-checked="false">
                     <span class="mode-card__icon" aria-hidden="true"><svg class="icon icon--infinity" viewBox="0 0 24 24" width="20" height="20" focusable="false"><use href="#icon-infinity"></use></svg></span><strong class="mode-card__title">Endless</strong><span class="mode-card__subtitle">Chơi không giới hạn</span><span class="mode-card__description">Từ vựng lặp vô tận. Bạn có thể bật hoặc tắt giới hạn HP.</span><svg class="mode-card__check icon icon--check" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg>
                   </button>
                 </div>
@@ -97,10 +101,10 @@
               <div class="setup-card__step">03</div>
               <div class="setup-card__content">
                 <h2 class="eyebrow">Tốc độ rơi</h2>
-                <div class="speed-selector">
-                  <button class="speed-selector__option" type="button" data-difficulty="easy" aria-checked="false"><span class="speed-selector__icon" aria-hidden="true">!</span><strong class="speed-selector__title">Dễ</strong><span class="speed-selector__description">24 giây tới vạch</span></button>
-                  <button class="speed-selector__option speed-selector__option--active" type="button" data-difficulty="normal" aria-checked="true"><span class="speed-selector__icon" aria-hidden="true">!!</span><strong class="speed-selector__title">Vừa</strong><span class="speed-selector__description">16 giây tới vạch</span></button>
-                  <button class="speed-selector__option" type="button" data-difficulty="hard" aria-checked="false"><span class="speed-selector__icon" aria-hidden="true">!!!</span><strong class="speed-selector__title">Khó</strong><span class="speed-selector__description">11 giây tới vạch</span></button>
+                <div class="speed-selector" role="radiogroup">
+                  <button class="speed-selector__option" type="button" data-difficulty="easy" role="radio" aria-checked="false"><span class="speed-selector__icon" aria-hidden="true">!</span><strong class="speed-selector__title">Dễ</strong><span class="speed-selector__description">24 giây tới vạch</span></button>
+                  <button class="speed-selector__option speed-selector__option--active" type="button" data-difficulty="normal" role="radio" aria-checked="true"><span class="speed-selector__icon" aria-hidden="true">!!</span><strong class="speed-selector__title">Vừa</strong><span class="speed-selector__description">16 giây tới vạch</span></button>
+                  <button class="speed-selector__option" type="button" data-difficulty="hard" role="radio" aria-checked="false"><span class="speed-selector__icon" aria-hidden="true">!!!</span><strong class="speed-selector__title">Khó</strong><span class="speed-selector__description">11 giây tới vạch</span></button>
                 </div>
               </div>
             </article>
