@@ -200,4 +200,28 @@
 }
 
 /* Điều chỉnh bố cục cho ngưỡng màn hình này để nội dung dễ đọc và thao tác. */
-
+@media (max-width: 680px) {
+  #home-page.page--play-active .site-header__actions { display: none; }
+  #home-page .play-toolbar { flex-wrap: wrap; gap: .25rem; }
+  #home-page .play-toolbar .cluster { gap: .25rem; }
+  #home-page .play-toolbar .button { gap: .25rem; padding: .5rem .45rem; font-size: .75rem; }
+  #home-page .nav-tabs__label { display: none; }
+  #home-page .nav-tabs { justify-content: center; }
+  #home-page .nav-tabs__button { min-width: 38px; justify-content: center; padding: 0 .55rem; }
+  #home-page .view--setup, #home-page .view--review { padding-top: 2rem; padding-bottom: 2rem; }
+  #home-page .setup-card { padding: 1rem; }
+  #home-page .setup-card__step { display: none; }
+  #home-page .mode-selector, #home-page .speed-selector { grid-template-columns: 1fr; }
+  #home-page .mode-card { min-height: 0; }
+  #home-page .review-panel__heading { align-items: flex-start; flex-direction: column; }
+  #home-page .game-status { padding: .7rem; }
+  #home-page .game-status__stats { width: 100%; flex-wrap: wrap; justify-content: space-between; gap: .35rem; font-size: .68rem; }
+  #home-page .answer-form__keyboard-icon, #home-page .answer-form__preview, #home-page .button__label, #home-page .button__shortcut { display: none !important; }
+  #home-page .game-field { height: clamp(220px, calc(100dvh - 290px), min(620px, 140vw)); }
+  #home-page .answer-area { padding: .6rem; }
+  #home-page .answer-form { padding: .65rem; }
+  #home-page .button--target { width: 48px; min-height: 72px; padding: 0; }
+  #home-page .answer-form__feedback { max-width: 55%; }
+  #home-page .review-list__word { gap: .65rem; }
+  #home-page .review-list__kanji { min-width: 4.8rem; }
+}

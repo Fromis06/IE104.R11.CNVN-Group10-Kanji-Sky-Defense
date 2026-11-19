@@ -1,4 +1,5 @@
 /* Giao diện dùng chung và các quy tắc hiển thị toàn website. */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap');
 
 /* Token màu, phông chữ và kích thước dùng chung cho theme tối. */
 :root {
@@ -32,8 +33,8 @@
   --radius: .5rem;
   --radius-lg: .65rem;
   --notch: 18px;
-  --font-body: Arial, sans-serif;
-  --font-mono: monospace;
+  --font-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
 }
 
@@ -229,7 +230,16 @@ a.brand { text-decoration: none; }
 }
 
 /* Điều chỉnh bố cục cho ngưỡng màn hình này để nội dung dễ đọc và thao tác. */
-
+@media (max-width: 680px) {
+  .brand__title { font-size: .72rem; }
+  .brand__subtitle { display: none; }
+  .site-header__actions { align-items: stretch; flex-direction: column; }
+  .page-nav { justify-content: center; }
+  .account-nav { justify-content: center; padding: .55rem 0 0; border-top: 1px solid var(--line-soft); border-left: 0; }
+  .account-nav__name { max-width: 140px; }
+  .page-nav__link { padding: .5rem; font-size: .8rem; }
+  .site-footer { align-items: flex-start; flex-direction: column; }
+}
 
 /* Giảm hiệu ứng theo tùy chọn trợ năng của hệ điều hành. */
 @media (prefers-reduced-motion: reduce) {
