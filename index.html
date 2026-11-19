@@ -28,7 +28,7 @@
     <!-- Nhận diện website và điều hướng tới các màn hình, trang thông tin và tài khoản. -->
     <header class="site-header">
       <div class="site-header__inner">
-        <button class="brand" type="button" data-view="setup">
+        <button class="brand" type="button" data-view="setup" aria-label="Về trang thiết lập">
           <span class="brand__mark" aria-hidden="true">漢</span>
           <span>
             <span class="brand__title">KANJI SKY DEFENSE</span>
@@ -36,12 +36,12 @@
           </span>
         </button>
         <div class="site-header__actions">
-          <nav class="nav-tabs">
+          <nav class="nav-tabs" aria-label="Điều hướng chính">
             <button class="nav-tabs__button nav-tabs__button--active" type="button" data-view="setup"><svg class="icon icon--settings" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-settings"></use></svg><span class="nav-tabs__label">Thiết lập</span></button>
             <button id="nav-play" class="nav-tabs__button" type="button" data-view="play" disabled><svg class="icon icon--target" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-target"></use></svg><span class="nav-tabs__label">Chơi</span></button>
             <button class="nav-tabs__button" type="button" data-view="review"><svg class="icon icon--book-open" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-book-open"></use></svg><span class="nav-tabs__label">Học lại</span><span id="review-badge" class="nav-tabs__badge nav-tabs__badge--hidden">0</span></button>
           </nav>
-          <nav class="account-nav" data-auth-nav>
+          <nav class="account-nav" data-auth-nav aria-label="Tài khoản">
             <a class="account-nav__link" href="login.html">Đăng nhập</a>
             <a class="account-nav__link account-nav__link--primary" href="register.html">Đăng ký</a>
           </nav>
@@ -56,7 +56,7 @@
         <div class="setup-intro">
           <p class="eyebrow">Thiết lập nhiệm vụ</p>
           <h1 class="setup-intro__title">Chọn cách bạn muốn học.</h1>
-          <p class="setup-intro__description">Nạp bộ từ của riêng bạn, chọn chế độ và tốc độ. Bản tích hợp — nội dung hướng dẫn đang rà soát.</p>
+          <p class="setup-intro__description">Nạp bộ từ của riêng bạn, chọn chế độ và tốc độ. Bảo vệ bầu trời !</p>
         </div>
 
         <div class="setup-layout">
@@ -83,7 +83,7 @@
               <div class="setup-card__step">02</div>
               <div class="setup-card__content">
                 <h2 class="eyebrow">Chế độ chơi</h2>
-                <div class="mode-selector" role="radiogroup">
+                <div class="mode-selector" role="radiogroup" aria-label="Chế độ chơi">
                   <button class="mode-card mode-card--active" type="button" data-mode="study" role="radio" aria-checked="true">
                     <span class="mode-card__icon" aria-hidden="true"><svg class="icon icon--book-open" viewBox="0 0 24 24" width="20" height="20" focusable="false"><use href="#icon-book-open"></use></svg></span><strong class="mode-card__title">Study</strong><span class="mode-card__subtitle">Học không áp lực</span><span class="mode-card__description">Không có HP. Từ bị bỏ lỡ hoặc trả lời sai sẽ tự động vào Học lại.</span><svg class="mode-card__check icon icon--check" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg>
                   </button>
@@ -101,7 +101,7 @@
               <div class="setup-card__step">03</div>
               <div class="setup-card__content">
                 <h2 class="eyebrow">Tốc độ rơi</h2>
-                <div class="speed-selector" role="radiogroup">
+                <div class="speed-selector" role="radiogroup" aria-label="Tốc độ rơi">
                   <button class="speed-selector__option" type="button" data-difficulty="easy" role="radio" aria-checked="false"><span class="speed-selector__icon" aria-hidden="true">!</span><strong class="speed-selector__title">Dễ</strong><span class="speed-selector__description">24 giây tới vạch</span></button>
                   <button class="speed-selector__option speed-selector__option--active" type="button" data-difficulty="normal" role="radio" aria-checked="true"><span class="speed-selector__icon" aria-hidden="true">!!</span><strong class="speed-selector__title">Vừa</strong><span class="speed-selector__description">16 giây tới vạch</span></button>
                   <button class="speed-selector__option" type="button" data-difficulty="hard" role="radio" aria-checked="false"><span class="speed-selector__icon" aria-hidden="true">!!!</span><strong class="speed-selector__title">Khó</strong><span class="speed-selector__description">11 giây tới vạch</span></button>
@@ -120,9 +120,9 @@
                   <button id="hp-toggle" class="hp-toggle hp-toggle--hidden" type="button" aria-pressed="false"><span class="hp-toggle__indicator" aria-hidden="true"></span><b class="hp-toggle__label">Không HP</b></button>
                 </div>
                 <div id="hp-counter" class="hp-counter">
-                  <button id="hp-minus" class="hp-counter__button" type="button"><svg class="icon icon--minus" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-minus"></use></svg></button>
+                  <button id="hp-minus" class="hp-counter__button" type="button" aria-label="Giảm HP"><svg class="icon icon--minus" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-minus"></use></svg></button>
                   <div class="hp-counter__value"><svg class="icon icon--heart" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-heart"></use></svg><b id="hp-value">3</b></div>
-                  <button id="hp-plus" class="hp-counter__button" type="button"><svg class="icon icon--plus" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-plus"></use></svg></button>
+                  <button id="hp-plus" class="hp-counter__button" type="button" aria-label="Tăng HP"><svg class="icon icon--plus" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-plus"></use></svg></button>
                 </div>
               </div>
             </article>
@@ -165,7 +165,7 @@
             <div id="game-remaining" class="game-status__remaining">12 từ còn lại</div>
           </div>
           <div id="game-field" class="game-field">
-            <canvas id="game-canvas" class="game-field__canvas"></canvas>
+            <canvas id="game-canvas" class="game-field__canvas" aria-label="Khu vực chơi Kanji Sky Defense"></canvas>
             <div id="sector-label" class="game-field__sector">Airspace 01 · Study sector</div>
 
             <div id="game-overlay" class="game-overlay game-overlay--hidden">
@@ -188,7 +188,7 @@
               <div class="answer-form__meta"><span id="target-label" class="answer-form__target">Đang tìm mục tiêu</span><span id="feedback" class="answer-form__feedback">Nhập Hiragana hoặc Romaji, rồi nhấn Enter.</span></div>
               <div class="answer-form__row">
                 <svg class="answer-form__keyboard-icon icon icon--keyboard" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-keyboard"></use></svg>
-                <input id="answer-input" class="answer-form__input" lang="ja" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="gakkou hoặc がっこう" disabled>
+                <input id="answer-input" class="answer-form__input" lang="ja" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="gakkou hoặc がっこう" aria-label="Nhập Hiragana hoặc Romaji" disabled>
                 <span id="answer-preview" class="answer-form__preview answer-form__preview--hidden"></span>
                 <button id="answer-submit" class="button button--accent" type="submit" disabled>Xác nhận <kbd class="button__shortcut">Enter</kbd></button>
               </div>
@@ -217,7 +217,7 @@
     <!-- Năm bản quyền và liên kết tới các trang thông tin dùng chung. -->
     <footer class="site-footer">
       <span class="site-footer__copyright">© <span data-year></span> Kanji Sky Defense</span>
-      <nav class="site-footer__nav">
+      <nav class="site-footer__nav" aria-label="Thông tin">
         <a class="site-footer__link" href="about.html">Giới thiệu</a>
         <a class="site-footer__link" href="contact.html">Liên hệ</a>
         <a class="site-footer__link" href="privacy.html">Quyền riêng tư</a>
