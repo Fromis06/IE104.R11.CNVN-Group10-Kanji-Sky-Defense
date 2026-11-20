@@ -151,9 +151,9 @@
     else button.replaceChildren(icon, label);
   }
 
-  /* Tự lấy focus ô nhập; còn phải kiểm tra hành vi bàn phím trên thiết bị cảm ứng. */
+  /* Chỉ tự lấy focus trên máy dùng chuột để tránh bật bàn phím ảo ngoài ý muốn. */
   function focusAnswerOnDesktop(delay) {
-    // Trên điện thoại còn tự bật bàn phím khi chuyển màn, cần xem lại.
+    if (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) return;
     setTimeout(function () { elements.answerInput.focus(); }, delay);
   }
 
@@ -742,9 +742,9 @@
     context.restore();
   }
 
-  /* Tính thời gian từ frame trước; chưa giới hạn khi tab bị ngắt lâu. */
+  /* Dùng thời gian thực và chặn bước thời gian lớn để chuyển động ổn định. */
   function animationLoop(time) {
-    const delta = (time - game.previousTime) / 1000;
+    const delta = Math.min((time - game.previousTime) / 1000, .05);
     game.previousTime = time;
     updateWorld(delta);
     drawWorld(time);

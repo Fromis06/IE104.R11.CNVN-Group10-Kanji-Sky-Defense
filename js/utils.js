@@ -174,10 +174,16 @@
     return vocabulary;
   }
 
-  /* Xáo trộn trên bản sao; sort ngẫu nhiên vẫn có thể làm lệch phân phối. */
+  /* Xáo trộn Fisher–Yates trên bản sao để giữ nguyên thứ tự của nguồn đầu vào. */
   function shuffled(items) {
-    // Sort ngẫu nhiên chưa cho phân phối đều; cần thay cách xáo trộn.
-    return items.slice().sort(function () { return Math.random() - .5; });
+    const copy = items.slice();
+    for (let index = copy.length - 1; index > 0; index -= 1) {
+      const swapIndex = Math.floor(Math.random() * (index + 1));
+      const saved = copy[index];
+      copy[index] = copy[swapIndex];
+      copy[swapIndex] = saved;
+    }
+    return copy;
   }
 
   /* Tính khoảng cách chỉnh sửa để xếp hạng các cách viết gần giống. */
@@ -214,10 +220,33 @@
     return 1 + editDistance(target, normalizedQuery) / Math.max(target.length, normalizedQuery.length);
   }
 
-  /* Lọc theo chuỗi chứa; chưa hỗ trợ tìm gần đúng hoặc chuyển Romaji trong truy vấn. */
+  /* Xếp hạng từng từ với cả truy vấn gốc và phiên bản chuyển sang Hiragana. */
   function rankBySimilarity(items, query, getValues) {
-    const needle=String(query).trim().toLowerCase();
-    return items.filter(item=>!needle||[].concat(getValues(item)).some(value=>String(value).toLowerCase().includes(needle))).map(item=>({item,score:0}));
+    const normalizedQuery = normalizeSearch(query);
+    const results = [];
+    if (!normalizedQuery) {
+      for (let index = 0; index < items.length; index += 1) results.push({ item: items[index], score: 0 });
+      return results;
+    }
+    const queryVariants = [normalizedQuery];
+    const hiraganaQuery = normalizeSearch(toHiragana(normalizedQuery));
+    if (hiraganaQuery !== normalizedQuery) queryVariants.push(hiraganaQuery);
+    for (let itemIndex = 0; itemIndex < items.length; itemIndex += 1) {
+      const item = items[itemIndex];
+      const values = getValues(item);
+      const candidates = Array.isArray(values) ? values : [values];
+      let score = Number.POSITIVE_INFINITY;
+      for (let valueIndex = 0; valueIndex < candidates.length; valueIndex += 1) {
+        for (let queryIndex = 0; queryIndex < queryVariants.length; queryIndex += 1) {
+          score = Math.min(score, similarityScore(candidates[valueIndex], queryVariants[queryIndex]));
+        }
+      }
+      results.push({ item: item, score: score });
+    }
+    results.sort(function (left, right) {
+      return left.score - right.score;
+    });
+    return results;
   }
 
   /* Kiểm tra ảnh, cắt vuông và thu nhỏ avatar trước khi lưu dữ liệu cục bộ. */
