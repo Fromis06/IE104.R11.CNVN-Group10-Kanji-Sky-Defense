@@ -631,8 +631,7 @@
   }
 
   /* Áp dụng theme sớm, sau đó dịch trang khi DOM đã sẵn sàng. */
-  // Theme đang chờ DOM tải xong nên lúc mở trang còn nháy màu.
-  document.addEventListener('DOMContentLoaded', apply);
+  apply();
   window.KanjiPreferences = Object.freeze({ get: get, locale: function () { return LOCALES[current.language]; }, t: t, translate: translate, update: update });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { translate(document); });
   else translate(document);

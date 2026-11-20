@@ -15,7 +15,7 @@
       const value = JSON.parse(localStorage.getItem(key));
       return value === null || value === undefined ? fallback : value;
     } catch (error) {
-      // Trả giá trị dự phòng; khóa bị lỗi vẫn còn trong localStorage.
+      localStorage.removeItem(key);
       return fallback;
     }
   }

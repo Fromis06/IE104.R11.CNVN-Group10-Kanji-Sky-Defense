@@ -135,7 +135,7 @@
     const bounds = canvas.getBoundingClientRect();
     if (bounds.width < 1 || bounds.height < 1) return;
     const context = canvas.getContext('2d');
-    const ratio = window.devicePixelRatio || 1;
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = Math.max(1, Math.round(bounds.width * ratio));
     canvas.height = Math.max(1, Math.round(bounds.height * ratio));
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
