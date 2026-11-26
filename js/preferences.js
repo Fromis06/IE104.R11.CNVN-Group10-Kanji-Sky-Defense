@@ -258,8 +258,7 @@
       '0 ngày': '0 days',
       '0 từ': '0 words',
       'Tài khoản, tiến độ học và thư viện từ đã quên của người chơi Kanji Sky Defense.': 'Your Kanji Sky Defense account, learning progress, and forgotten-word library.',
-      'Đã sao chép. Bạn có thể dán nội dung vào kênh liên hệ của mình.': 'Copied. You can paste the message into your preferred contact channel.',
-      'Trình duyệt không cho phép sao chép tự động. Hãy chọn và sao chép nội dung thủ công.': 'Automatic copying is unavailable. Select and copy the message manually.',
+      'Đã gửi': 'Sent',
     },
     ja: {
       'Thiết lập': '設定',
@@ -505,8 +504,7 @@
       '0 ngày': '0日',
       '0 từ': '0語',
       'Tài khoản, tiến độ học và thư viện từ đã quên của người chơi Kanji Sky Defense.': 'Kanji Sky Defenseのアカウント、学習進捗、復習単語リスト。',
-      'Đã sao chép. Bạn có thể dán nội dung vào kênh liên hệ của mình.': 'コピーしました。お好みの連絡方法に貼り付けてください。',
-      'Trình duyệt không cho phép sao chép tự động. Hãy chọn và sao chép nội dung thủ công.': '自動コピーできません。内容を選択して手動でコピーしてください。',
+      'Đã gửi': '送信しました',
     },
   };
 
