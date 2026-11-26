@@ -93,6 +93,10 @@
 #user-page .settings-card--row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 #user-page .settings-card__label { font-weight: 700; }
 #user-page .settings-card__select { min-width: 220px; min-height: 44px; padding: 0 .8rem; border: 1px solid var(--line); color: var(--text); background: var(--input-bg); }
+#user-page .settings-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+#user-page .settings-row__info { min-width: 0; }
+#user-page .settings-row__label { display: block; font-size: .92rem; }
+#user-page .settings-row__description { margin: .25rem 0 0; color: var(--muted); font-size: .82rem; line-height: 1.45; }
 #user-page .preference { display: flex; min-height: 52px; align-items: center; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--line-soft); cursor: pointer; }
 #user-page .preference:first-of-type { border-top: 0; }
 #user-page .preference__label { font-size: .9rem; }
@@ -139,7 +143,7 @@
   #user-page .dashboard-card__heading { align-items: flex-start; flex-direction: column; }
   #user-page .word-library__actions, #user-page .word-library__action { width: 100%; }
   #user-page .theme-selector { grid-template-columns: 1fr 1fr; }
-  #user-page .settings-card--row { align-items: stretch; flex-direction: column; }
+  #user-page .settings-card--row, #user-page .settings-row { align-items: stretch; flex-direction: column; }
   #user-page .settings-card__select { width: 100%; }
 }
 

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap"></noscript>
     <script src="js/preferences.js" defer></script>
+    <script src="js/icons.js" defer></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/auth.css">
     <script src="js/storage.js" defer></script>
@@ -26,7 +27,7 @@
       <div class="site-header__inner">
         <a class="brand" href="index.html">
           <span class="brand__mark" aria-hidden="true">漢</span>
-          <span><span class="brand__title">KANJI SKY DEFENSE</span><span class="brand__subtitle">Typing defense station</span></span>
+          <span><span class="brand__title">KANJI SKY DEFENSE</span><span class="brand__subtitle">Trạm phòng thủ gõ phím</span></span>
         </a>
         <div class="site-header__actions">
           <nav class="page-nav" aria-label="Điều hướng chính"><a class="page-nav__link" href="index.html">Chơi</a><a class="page-nav__link" href="about.html">Giới thiệu</a><a class="page-nav__link" href="contact.html">Liên hệ</a><a class="page-nav__link" href="privacy.html">Quyền riêng tư</a></nav>
@@ -45,12 +46,39 @@
       <form class="auth-card" data-auth-form="login">
         <div class="auth-card__heading"><p class="eyebrow">Chào mừng trở lại</p><h2 class="auth-card__title">Đăng nhập</h2></div>
         <div class="field"><label class="field__label" for="login-email">Email</label><input id="login-email" class="field__control" name="email" type="email" autocomplete="email" required></div>
-        <div class="field"><label class="field__label" for="login-password">Mật khẩu</label><input id="login-password" class="field__control" name="password" type="password" autocomplete="current-password" minlength="6" required></div>
+        <div class="field">
+          <div class="field__header">
+            <label class="field__label" for="login-password">Mật khẩu</label>
+            <button id="forgot-password-trigger" class="auth-card__forgot" type="button">Quên mật khẩu?</button>
+          </div>
+          <input id="login-password" class="field__control" name="password" type="password" autocomplete="current-password" minlength="6" required>
+        </div>
         <button class="button button--accent button--large button--full" type="submit">Đăng nhập</button>
         <p class="form-status" data-auth-status role="status" aria-live="polite"></p>
         <p class="auth-card__switch">Chưa có tài khoản? <a class="auth-card__link" href="register.html">Đăng ký</a></p>
       </form>
     </main>
+
+    <!-- Hộp thoại đặt lại mật khẩu đơn giản cho tài khoản lưu cục bộ. -->
+    <div id="forgot-modal" class="modal modal--hidden" role="dialog" aria-modal="true" aria-labelledby="forgot-modal-title" aria-describedby="forgot-modal-copy">
+      <div class="modal__backdrop" data-modal-close></div>
+      <div class="modal__card">
+        <button class="modal__close" type="button" data-modal-close aria-label="Đóng"><svg class="icon icon--x" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-x"></use></svg></button>
+        <div class="modal__header">
+          <div class="modal__icon" aria-hidden="true"><svg class="icon icon--key-round" viewBox="0 0 24 24" width="20" height="20" focusable="false"><use href="#icon-key-round"></use></svg></div>
+          <p class="eyebrow">Khôi phục mật khẩu</p>
+          <h2 id="forgot-modal-title" class="modal__title">Quên mật khẩu</h2>
+          <p id="forgot-modal-copy" class="modal__description">Nhập email đã đăng ký trên trình duyệt này để đặt mật khẩu mới.</p>
+        </div>
+        <form class="modal__form" data-auth-form="reset">
+          <div class="field"><label class="field__label" for="reset-email">Email</label><input id="reset-email" class="field__control" name="email" type="email" autocomplete="email" required></div>
+          <div class="field"><label class="field__label" for="reset-password">Mật khẩu mới</label><input id="reset-password" class="field__control" name="password" type="password" autocomplete="new-password" minlength="6" required></div>
+          <div class="field"><label class="field__label" for="reset-confirm">Xác nhận mật khẩu mới</label><input id="reset-confirm" class="field__control" name="confirmPassword" type="password" autocomplete="new-password" minlength="6" required></div>
+          <button class="button button--accent button--large button--full" type="submit">Đặt lại mật khẩu</button>
+          <p class="form-status" data-auth-status role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
 
     <!-- Năm bản quyền và liên kết tới các trang thông tin dùng chung. -->
     <footer class="site-footer"><span class="site-footer__copyright">© <span data-year></span> Kanji Sky Defense</span><nav class="site-footer__nav" aria-label="Thông tin"><a class="site-footer__link" href="about.html">Giới thiệu</a><a class="site-footer__link" href="contact.html">Liên hệ</a><a class="site-footer__link" href="privacy.html">Quyền riêng tư</a></nav></footer>

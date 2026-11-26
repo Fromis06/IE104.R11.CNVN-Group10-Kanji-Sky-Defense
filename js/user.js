@@ -42,12 +42,26 @@
     return total;
   }
 
-  /* Đồng bộ thông báo lưu hồ sơ và trạng thái avatar. */
+  /* Đồng bộ thông báo lưu hồ sơ, ảnh đại diện và đổi mật khẩu. */
   function setStatus(selector, message, type) {
     const status = document.querySelector(selector);
+    if (!status) return;
+    status.dataset.statusKey = message || '';
     status.textContent = message ? t(message) : '';
-    const componentClass = status.id === 'avatar-status' ? 'avatar-editor__status' : 'account-form__status';
-    status.className = 'form-status ' + componentClass + (type ? ' form-status--' + type : '');
+    const componentClass = status.id === 'avatar-status'
+      ? ' avatar-editor__status'
+      : status.id === 'account-status'
+        ? ' account-form__status'
+        : '';
+    status.className = 'form-status' + componentClass + (type ? ' form-status--' + type : '');
+  }
+
+  function refreshStatuses() {
+    const ids = ['#account-status', '#avatar-status', '#password-status'];
+    for (let index = 0; index < ids.length; index += 1) {
+      const element = document.querySelector(ids[index]);
+      if (element && element.dataset.statusKey) element.textContent = t(element.dataset.statusKey);
+    }
   }
 
   /* Hiện ảnh đại diện nếu có, nếu không dùng ký tự tên làm ảnh thay thế. */
@@ -274,7 +288,7 @@
       const message = document.createElement('strong');
       message.className = 'word-library__empty-message';
       message.textContent = t(query ? 'Không tìm thấy từ phù hợp' : 'Chưa có từ bị quên');
-      empty.append(window.KanjiIcons.create('book-open', 'word-library__empty-icon'), message);
+      empty.append(window.KanjiIcons.create(query ? 'search-x' : 'circle-check', 'word-library__empty-icon'), message);
       content.append(empty);
       return;
     }
@@ -299,7 +313,7 @@
       remove.type = 'button';
       remove.className = 'word-library__remove';
       remove.setAttribute('aria-label', t('Xóa {word} khỏi thư viện', { word: word.kanji }));
-      remove.append(window.KanjiIcons.create('close'));
+      remove.append(window.KanjiIcons.create('x'));
       remove.addEventListener('click', function () {
         review.remove(word.kanji, word.hiragana);
         renderLibrary();
@@ -408,8 +422,55 @@
   });
   document.querySelector('#user-logout').addEventListener('click', function () {
     auth.logout();
-    window.location.href = 'index.html';
+    window.location.href = 'about.html';
   });
+
+  /* Hộp thoại đổi mật khẩu cục bộ nằm trong tab Cài đặt. */
+  const passwordModal = document.querySelector('#password-modal');
+  const passwordTrigger = document.querySelector('#change-password-button');
+  const passwordForm = document.querySelector('#password-form');
+  if (passwordModal && passwordTrigger && passwordForm) {
+    function openPasswordModal() {
+      passwordForm.reset();
+      setStatus('#password-status', '');
+      passwordModal.classList.remove('modal--hidden');
+      const currentInput = document.querySelector('#current-password');
+      if (currentInput) currentInput.focus();
+    }
+
+    function closePasswordModal() {
+      passwordModal.classList.add('modal--hidden');
+      passwordTrigger.focus();
+    }
+
+    passwordTrigger.addEventListener('click', openPasswordModal);
+    const closeTargets = passwordModal.querySelectorAll('[data-modal-close]');
+    for (let index = 0; index < closeTargets.length; index += 1) {
+      closeTargets[index].addEventListener('click', closePasswordModal);
+    }
+    window.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !passwordModal.classList.contains('modal--hidden')) closePasswordModal();
+    });
+
+    passwordForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      if (!passwordForm.reportValidity()) return;
+      const submit = passwordForm.querySelector('button[type="submit"]');
+      const data = new FormData(passwordForm);
+      submit.disabled = true;
+      setStatus('#password-status', 'Đang xử lý…');
+      try {
+        if (data.get('newPassword') !== data.get('confirmPassword')) throw new Error('Mật khẩu xác nhận chưa khớp.');
+        user = await auth.changePassword(data.get('currentPassword'), data.get('newPassword'));
+        passwordForm.reset();
+        setStatus('#password-status', 'Đã đổi mật khẩu thành công.', 'success');
+      } catch (error) {
+        setStatus('#password-status', error instanceof Error ? error.message : 'Không thể hoàn tất thao tác.', 'error');
+      } finally {
+        submit.disabled = false;
+      }
+    });
+  }
 
   const themeButtons = document.querySelectorAll('[data-theme-option]');
   for (let index = 0; index < themeButtons.length; index += 1) {
@@ -435,6 +496,7 @@
     renderAccount();
     renderStats();
     renderLibrary();
+    refreshStatuses();
     requestAnimationFrame(drawChart);
   });
 

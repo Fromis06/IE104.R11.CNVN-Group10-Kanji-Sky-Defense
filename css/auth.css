@@ -10,6 +10,8 @@
   background: var(--panel);
 }
 #login-page .auth-card__title, #register-page .auth-card__title { margin: .4rem 0 0; font-size: 1.6rem; }
+#login-page .auth-card__forgot { padding: 0; border: 0; color: var(--accent-soft); background: transparent; font-size: .8rem; font-weight: 700; }
+#login-page .auth-card__forgot:hover { color: var(--accent); text-decoration: underline; }
 #login-page .auth-card__switch, #register-page .auth-card__switch { margin: 0; color: var(--muted); font-size: .9rem; text-align: center; }
 #login-page .auth-card__link, #register-page .auth-card__link { color: var(--accent-soft); font-weight: 700; }
 
