@@ -12,7 +12,12 @@
     <meta name="twitter:card" content="summary_large_image">
     <title>Kanji Sky Defense</title>
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-    <script src="js/preferences.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap"></noscript>
+    <script src="js/preferences.js" defer></script>
     <script src="js/icons.js" defer></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/index.css">
@@ -23,23 +28,24 @@
     <script src="js/app.js" defer></script>
   </head>
   <body id="home-page" class="page">
-    <input id="csv-input" class="visually-hidden" type="file" accept=".csv,text/csv">
+    <input id="csv-input" class="visually-hidden" type="file" accept=".csv,text/csv" aria-label="Nạp CSV">
 
     <!-- Nhận diện website và điều hướng tới các màn hình, trang thông tin và tài khoản. -->
     <header class="site-header">
       <div class="site-header__inner">
-        <button class="brand" type="button" data-view="setup" aria-label="Về trang thiết lập">
+        <button class="brand" type="button" data-view="setup">
           <span class="brand__mark" aria-hidden="true">漢</span>
           <span>
             <span class="brand__title">KANJI SKY DEFENSE</span>
             <span class="brand__subtitle">Typing defense station</span>
           </span>
+          <span class="visually-hidden">Về trang thiết lập</span>
         </button>
         <div class="site-header__actions">
           <nav class="nav-tabs" aria-label="Điều hướng chính">
-            <button class="nav-tabs__button nav-tabs__button--active" type="button" data-view="setup"><svg class="icon icon--settings" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-settings"></use></svg><span class="nav-tabs__label">Thiết lập</span></button>
-            <button id="nav-play" class="nav-tabs__button" type="button" data-view="play" disabled><svg class="icon icon--target" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-target"></use></svg><span class="nav-tabs__label">Chơi</span></button>
-            <button class="nav-tabs__button" type="button" data-view="review"><svg class="icon icon--book-open" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-book-open"></use></svg><span class="nav-tabs__label">Học lại</span><span id="review-badge" class="nav-tabs__badge nav-tabs__badge--hidden">0</span></button>
+            <button class="nav-tabs__button nav-tabs__button--active" type="button" data-view="setup" aria-label="Thiết lập"><svg class="icon icon--settings" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-settings"></use></svg><span class="nav-tabs__label">Thiết lập</span></button>
+            <button id="nav-play" class="nav-tabs__button" type="button" data-view="play" aria-label="Chơi" disabled><svg class="icon icon--target" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-target"></use></svg><span class="nav-tabs__label">Chơi</span></button>
+            <button class="nav-tabs__button" type="button" data-view="review" aria-label="Học lại"><svg class="icon icon--book-open" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-book-open"></use></svg><span class="nav-tabs__label">Học lại</span><span id="review-badge" class="nav-tabs__badge nav-tabs__badge--hidden">0</span></button>
           </nav>
           <nav class="account-nav" data-auth-nav aria-label="Tài khoản">
             <a class="account-nav__link" href="login.html">Đăng nhập</a>
@@ -167,7 +173,7 @@
           <div id="game-field" class="game-field">
             <canvas id="game-canvas" class="game-field__canvas" aria-label="Khu vực chơi Kanji Sky Defense"></canvas>
             <div id="sector-label" class="game-field__sector">Airspace 01 · Study sector</div>
-
+x
             <div id="game-overlay" class="game-overlay game-overlay--hidden">
               <div class="game-overlay__content">
                 <div id="overlay-icon" class="game-overlay__icon" aria-hidden="true"><svg class="icon icon--pause" viewBox="0 0 24 24" width="20" height="20" focusable="false"><use href="#icon-pause"></use></svg></div>
