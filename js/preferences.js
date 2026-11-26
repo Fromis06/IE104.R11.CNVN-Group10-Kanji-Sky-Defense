@@ -79,6 +79,7 @@
       'Email này đã được đăng ký.': 'This email is already registered.',
       'Email hoặc mật khẩu chưa đúng.': 'Incorrect email or password.',
       'Mật khẩu xác nhận chưa khớp.': 'Passwords do not match.',
+      'Mật khẩu chưa khớp': 'Passwords do not match.',
       'Đang xử lý…': 'Processing…',
       'Thành công. Đang mở trang cá nhân…': 'Success. Opening your profile…',
       'Không thể hoàn tất thao tác.': 'The action could not be completed.',
@@ -140,9 +141,10 @@
       'Bảo mật và giới hạn': 'Security and limitations',
       'Dữ liệu cục bộ thuộc origin của website và không được ứng dụng tự động gửi kèm mọi yêu cầu như cookie. Tuy vậy, người có quyền truy cập thiết bị, hồ sơ trình duyệt hoặc mã chạy trong cùng origin có thể tiếp cận dữ liệu này. Không lưu thông tin nhạy cảm trong ứng dụng.': 'Local data belongs to the website origin and, unlike cookies, is not automatically sent with every request. However, anyone with access to the device, browser profile, or code running on the same origin may be able to access it. Do not store sensitive information in the app.',
       'Thay đổi và liên hệ': 'Changes and contact',
-      'Chính sách có thể được cập nhật khi chức năng lưu trữ hoặc cách triển khai thay đổi. Ngày cập nhật mới nhất sẽ luôn được ghi ở đầu trang. Nếu có câu hỏi, bạn có thể chuẩn bị nội dung tại trang': 'This policy may be updated when storage features or deployment methods change. The latest revision date will always appear at the top of this page. If you have questions, you can prepare a message on the',
+      'Chính sách có thể được cập nhật khi chức năng lưu trữ hoặc cách triển khai thay đổi. Ngày cập nhật mới nhất sẽ luôn được ghi ở đầu trang. Nếu có câu hỏi, bạn có thể chuẩn bị nội dung tại trang': 'This policy may be updated when storage features or deployment methods change. The latest revision date will always appear at the top of this page. If you have questions, you can reach out via',
       'Tham khảo kỹ thuật': 'Technical references',
       'Thông tin về cơ chế lưu trữ được tham khảo từ tài liệu Web Storage và HTTP Cookie của MDN.': 'Information about storage mechanisms is based on MDN documentation for Web Storage and HTTP cookies.',
+      'Góp ý để trang web phát triển': 'Help us improve the website',
       'Góp ý để trang web phát triển.': 'Help us improve the website.',
       'Nếu bạn gặp lỗi khi sử dụng trang web, hãy gửi phản hồi của bạn cho chúng tôi nhé, mọi ý kiến đều được trân trọng và được xem xét để cải thiện trải nghiệm người dùng hơn nữa.': 'If you encounter a problem while using the website, send us your feedback. We value every suggestion and will consider it to improve the experience.',
       'Gửi góp ý cho Kanji Sky Defense.': 'Send feedback about Kanji Sky Defense.',
@@ -248,7 +250,7 @@
       'Không thể đọc file CSV.': 'The CSV file could not be read.',
       'Xóa toàn bộ thư viện từ đã quên?': 'Clear the entire forgotten-word library?',
       'Xóa toàn bộ danh sách Học lại?': 'Clear the entire Review list?',
-      'Chơi ngay với 12 từ mẫu hoặc nạp CSV gồm hai cột': 'Play with 12 sample words or upload a two-column CSV',
+      'Chơi ngay với 12 từ mẫu hoặc nạp CSV gồm hai cột': 'Play with 12 sample words or upload a two-column CSV:',
       'Nhập trực tiếp Hiragana hoặc gõ Romaji. Trò chơi tự chuyển đổi để so sánh đáp án.': 'Enter Hiragana directly or type Romaji. The game converts it before checking your answer.',
       'Mọi đáp án sai và mục tiêu vượt phòng tuyến đều có thể được học lại !': 'You can review incorrect answers and targets that cross the defence line!',
       'Không giới hạn HP, phù hợp để làm quen bộ từ mới.': 'Unlimited HP, ideal for learning a new word set.',
@@ -259,9 +261,42 @@
       '0 từ': '0 words',
       'Tài khoản, tiến độ học và thư viện từ đã quên của người chơi Kanji Sky Defense.': 'Your Kanji Sky Defense account, learning progress, and forgotten-word library.',
       'Đã gửi': 'Sent',
+      'Hiragana': 'Hiragana',
+      'Romaji': 'Romaji',
+      'Trạm phòng thủ gõ phím': 'Typing defense station',
+      'Khu vực 01 · Chế độ Study': 'Airspace 01 · Study sector',
+      'Khu vực 01 · Chế độ {mode}': 'Airspace 01 · {mode} sector',
+      'Bộ mẫu · {count} từ': 'Sample set · {count} words',
+      'VẠCH PHÒNG THỦ': 'DEFENSE LINE',
+      'MỤC TIÊU': 'TARGET',
+      'File CSV chưa có dữ liệu từ vựng.': 'The CSV file does not contain any vocabulary data.',
+      'Dòng đầu phải gồm đúng hai cột: kanji,hiragana': 'The first row must contain exactly two columns: kanji,hiragana',
+      'Không tìm thấy dòng từ vựng hợp lệ.': 'No valid vocabulary rows were found.',
+      'Cảm ơn bạn đã góp ý!': 'Thank you for your feedback!',
+      'Phản hồi của bạn đã được ghi nhận. Chúng tôi rất trân trọng sự đóng góp của bạn.': 'Your feedback has been received. We truly appreciate your contribution.',
+      'Đóng': 'Close',
+      'Quên mật khẩu?': 'Forgot password?',
+      'Khôi phục mật khẩu': 'Password recovery',
+      'Quên mật khẩu': 'Forgot password',
+      'Nhập email đã đăng ký trên trình duyệt này để đặt mật khẩu mới.': 'Enter the email registered on this browser to set a new password.',
+      'Mật khẩu mới': 'New password',
+      'Xác nhận mật khẩu mới': 'Confirm new password',
+      'Đặt lại mật khẩu': 'Reset password',
+      'Không tìm thấy tài khoản với email này.': 'No account was found with this email.',
+      'Mật khẩu cần ít nhất 6 ký tự.': 'Password must be at least 6 characters.',
+      'Đã đặt lại mật khẩu. Bạn có thể đăng nhập ngay.': 'Password reset successfully. You can sign in now.',
+      'Bảo mật': 'Security',
+      'Cập nhật mật khẩu cho tài khoản lưu trên trình duyệt này.': 'Update the password for the account stored on this browser.',
+      'Đổi mật khẩu': 'Change password',
+      'Thay đổi mật khẩu cục bộ cho tài khoản hiện tại.': 'Change the local password for your current account.',
+      'Mật khẩu hiện tại': 'Current password',
+      'Cập nhật mật khẩu': 'Update password',
+      'Mật khẩu hiện tại chưa đúng.': 'Current password is incorrect.',
+      'Mật khẩu mới phải khác mật khẩu hiện tại.': 'New password must be different from the current password.',
+      'Đã đổi mật khẩu thành công.': 'Password changed successfully.',
     },
     ja: {
-      'Thiết lập': '設定',
+      'Thiết lập': 'セットアップ',
       'Chơi': 'プレイ',
       'Học lại': '復習',
       'Giới thiệu': '紹介',
@@ -325,6 +360,7 @@
       'Email này đã được đăng ký.': 'このメールアドレスはすでに登録されています。',
       'Email hoặc mật khẩu chưa đúng.': 'メールアドレスまたはパスワードが正しくありません。',
       'Mật khẩu xác nhận chưa khớp.': 'パスワードが一致しません。',
+      'Mật khẩu chưa khớp': 'パスワードが一致しません。',
       'Không thể hoàn tất thao tác.': '操作を完了できませんでした。',
       'Đang xử lý…': '処理中…',
       'Thành công. Đang mở trang cá nhân…': '完了しました。プロフィールを開きます…',
@@ -363,6 +399,7 @@
       '3 chế độ chơi': '3つのゲームモード',
       'Chọn chế độ chơi phù hợp với nhu cầu của bạn': '自分に合ったゲームモードを選びましょう',
       'Liên hệ · Kanji Sky Defense': 'お問い合わせ · Kanji Sky Defense',
+      'Góp ý để trang web phát triển': 'ウェブサイト改善のためのご意見をお寄せください',
       'Góp ý để trang web phát triển.': 'ウェブサイト改善のためのご意見をお寄せください。',
       'Nếu bạn gặp lỗi khi sử dụng trang web, hãy gửi phản hồi của bạn cho chúng tôi nhé, mọi ý kiến đều được trân trọng và được xem xét để cải thiện trải nghiệm người dùng hơn nữa.': 'ウェブサイトの利用中に問題が発生した場合は、ご意見をお寄せください。いただいたご意見を大切にし、使いやすさの向上に役立てます。',
       'Gửi góp ý cho Kanji Sky Defense.': 'Kanji Sky Defenseへのご意見を送ります。',
@@ -374,7 +411,7 @@
       'Cập nhật lần cuối: 12/09/2026': '最終更新日：2026年9月12日',
       'Tóm tắt chính sách': 'ポリシーの概要',
       'Tóm tắt nhanh': '概要',
-      'Dữ liệu được lưu trên thiết bị bằng': 'データは端末上の',
+      'Dữ liệu được lưu trên thiết bị bằng': '端末に保存する仕組み：',
       'Ứng dụng hiện không tự đặt cookie.': '現在、アプリはCookieを設定しません。',
       'Không có quảng cáo hoặc công cụ theo dõi bên thứ ba.': '広告や第三者のトラッカーはありません。',
       'Bạn có thể xóa dữ liệu qua phần cài đặt trình duyệt.': 'ブラウザの設定からデータを削除できます。',
@@ -390,7 +427,7 @@
       'Bảo mật và giới hạn': 'セキュリティと制限',
       'Dữ liệu cục bộ thuộc origin của website và không được ứng dụng tự động gửi kèm mọi yêu cầu như cookie. Tuy vậy, người có quyền truy cập thiết bị, hồ sơ trình duyệt hoặc mã chạy trong cùng origin có thể tiếp cận dữ liệu này. Không lưu thông tin nhạy cảm trong ứng dụng.': 'ローカルデータはサイトのオリジンに属し、Cookieのようにすべてのリクエストへ自動送信されることはありません。ただし、端末やブラウザプロフィールへアクセスできる人、または同じオリジンで動くコードが、このデータへアクセスできる場合があります。機密情報はアプリに保存しないでください。',
       'Thay đổi và liên hệ': '変更とお問い合わせ',
-      'Chính sách có thể được cập nhật khi chức năng lưu trữ hoặc cách triển khai thay đổi. Ngày cập nhật mới nhất sẽ luôn được ghi ở đầu trang. Nếu có câu hỏi, bạn có thể chuẩn bị nội dung tại trang': '保存機能や運用方法が変わった場合、このポリシーを更新することがあります。最新の更新日は常にページ上部に表示します。ご質問がある場合は、',
+      'Chính sách có thể được cập nhật khi chức năng lưu trữ hoặc cách triển khai thay đổi. Ngày cập nhật mới nhất sẽ luôn được ghi ở đầu trang. Nếu có câu hỏi, bạn có thể chuẩn bị nội dung tại trang': '保存機能や運用方法が変わった場合、このポリシーを更新することがあります。最新の更新日は常にページ上部に表示します。ご質問がある場合はこちらから：',
       'Tham khảo kỹ thuật': '技術資料',
       'Thông tin về cơ chế lưu trữ được tham khảo từ tài liệu Web Storage và HTTP Cookie của MDN.': '保存の仕組みに関する情報は、MDNのWeb StorageおよびHTTP Cookieの資料を参照しています。',
       'Nội dung sẽ được sao chép để bạn gửi qua kênh liên hệ phù hợp.': '内容をコピーし、お好みの連絡方法で送信できます。',
@@ -494,7 +531,7 @@
       'Không thể đọc file CSV.': 'CSVファイルを読み込めません。',
       'Xóa toàn bộ thư viện từ đã quên?': '忘れた単語をすべて削除しますか？',
       'Xóa toàn bộ danh sách Học lại?': '復習リストをすべて削除しますか？',
-      'Chơi ngay với 12 từ mẫu hoặc nạp CSV gồm hai cột': '12語のサンプルで遊ぶか、2列のCSVを読み込めます',
+      'Chơi ngay với 12 từ mẫu hoặc nạp CSV gồm hai cột': '12語のサンプルで遊ぶか、2列形式のCSVを読み込めます：',
       'Nhập trực tiếp Hiragana hoặc gõ Romaji. Trò chơi tự chuyển đổi để so sánh đáp án.': 'ひらがなを直接入力するか、ローマ字を入力できます。ゲームが変換して答えを確認します。',
       'Mọi đáp án sai và mục tiêu vượt phòng tuyến đều có thể được học lại !': '不正解や防衛ラインを越えた単語は後で復習できます！',
       'Không giới hạn HP, phù hợp để làm quen bộ từ mới.': 'HP無制限で、新しい単語セットの学習に最適です。',
@@ -505,8 +542,66 @@
       '0 từ': '0語',
       'Tài khoản, tiến độ học và thư viện từ đã quên của người chơi Kanji Sky Defense.': 'Kanji Sky Defenseのアカウント、学習進捗、復習単語リスト。',
       'Đã gửi': '送信しました',
+      'Hiragana': 'ひらがな',
+      'Romaji': 'ローマ字',
+      'Trạm phòng thủ gõ phím': 'タイピング防衛ステーション',
+      'Khu vực 01 · Chế độ Study': '空域 01 · Study セクター',
+      'Khu vực 01 · Chế độ {mode}': '空域 01 · {mode} セクター',
+      'Bộ mẫu · {count} từ': 'サンプル · {count}語',
+      'VẠCH PHÒNG THỦ': '防衛ライン',
+      'MỤC TIÊU': 'ターゲット',
+      'File CSV chưa có dữ liệu từ vựng.': 'CSVファイルに単語データがありません。',
+      'Dòng đầu phải gồm đúng hai cột: kanji,hiragana': '1行目は kanji,hiragana の2列にしてください。',
+      'Không tìm thấy dòng từ vựng hợp lệ.': '有効な単語データが見つかりません。',
+      'Cảm ơn bạn đã góp ý!': 'ご意見ありがとうございます！',
+      'Phản hồi của bạn đã được ghi nhận. Chúng tôi rất trân trọng sự đóng góp của bạn.': 'ご意見を受け付けました。ご協力ありがとうございます。',
+      'Đóng': '閉じる',
+      'Quên mật khẩu?': 'パスワードをお忘れですか？',
+      'Khôi phục mật khẩu': 'パスワードの再設定',
+      'Quên mật khẩu': 'パスワードを忘れた場合',
+      'Nhập email đã đăng ký trên trình duyệt này để đặt mật khẩu mới.': 'このブラウザで登録したメールアドレスを入力し、新しいパスワードを設定してください。',
+      'Mật khẩu mới': '新しいパスワード',
+      'Xác nhận mật khẩu mới': '新しいパスワード確認',
+      'Đặt lại mật khẩu': 'パスワードを再設定',
+      'Không tìm thấy tài khoản với email này.': 'このメールアドレスのアカウントが見つかりません。',
+      'Mật khẩu cần ít nhất 6 ký tự.': 'パスワードは6文字以上で入力してください。',
+      'Đã đặt lại mật khẩu. Bạn có thể đăng nhập ngay.': 'パスワードを再設定しました。今すぐログインできます。',
+      'Bảo mật': 'セキュリティ',
+      'Cập nhật mật khẩu cho tài khoản lưu trên trình duyệt này.': 'このブラウザに保存されているアカウントのパスワードを更新します。',
+      'Đổi mật khẩu': 'パスワード変更',
+      'Thay đổi mật khẩu cục bộ cho tài khoản hiện tại.': '現在のアカウントのローカルパスワードを変更します。',
+      'Mật khẩu hiện tại': '現在のパスワード',
+      'Cập nhật mật khẩu': 'パスワードを更新',
+      'Mật khẩu hiện tại chưa đúng.': '現在のパスワードが正しくありません。',
+      'Mật khẩu mới phải khác mật khẩu hiện tại.': '新しいパスワードは現在のパスワードと異なるものにしてください。',
+      'Đã đổi mật khẩu thành công.': 'パスワードを変更しました。',
     },
   };
+
+  /* Bảng tra ngược từ bản dịch sang khóa tiếng Việt để tránh kẹt ngôn ngữ khi JS ghi đè DOM. */
+  const SOURCE_KEYS = {};
+  const REVERSE_LOOKUP = {};
+  (function () {
+    const languages = Object.keys(TRANSLATIONS);
+    for (let langIndex = 0; langIndex < languages.length; langIndex += 1) {
+      const map = TRANSLATIONS[languages[langIndex]];
+      const keys = Object.keys(map);
+      for (let keyIndex = 0; keyIndex < keys.length; keyIndex += 1) {
+        const sourceKey = keys[keyIndex];
+        SOURCE_KEYS[sourceKey] = true;
+        const translatedValue = map[sourceKey];
+        if (!Object.prototype.hasOwnProperty.call(REVERSE_LOOKUP, translatedValue)) {
+          REVERSE_LOOKUP[translatedValue] = sourceKey;
+        }
+      }
+    }
+  })();
+
+  function resolveSource(text) {
+    if (Object.prototype.hasOwnProperty.call(SOURCE_KEYS, text)) return text;
+    if (Object.prototype.hasOwnProperty.call(REVERSE_LOOKUP, text)) return REVERSE_LOOKUP[text];
+    return text;
+  }
 
   /* Giữ nội dung gốc trong WeakMap để đổi ngôn ngữ mà không dịch chồng lên bản dịch. */
   const textState = new WeakMap();
@@ -567,9 +662,11 @@
     let source = previous && previous.source ? previous.source : node.nodeValue;
     if (previous && node.nodeValue !== previous.rendered) source = node.nodeValue;
     const match = source.match(/^(\s*)([\s\S]*?)(\s*)$/);
-    const translated = match ? match[1] + t(match[2]) + match[3] : source;
+    const coreSource = match ? resolveSource(match[2]) : source;
+    const normalizedSource = match ? match[1] + coreSource + match[3] : coreSource;
+    const translated = match ? match[1] + t(coreSource) + match[3] : t(coreSource);
     node.nodeValue = translated;
-    textState.set(node, { source, rendered: translated });
+    textState.set(node, { source: normalizedSource, rendered: translated });
   }
 
   /* Dịch nhãn trợ năng, gợi ý nhập và metadata mà vẫn lưu giá trị nguồn. */
@@ -582,7 +679,8 @@
       if (!element.hasAttribute(attribute)) continue;
       const currentValue = element.getAttribute(attribute);
       const previous = values[attribute];
-      const source = previous && currentValue === previous.rendered ? previous.source : currentValue;
+      const rawSource = previous && currentValue === previous.rendered ? previous.source : currentValue;
+      const source = resolveSource(rawSource);
       const rendered = t(source);
       element.setAttribute(attribute, rendered);
       values[attribute] = { source: source, rendered: rendered };

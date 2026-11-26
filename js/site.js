@@ -1,10 +1,5 @@
 (function () {
   'use strict';
-  /* Lấy bản dịch nếu module tùy chọn đã có. */
-  function t(source) {
-    if (window.KanjiPreferences) return window.KanjiPreferences.t(source);
-    return source;
-  }
 
   /* Điền năm hiện tại vào các vị trí đánh dấu ở chân trang. */
   const yearElements = document.querySelectorAll('[data-year]');
@@ -16,11 +11,40 @@
   const form = document.querySelector('#contact-form');
   if (!form) return;
 
-  /* Hiển thị trạng thái xác nhận khi người dùng gửi góp ý. */
+  const modal = document.querySelector('#contact-modal');
+  const status = document.querySelector('#contact-status');
+  const doneButton = document.querySelector('#contact-modal-done');
+
+  function openModal() {
+    if (!modal) return;
+    modal.classList.remove('modal--hidden');
+    if (doneButton) doneButton.focus();
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.add('modal--hidden');
+  }
+
+  if (modal) {
+    const closeTargets = modal.querySelectorAll('[data-modal-close]');
+    for (let index = 0; index < closeTargets.length; index += 1) {
+      closeTargets[index].addEventListener('click', closeModal);
+    }
+    window.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !modal.classList.contains('modal--hidden')) closeModal();
+    });
+  }
+
+  /* Hiển thị hộp thoại cảm ơn gọn gàng khi người dùng gửi góp ý. */
   form.addEventListener('submit', function (event) {
     event.preventDefault();
-    const status = document.querySelector('#contact-status');
-    status.textContent = t('Đã gửi');
-    status.className = 'form-status form-status--success';
+    if (!form.reportValidity()) return;
+    if (status) {
+      status.textContent = '';
+      status.className = 'form-status';
+    }
+    form.reset();
+    openModal();
   });
 })();

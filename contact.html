@@ -27,7 +27,7 @@
       <div class="site-header__inner">
         <a class="brand" href="index.html">
           <span class="brand__mark" aria-hidden="true">漢</span>
-          <span><span class="brand__title">KANJI SKY DEFENSE</span><span class="brand__subtitle">Typing defense station</span></span>
+          <span><span class="brand__title">KANJI SKY DEFENSE</span><span class="brand__subtitle">Trạm phòng thủ gõ phím</span></span>
         </a>
         <div class="site-header__actions">
           <nav class="page-nav" aria-label="Điều hướng chính">
@@ -49,7 +49,7 @@
         <p class="contact-page__description">Nếu bạn gặp lỗi khi sử dụng trang web, hãy gửi phản hồi của bạn cho chúng tôi nhé, mọi ý kiến đều được trân trọng và được xem xét để cải thiện trải nghiệm người dùng hơn nữa.</p>
       </section>
 
-      <!-- Các trường nhập có nhãn; JavaScript hiển thị kết quả xử lý ngay tại form. -->
+      <!-- Các trường nhập có nhãn; JavaScript hiển thị hộp thoại cảm ơn sau khi gửi. -->
       <form id="contact-form" class="contact-form">
         <div class="field"><label class="field__label" for="contact-name">Tên của bạn</label><input id="contact-name" class="field__control" name="name" autocomplete="name" required></div>
         <div class="field"><label class="field__label" for="contact-email">Email</label><input id="contact-email" class="field__control" name="email" type="email" autocomplete="email" required></div>
@@ -58,6 +58,18 @@
         <p id="contact-status" class="form-status" role="status" aria-live="polite"></p>
       </form>
     </main>
+
+    <!-- Hộp thoại cảm ơn ngắn gọn sau khi người dùng gửi góp ý. -->
+    <div id="contact-modal" class="modal modal--hidden" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title" aria-describedby="contact-modal-copy">
+      <div class="modal__backdrop" data-modal-close></div>
+      <div class="modal__card modal__card--compact">
+        <button class="modal__close" type="button" data-modal-close aria-label="Đóng"><svg class="icon icon--x" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-x"></use></svg></button>
+        <div class="modal__icon" aria-hidden="true"><svg class="icon icon--mail-check" viewBox="0 0 24 24" width="20" height="20" focusable="false"><use href="#icon-mail-check"></use></svg></div>
+        <h2 id="contact-modal-title" class="modal__title">Cảm ơn bạn đã góp ý!</h2>
+        <p id="contact-modal-copy" class="modal__description">Phản hồi của bạn đã được ghi nhận. Chúng tôi rất trân trọng sự đóng góp của bạn.</p>
+        <button id="contact-modal-done" class="button button--accent button--full modal__action" type="button" data-modal-close>Đóng</button>
+      </div>
+    </div>
 
     <!-- Năm bản quyền và liên kết tới các trang thông tin dùng chung. -->
     <footer class="site-footer"><span class="site-footer__copyright">© <span data-year></span> Kanji Sky Defense</span><nav class="site-footer__nav" aria-label="Thông tin"><a class="site-footer__link" href="about.html">Giới thiệu</a><a class="site-footer__link" href="contact.html">Liên hệ</a><a class="site-footer__link" href="privacy.html">Quyền riêng tư</a></nav></footer>

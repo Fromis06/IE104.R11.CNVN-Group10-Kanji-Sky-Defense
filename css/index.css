@@ -43,10 +43,11 @@
 
 /* Các lựa chọn tốc độ rơi. */
 #home-page .speed-selector { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; margin-top: 1rem; }
-#home-page .speed-selector__option { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; gap: .25rem; padding: .85rem; border: 1px solid var(--line-soft); border-radius: 2px; color: var(--muted); background: var(--surface-soft); text-align: left; transition: .16s ease; }
-#home-page .speed-selector__icon { display: inline-block; min-height: 20px; font-family: var(--font-mono); font-size: 1rem; font-weight: 700; line-height: 20px; letter-spacing: .04em; }
+#home-page .speed-selector__option { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; gap: .3rem; padding: .85rem; border: 1px solid var(--line-soft); border-radius: 2px; color: var(--muted); background: var(--surface-soft); text-align: left; transition: .16s ease; }
+#home-page .speed-selector__icon { display: inline-flex; min-height: 22px; align-items: center; color: var(--icon-muted); font-size: 1.15rem; }
 #home-page .speed-selector__description { max-width: 100%; overflow: hidden; color: var(--dim); font-size: .78rem; text-overflow: ellipsis; white-space: nowrap; }
 #home-page .speed-selector__option--active { border-color: var(--launch); color: var(--launch-hover); background: color-mix(in srgb, var(--launch) 10%, transparent); }
+#home-page .speed-selector__option--active .speed-selector__icon { color: var(--launch-hover); }
 
 /* Công tắc HP và bộ tăng giảm số mạng. */
 #home-page .hp-toggle { display: inline-flex; align-items: center; gap: .55rem; padding: .45rem .7rem; border: 1px solid var(--line-soft); border-radius: 999px; color: var(--muted); background: transparent; font-size: .8rem; }
@@ -104,12 +105,6 @@
   background: radial-gradient(circle at 50% 100%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 46%),
               radial-gradient(circle at 50% 50%, transparent 20%, color-mix(in srgb, black 42%, transparent) 100%);
 }
-
-#home-page .game-field {
-  position: relative;
-  overflow: hidden;
-}
-
 #home-page .game-field::after {
   position: absolute;
   top: 50%;
@@ -130,6 +125,26 @@
   mix-blend-mode: screen;
   animation: sonar-ping 4s cubic-bezier(0.1, 0.5, 0.4, 1) infinite;
 }
+/* Điều chỉnh sắc độ sân chơi ở giao diện sáng để rõ chữ và cân bằng độ tương phản. */
+:root[data-theme="light"] #home-page .game-field {
+  background-color: #f4eee0;
+  background-image:
+    linear-gradient(rgba(163, 72, 15, .09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(163, 72, 15, .09) 1px, transparent 1px),
+    linear-gradient(180deg, #efe7d6 0%, #f9f5eb 54%, #efe5d0 100%);
+  background-size: 48px 48px, 48px 48px, 100% 100%;
+}
+:root[data-theme="light"] #home-page .game-field::before {
+  background: radial-gradient(circle at 50% 100%, rgba(200, 90, 23, .11), transparent 48%),
+              radial-gradient(circle at 50% 50%, transparent 45%, rgba(92, 70, 38, .12) 100%);
+}
+:root[data-theme="light"] #home-page .game-field::after {
+  border-color: rgba(200, 90, 23, .28);
+  background: radial-gradient(circle, transparent 58%, rgba(200, 90, 23, .08) 95%, transparent 100%);
+  mix-blend-mode: normal;
+}
+:root[data-theme="light"] #home-page .game-field__sector { color: var(--muted); }
+:root[data-theme="light"] #home-page .game-overlay { background: rgba(246, 241, 230, .86); }
 
 @keyframes sonar-ping {
   0% {

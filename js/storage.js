@@ -139,6 +139,60 @@
     localStorage.removeItem(KEYS.session);
   }
 
+  /* Đặt lại mật khẩu cục bộ theo email đã đăng ký trên trình duyệt hiện tại. */
+  async function resetPassword(email, newPassword) {
+    const normalizedEmail = normalizeEmail(email);
+    const password = String(newPassword || '');
+    if (password.length < 6) throw new Error('Mật khẩu cần ít nhất 6 ký tự.');
+    const users = getUsers();
+    let index = -1;
+    for (let position = 0; position < users.length; position += 1) {
+      if (users[position].email === normalizedEmail) {
+        index = position;
+        break;
+      }
+    }
+    if (index < 0) throw new Error('Không tìm thấy tài khoản với email này.');
+    const current = users[index];
+    const updated = {};
+    const keys = Object.keys(current);
+    for (let position = 0; position < keys.length; position += 1) updated[keys[position]] = current[keys[position]];
+    updated.passwordHash = await hashPassword(password);
+    users[index] = updated;
+    saveUsers(users);
+    return users[index];
+  }
+
+  /* Đổi mật khẩu cục bộ cho tài khoản đang đăng nhập sau khi xác nhận mật khẩu cũ. */
+  async function changePassword(currentPassword, newPassword) {
+    const id = getSessionId();
+    if (!id) throw new Error('Không thể hoàn tất thao tác.');
+    const users = getUsers();
+    let index = -1;
+    for (let position = 0; position < users.length; position += 1) {
+      if (users[position].id === id) {
+        index = position;
+        break;
+      }
+    }
+    if (index < 0) throw new Error('Không thể hoàn tất thao tác.');
+    const current = users[index];
+    const oldPassword = String(currentPassword || '');
+    const nextPassword = String(newPassword || '');
+    if (current.passwordHash !== await hashPassword(oldPassword)) {
+      throw new Error('Mật khẩu hiện tại chưa đúng.');
+    }
+    if (nextPassword.length < 6) throw new Error('Mật khẩu cần ít nhất 6 ký tự.');
+    if (nextPassword === oldPassword) throw new Error('Mật khẩu mới phải khác mật khẩu hiện tại.');
+    const updated = {};
+    const keys = Object.keys(current);
+    for (let position = 0; position < keys.length; position += 1) updated[keys[position]] = current[keys[position]];
+    updated.passwordHash = await hashPassword(nextPassword);
+    users[index] = updated;
+    saveUsers(users);
+    return users[index];
+  }
+
   /* Kiểm tra dữ liệu chỉnh sửa, email trùng và ngày sinh trước khi lưu hồ sơ. */
   function updateAccount(changes) {
     const id = getSessionId();
@@ -270,7 +324,15 @@
 
   /* API lưu trữ chia theo tài khoản, danh sách ôn và hoạt động học. */
   window.KanjiStorage = Object.freeze({
-    auth: Object.freeze({ currentUser: currentUser, login: login, logout: logout, register: register, updateAccount: updateAccount }),
+    auth: Object.freeze({
+      changePassword: changePassword,
+      currentUser: currentUser,
+      login: login,
+      logout: logout,
+      register: register,
+      resetPassword: resetPassword,
+      updateAccount: updateAccount,
+    }),
     review: Object.freeze({ clear: clearReview, load: loadReview, remove: removeReviewWord, save: saveReview }),
     activity: Object.freeze({ get: currentActivity, localDateKey: localDateKey, recordAttempt: recordAttempt, recordSession: recordSession }),
   });

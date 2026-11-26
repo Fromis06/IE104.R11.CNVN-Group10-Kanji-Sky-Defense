@@ -29,7 +29,7 @@
       <div class="site-header__inner">
         <a class="brand" href="index.html">
           <span class="brand__mark" aria-hidden="true">漢</span>
-          <span><span class="brand__title">KANJI SKY DEFENSE</span><span class="brand__subtitle">Typing defense station</span></span>
+          <span><span class="brand__title">KANJI SKY DEFENSE</span><span class="brand__subtitle">Trạm phòng thủ gõ phím</span></span>
         </a>
         <div class="site-header__actions">
           <nav class="page-nav" aria-label="Điều hướng chính"><a class="page-nav__link" href="index.html">Chơi</a><a class="page-nav__link" href="about.html">Giới thiệu</a><a class="page-nav__link" href="contact.html">Liên hệ</a><a class="page-nav__link" href="privacy.html">Quyền riêng tư</a></nav>
@@ -57,11 +57,11 @@
           </div>
 
           <nav class="profile-sidebar__menu" aria-label="Trang cá nhân">
-            <button class="profile-sidebar__menu-item profile-sidebar__menu-item--active" type="button" data-user-panel="account" aria-pressed="true"><svg class="profile-sidebar__icon icon icon--profile" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-profile"></use></svg><b class="profile-sidebar__label">Tài khoản</b></button>
+            <button class="profile-sidebar__menu-item profile-sidebar__menu-item--active" type="button" data-user-panel="account" aria-pressed="true"><svg class="profile-sidebar__icon icon icon--user" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-user"></use></svg><b class="profile-sidebar__label">Tài khoản</b></button>
             <button class="profile-sidebar__menu-item" type="button" data-user-panel="settings" aria-pressed="false"><svg class="profile-sidebar__icon icon icon--settings" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-settings"></use></svg><b class="profile-sidebar__label">Cài đặt</b></button>
           </nav>
 
-          <button id="user-logout" class="profile-sidebar__logout" type="button"><svg class="profile-sidebar__icon icon icon--logout" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-logout"></use></svg><b class="profile-sidebar__label">Đăng xuất</b></button>
+          <button id="user-logout" class="profile-sidebar__logout" type="button"><svg class="profile-sidebar__icon icon icon--log-out" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-log-out"></use></svg><b class="profile-sidebar__label">Đăng xuất</b></button>
         </aside>
 
         <div class="account-layout__content">
@@ -145,10 +145,42 @@
               <label class="preference"><b class="preference__label">Hiển thị phím tắt</b><span class="preference__switch"><input id="show-shortcuts" class="preference__input" type="checkbox"><span class="preference__track" aria-hidden="true"></span></span></label>
               <label class="preference"><b class="preference__label">Xác nhận trước khi xóa</b><span class="preference__switch"><input id="confirm-delete" class="preference__input" type="checkbox"><span class="preference__track" aria-hidden="true"></span></span></label>
             </section>
+
+            <section class="settings-card">
+              <h2 class="settings-card__title">Bảo mật</h2>
+              <div class="settings-row">
+                <div class="settings-row__info">
+                  <b class="settings-row__label">Mật khẩu</b>
+                  <p class="settings-row__description">Cập nhật mật khẩu cho tài khoản lưu trên trình duyệt này.</p>
+                </div>
+                <button id="change-password-button" class="button button--secondary" type="button"><svg class="icon icon--key-round" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-key-round"></use></svg><span>Đổi mật khẩu</span></button>
+              </div>
+            </section>
           </section>
         </div>
       </div>
     </main>
+
+    <!-- Hộp thoại đổi mật khẩu cục bộ trong mục cài đặt. -->
+    <div id="password-modal" class="modal modal--hidden" role="dialog" aria-modal="true" aria-labelledby="password-modal-title" aria-describedby="password-modal-copy">
+      <div class="modal__backdrop" data-modal-close></div>
+      <div class="modal__card">
+        <button class="modal__close" type="button" data-modal-close aria-label="Đóng"><svg class="icon icon--x" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><use href="#icon-x"></use></svg></button>
+        <div class="modal__header">
+          <div class="modal__icon" aria-hidden="true"><svg class="icon icon--key-round" viewBox="0 0 24 24" width="20" height="20" focusable="false"><use href="#icon-key-round"></use></svg></div>
+          <p class="eyebrow">Bảo mật</p>
+          <h2 id="password-modal-title" class="modal__title">Đổi mật khẩu</h2>
+          <p id="password-modal-copy" class="modal__description">Thay đổi mật khẩu cục bộ cho tài khoản hiện tại.</p>
+        </div>
+        <form id="password-form" class="modal__form">
+          <div class="field"><label class="field__label" for="current-password">Mật khẩu hiện tại</label><input id="current-password" class="field__control" name="currentPassword" type="password" autocomplete="current-password" minlength="6" required></div>
+          <div class="field"><label class="field__label" for="new-password">Mật khẩu mới</label><input id="new-password" class="field__control" name="newPassword" type="password" autocomplete="new-password" minlength="6" required></div>
+          <div class="field"><label class="field__label" for="confirm-new-password">Xác nhận mật khẩu mới</label><input id="confirm-new-password" class="field__control" name="confirmPassword" type="password" autocomplete="new-password" minlength="6" required></div>
+          <button class="button button--accent button--large button--full" type="submit">Cập nhật mật khẩu</button>
+          <p id="password-status" class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
 
     <!-- Năm bản quyền và liên kết tới các trang thông tin dùng chung. -->
     <footer class="site-footer"><span class="site-footer__copyright">© <span data-year></span> Kanji Sky Defense</span><nav class="site-footer__nav" aria-label="Thông tin"><a class="site-footer__link" href="about.html">Giới thiệu</a><a class="site-footer__link" href="contact.html">Liên hệ</a><a class="site-footer__link" href="privacy.html">Quyền riêng tư</a></nav></footer>
