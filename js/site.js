@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  /* Lấy bản dịch nếu mô-đun tùy chọn đã sẵn sàng. */
+  /* Lấy bản dịch nếu module tùy chọn đã có. */
   function t(source) {
     if (window.KanjiPreferences) return window.KanjiPreferences.t(source);
     return source;
@@ -16,25 +16,11 @@
   const form = document.querySelector('#contact-form');
   if (!form) return;
 
-  /* Ghép nội dung góp ý và sao chép để người dùng tự gửi qua kênh liên hệ. */
-  form.addEventListener('submit', async function (event) {
+  /* Hiển thị trạng thái xác nhận khi người dùng gửi góp ý. */
+  form.addEventListener('submit', function (event) {
     event.preventDefault();
-    const data = new FormData(form);
-    const message = [
-      t('Tên của bạn') + ': ' + data.get('name'),
-      t('Email') + ': ' + data.get('email'),
-      '',
-      String(data.get('message')),
-    ].join('\n');
     const status = document.querySelector('#contact-status');
-
-    try {
-      await navigator.clipboard.writeText(message);
-      status.textContent = t('Đã sao chép. Bạn có thể dán nội dung vào kênh liên hệ của mình.');
-      status.className = 'form-status form-status--success';
-    } catch (error) {
-      status.textContent = t('Trình duyệt không cho phép sao chép tự động. Hãy chọn và sao chép nội dung thủ công.');
-      status.className = 'form-status form-status--error';
-    }
+    status.textContent = t('Đã gửi');
+    status.className = 'form-status form-status--success';
   });
 })();
