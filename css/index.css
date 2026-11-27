@@ -43,10 +43,12 @@
 
 /* Các lựa chọn tốc độ rơi. */
 #home-page .speed-selector { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; margin-top: 1rem; }
-#home-page .speed-selector__option { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; gap: .3rem; padding: .85rem; border: 1px solid var(--line-soft); border-radius: 2px; color: var(--muted); background: var(--surface-soft); text-align: left; transition: .16s ease; }
+#home-page .speed-selector__option { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; gap: .3rem; padding: .85rem; border: 1px solid var(--line-soft); border-radius: 2px; color: var(--muted); background: var(--surface-soft); text-align: left; transition: border-color .16s ease, background .16s ease; }
+#home-page .speed-selector__option:hover { border-color: var(--line); }
 #home-page .speed-selector__icon { display: inline-flex; min-height: 22px; align-items: center; color: var(--icon-muted); font-size: 1.15rem; }
 #home-page .speed-selector__description { max-width: 100%; overflow: hidden; color: var(--dim); font-size: .78rem; text-overflow: ellipsis; white-space: nowrap; }
-#home-page .speed-selector__option--active { border-color: var(--launch); color: var(--launch-hover); background: color-mix(in srgb, var(--launch) 10%, transparent); }
+#home-page .speed-selector__option--active,
+#home-page .speed-selector__option--active:hover { border-color: var(--launch); color: var(--launch-hover); background: color-mix(in srgb, var(--launch) 10%, transparent); }
 #home-page .speed-selector__option--active .speed-selector__icon { color: var(--launch-hover); }
 
 /* Công tắc HP và bộ tăng giảm số mạng. */
