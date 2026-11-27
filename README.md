@@ -1,97 +1,68 @@
 # Kanji Sky Defense (漢字スカイディフェンス)
 
-Kanji Sky Defense là website học Kanji theo mô hình game phòng thủ 2D. Người chơi bảo vệ phi thuyền ở cuối màn hình bằng cách đọc Kanji trên các mục tiêu đang rơi và nhập cách đọc tương ứng bằng **Hiragana** hoặc **Romaji**.
+Kanji Sky Defense là ứng dụng web học Kanji kết hợp trò chơi phòng thủ 2D. Trong game, bạn bảo vệ phi thuyền ở cuối màn hình bằng cách đọc Kanji trên các mục tiêu đang rơi và nhập cách đọc tương ứng bằng **Hiragana** hoặc **Romaji**.
 
-Dự án được xây dựng cho môn **IE104 - Internet và Công nghệ Web** bằng HTML5, CSS3 và JavaScript thuần. Website không dùng framework, thư viện giao diện, trình biên dịch hay backend; toàn bộ game và dữ liệu học tập chạy trực tiếp trong trình duyệt.
+Dự án được xây dựng cho môn **IE104 - Internet và Công nghệ Web** bằng HTML5, CSS3 và JavaScript thuần (Vanilla JS), không sử dụng framework, thư viện giao diện hay backend. Toàn bộ logic game và dữ liệu học tập đều chạy và lưu trữ trực tiếp trên trình duyệt.
 
 ## Trạng thái dự án
 
-Phiên bản hiện tại đã hoàn thành MVP và có thể chơi được từ đầu đến cuối.
-
 | Hạng mục | Trạng thái |
 | --- | --- |
-| Thiết lập bộ từ, chế độ, tốc độ và HP | Đã có |
-| Game phòng thủ bằng Canvas 2D | Đã có |
-| Nhập Hiragana bằng IME | Đã có |
-| Chuyển Romaji sang Hiragana theo thời gian thực | Đã có |
-| Study, Challenge và Endless | Đã có |
-| Điểm, combo, HP, tạm dừng và chơi lại | Đã có |
-| Lưu và chơi lại các từ cần ôn | Đã có |
-| Trang Giới thiệu và Liên hệ | Đã có |
-| Đăng ký, đăng nhập và đăng xuất cục bộ | Đã có |
-| Trang cá nhân, chỉnh sửa tài khoản và ảnh đại diện | Đã có |
-| Thống kê và biểu đồ học theo tuần/tháng | Đã có |
-| Tìm kiếm gần đúng trong thư viện từ đã quên | Đã có |
-| Theme sáng/tối và giao diện Việt/Anh/Nhật | Đã có |
-| Trang báo lỗi 404 | Đã có |
-| Trang Privacy mô tả localStorage và cookie | Đã có |
+| Thiết lập bộ từ, chế độ chơi, tốc độ và HP | Hoàn thành |
+| Game phòng thủ bằng HTML5 Canvas 2D | Hoàn thành |
+| Nhập Hiragana trực tiếp bằng bộ gõ IME | Hoàn thành |
+| Chuyển đổi Romaji sang Hiragana theo thời gian thực | Hoàn thành |
+| 3 chế độ chơi: Study, Challenge và Endless | Hoàn thành |
+| Hệ thống tính điểm, combo, HP, tạm dừng và chơi lại | Hoàn thành |
+| Lưu trữ và ôn tập lại các từ trả lời sai/bỏ lỡ | Hoàn thành |
+| Các trang thông tin (Giới thiệu, Liên hệ, Chính sách, 404) | Hoàn thành |
+| Đăng ký, đăng nhập và quản lý phiên cục bộ | Hoàn thành |
+| Trang cá nhân, chỉnh sửa hồ sơ và ảnh đại diện | Hoàn thành |
+| Thống kê tiến độ và biểu đồ học tập theo tuần/tháng | Hoàn thành |
+| Tìm kiếm gần đúng trong thư viện từ đã quên | Hoàn thành |
+| Hỗ trợ giao diện Sáng/Tối và đa ngôn ngữ (Việt/Anh/Nhật) | Hoàn thành |
 
-## Tính năng đã triển khai
+## Tính năng chính
 
 ### 1. Thiết lập trước khi chơi
-
-- Có sẵn một bộ mẫu gồm 12 từ để người dùng có thể chơi ngay.
-- Cho phép tải lên bộ từ riêng bằng file CSV UTF-8.
-- Cho phép tải file CSV mẫu từ website.
-- Hiển thị tóm tắt cấu hình trước khi bắt đầu: số từ, chế độ, tốc độ và HP.
-- Có ba mức tốc độ rơi, hiển thị theo thời gian một thẻ đi từ đầu màn hình tới Vạch phòng thủ:
-  - **Dễ:** khoảng 24 giây.
-  - **Vừa:** khoảng 16 giây.
-  - **Khó:** khoảng 11 giây.
-- Vận tốc được tính theo chiều cao vùng chơi để thời gian trên giữ ổn định ở các kích thước màn hình.
-- HP có thể điều chỉnh từ 1 đến 20 ở những chế độ sử dụng HP.
+- Tích hợp sẵn bộ 12 từ mẫu để trải nghiệm ngay.
+- Hỗ trợ tải lên bộ từ vựng cá nhân qua định dạng CSV (UTF-8) và cung cấp sẵn file CSV mẫu để tải về.
+- Hiển thị tóm tắt cấu hình trước khi vào màn chơi (số lượng từ, chế độ, tốc độ, HP).
+- Ba mức tốc độ rơi tính theo thời gian mục tiêu đi từ đỉnh màn hình xuống Vạch phòng thủ (vận tốc tự động điều chỉnh theo chiều cao khung hình):
+  - **Dễ:** ~24 giây.
+  - **Vừa:** ~16 giây.
+  - **Khó:** ~11 giây.
+- Tùy chỉnh HP từ 1 đến 20 ở các chế độ có giới hạn máu.
 
 ### 2. Ba chế độ chơi
 
-| Chế độ | Luật chơi hiện tại |
+| Chế độ | Luật chơi |
 | --- | --- |
-| **Study** | Không giới hạn HP. Wave kết thúc sau khi toàn bộ từ đã bị tiêu diệt hoặc vượt Vạch phòng thủ. |
-| **Challenge** | Luôn sử dụng HP. Người chơi phải hoàn thành bộ từ trước khi HP về 0. |
-| **Endless** | Bộ từ được xáo trộn và lặp liên tục. Người chơi có thể bật hoặc tắt HP. |
+| **Study** | Không giới hạn HP. Màn chơi kết thúc khi toàn bộ từ vựng đã được xử lý hoặc rơi qua Vạch phòng thủ. |
+| **Challenge** | Bắt buộc dùng HP. Hoàn thành toàn bộ bộ từ trước khi HP giảm về 0. |
+| **Endless** | Bộ từ được xáo trộn và lặp lại vô tận. Cho phép bật hoặc tắt giới hạn HP. |
 
-Trong các chế độ có HP, mỗi mục tiêu vượt Vạch phòng thủ làm mất 1 HP. Trả lời sai không trừ HP ngay nhưng làm mất combo và đưa từ đó vào danh sách Học lại.
+Ở các chế độ dùng HP, mỗi mục tiêu lọt qua Vạch phòng thủ sẽ trừ 1 HP. Nhập sai đáp án không trừ HP nhưng sẽ ngắt chuỗi combo và tự động đưa từ đó vào danh sách **Học lại**.
 
 ### 3. Cơ chế game phòng thủ
-
-- Game được vẽ bằng HTML5 Canvas và cập nhật bằng `requestAnimationFrame`.
-- Chuyển động dựa trên thời gian thực (`deltaTime`), không phụ thuộc trực tiếp vào tốc độ khung hình.
-- Tối đa 5 mục tiêu xuất hiện cùng lúc; mục tiêu mới được sinh theo nhịp khoảng 1,65 giây.
-- Phi thuyền và Vạch phòng thủ nằm ở cuối màn hình.
-- Mục tiêu hiện tại có viền sáng, đường ngắm, thanh tiến độ và phần xem trước cách đọc.
-- Game tự chọn mục tiêu nguy hiểm nhất, tức mục tiêu đang ở gần Vạch phòng thủ nhất.
-- Có thể đổi mục tiêu bằng phím `Tab` hoặc nút **Đổi mục tiêu**.
-- Khi tiêu diệt mục tiêu, game tự chuyển sang mục tiêu nguy hiểm tiếp theo.
-- Trả lời đúng tạo laser và hiệu ứng hạt, tăng điểm và combo.
-- Điểm cho một đáp án đúng được tính theo công thức:
-
+- Render đồ họa bằng HTML5 Canvas và cập nhật khung hình qua `requestAnimationFrame` kết hợp `deltaTime` để đảm bảo tốc độ ổn định trên mọi tần số quét màn hình.
+- Tối đa 5 mục tiêu xuất hiện cùng lúc, nhịp sinh mục tiêu mới khoảng 1,65 giây.
+- Tự động khóa mục tiêu nguy hiểm nhất (gần Vạch phòng thủ nhất) với hiệu ứng viền sáng, đường ngắm, thanh tiến độ và xem trước cách đọc.
+- Hỗ trợ chuyển đổi mục tiêu linh hoạt bằng phím `Tab` hoặc nút **Đổi mục tiêu**.
+- Công thức tính điểm cho mỗi đáp án đúng:
   ```text
-  số ký tự Hiragana × 100 + min(combo, 10) × 20
+  Điểm = (Số ký tự Hiragana × 100) + (min(combo, 10) × 20)
   ```
+- Hỗ trợ tạm dừng bằng phím `Escape`, nút trên giao diện hoặc tự động tạm dừng khi người dùng chuyển tab/rời khỏi màn chơi.
 
-- Có HUD hiển thị chế độ, HP, điểm, combo và số từ còn lại hoặc số mục tiêu đang rơi.
-- Có các trạng thái tạm dừng, hoàn thành wave và Game Over.
-- Có thể tạm dừng bằng nút trên giao diện hoặc phím `Escape`.
-- Khi rời màn chơi trong lúc game đang chạy, game tự chuyển sang trạng thái tạm dừng.
+### 4. Bộ xử lý nhập liệu Hiragana & Romaji
+- Theo dõi sự kiện `composition` của trình duyệt để tương thích tốt với bộ gõ tiếng Nhật (IME), tránh chấm điểm nhầm khi người dùng đang ghép chữ.
+- Chấp nhận đồng thời Hiragana, Katakana (tự động quy đổi về Hiragana) và Romaji (chuyển đổi trực tiếp sang Hiragana kèm bản xem trước).
+- Xử lý đầy đủ các quy tắc biến âm tiếng Nhật: âm ngắt (`gakkou` → `がっこう`), âm ghép (`kya` → `きゃ`, `shu` → `しゅ`), âm mũi `ん` (`n`, `nn`, `n'`) và các âm mở rộng (`fa`, `vi`, `she`, `che`).
+- Chuẩn hóa chuỗi bằng Unicode NFKC, loại bỏ khoảng trắng và dấu `・` trước khi đối chiếu đáp án.
 
-### 4. Nhập Hiragana và Romaji
-
-- Dùng ô nhập HTML để hỗ trợ Japanese IME ổn định.
-- Theo dõi sự kiện composition của IME để không kiểm tra chuỗi khi người dùng vẫn đang ghép ký tự.
-- Chấp nhận Hiragana trực tiếp, Katakana và Romaji.
-- Katakana được chuẩn hóa về Hiragana trước khi so sánh.
-- Romaji được chuyển sang Hiragana theo thời gian thực và hiển thị bản xem trước.
-- Hỗ trợ các cách viết phổ biến:
-  - Âm ngắt như `gakkou` → `がっこう`.
-  - Âm ghép như `kya` → `きゃ`, `shu` → `しゅ`, `cho` → `ちょ`.
-  - Âm `ん` qua `n`, `nn` hoặc `n'` tùy ngữ cảnh.
-  - Một số âm mở rộng như `fa`, `vi`, `she`, `che`.
-- Chuỗi nhập được chuẩn hóa Unicode NFKC, bỏ khoảng trắng và dấu `・` trước khi so sánh.
-- Chỉ chấm đáp án khi người chơi nhấn `Enter` hoặc nút **Xác nhận**.
-- Trả lời sai sẽ xóa ô nhập, đặt combo về 0 và lưu từ vào Học lại.
-
-### 5. Nạp và kiểm tra CSV
-
-File CSV phải có đúng hai cột theo thứ tự sau:
+### 5. Định dạng và kiểm tra file CSV
+File CSV đầu vào yêu cầu cấu trúc 2 cột theo đúng thứ tự:
 
 ```csv
 kanji,hiragana
@@ -100,238 +71,129 @@ kanji,hiragana
 学校,がっこう
 ```
 
-Quy tắc xử lý hiện tại:
+- Hỗ trợ mã hóa UTF-8 (bao gồm UTF-8 BOM) và chuẩn escape dấu ngoặc kép của CSV.
+- Tự động lọc bỏ dòng trống, dòng thiếu dữ liệu và các cặp từ trùng lặp.
+- Giới hạn dung lượng tối đa 2 MB và tối đa 5.000 từ hợp lệ mỗi lần nạp.
 
-- Đọc file UTF-8 và chấp nhận UTF-8 BOM.
-- Dòng đầu phải là chính xác `kanji,hiragana` (không phân biệt chữ hoa/chữ thường ở tên cột).
-- Bỏ qua dòng trống, dòng thiếu Kanji hoặc thiếu Hiragana.
-- Hỗ trợ trường CSV đặt trong dấu ngoặc kép và dấu ngoặc kép được escape theo chuẩn CSV.
-- Tự loại bỏ các cặp `kanji` - `hiragana` trùng nhau.
-- Giới hạn tối đa 5.000 từ hợp lệ.
-- Từ chối file lớn hơn 2 MB.
-- Hiển thị thông báo dễ hiểu khi file sai định dạng hoặc không có dữ liệu hợp lệ.
+### 6. Hệ thống Học lại (Ôn tập cục bộ)
+- Tự động lưu các từ trả lời sai hoặc bỏ lỡ vào `localStorage` (khóa `kanji-sky-defense-review-v1`).
+- Cộng dồn số lần sai (`mistakeCount`) cho các từ lặp lại và sắp xếp danh sách ưu tiên từ cao xuống thấp.
+- Cho phép tạo nhanh một màn chơi Study chỉ gồm các từ trong danh sách cần ôn tập.
 
-> Website chỉ dùng hai cột đầu vào trên. Nghĩa tiếng Việt, câu ví dụ, cấp độ JLPT và các cột mở rộng chưa được hỗ trợ ở phiên bản hiện tại.
+### 7. Hệ thống trang và trải nghiệm người dùng
+- **8 trang HTML độc lập:** Trang chủ/Game (`index.html`), Giới thiệu (`about.html`), Liên hệ (`contact.html`), Đăng nhập (`login.html`), Đăng ký (`register.html`), Cá nhân (`user.html`), Chính sách dữ liệu (`privacy.html`) và Trang báo lỗi (`404.html`).
+- **Giao diện Responsive:** Tương thích từ desktop đến thiết bị di động (các mốc breakpoint 900px và 680px) bằng Flexbox và CSS Grid.
+- **Tối ưu hiển thị:** Canvas tự động điều chỉnh kích thước và giới hạn mật độ điểm ảnh (`devicePixelRatio`); hỗ trợ tùy chọn giảm chuyển động (`prefers-reduced-motion`).
+- **Độc lập tài nguyên:** Sử dụng bộ icon SVG sprite nội tuyến và font hệ thống, không phụ thuộc vào CDN hay tài nguyên bên ngoài.
 
-### 6. Học lại bằng dữ liệu cục bộ
+### 8. Tài khoản cục bộ và Trang cá nhân
+- Mô phỏng luồng đăng ký, đăng nhập và lưu phiên làm việc bằng `localStorage`. Mật khẩu được băm bằng Web Crypto API trước khi lưu trữ.
+- Trang cá nhân cung cấp giao diện quản lý hồ sơ (đổi tên, email, ngày sinh, ảnh đại diện) và khu vực Cài đặt (giao diện Sáng/Tối, ngôn ngữ Việt/Anh/Nhật, bật/tắt phím tắt, xác nhận xóa).
+- Thống kê 4 chỉ số học tập (số phiên, số từ đã luyện, độ chính xác, chuỗi ngày liên tiếp) kèm biểu đồ đường theo dõi tiến độ 7 ngày hoặc 30 ngày gần nhất.
+- Thư viện từ đã quên tách biệt theo từng tài khoản, hỗ trợ tìm kiếm gần đúng theo Kanji, Hiragana hoặc Romaji.
 
-- Từ được đưa vào Học lại khi người chơi trả lời sai hoặc để mục tiêu vượt Vạch phòng thủ.
-- Danh sách được lưu trong `localStorage` với khóa `kanji-sky-defense-review-v1`.
-- Một từ sai nhiều lần không tạo bản ghi trùng; hệ thống tăng `mistakeCount`.
-- Danh sách được sắp xếp theo số lần cần ôn từ cao xuống thấp.
-- Thanh điều hướng hiển thị số lượng từ đang cần ôn.
-- Nút **Học ngay** tạo một wave Study chỉ từ danh sách Học lại.
-- Nút **Xóa lịch sử** yêu cầu xác nhận trước khi xóa toàn bộ dữ liệu ôn tập khi tùy chọn xác nhận xóa đang bật.
+## Hướng dẫn chơi
 
-### 7. Các trang và trải nghiệm giao diện
+1. Sử dụng bộ 12 từ có sẵn hoặc nhấn **Nạp CSV** để tải lên danh sách từ vựng của bạn.
+2. Chọn chế độ chơi (**Study**, **Challenge** hoặc **Endless**), tốc độ rơi và số lượng HP.
+3. Nhấn **Bắt đầu nhiệm vụ**.
+4. Quan sát chữ Kanji trên mục tiêu đang được khóa, gõ cách đọc bằng Hiragana hoặc Romaji rồi nhấn `Enter`.
+5. Dùng phím `Tab` để đổi mục tiêu và `Escape` để tạm dừng khi cần.
+6. Truy cập mục **Học lại** hoặc **Trang cá nhân** để ôn tập lại các từ đã quên.
 
-Website có tám trang HTML, vượt yêu cầu tối thiểu ba trang của đồ án:
+## Giới hạn của phiên bản hiện tại
 
-- `index.html`: trang chính, gồm ba màn hình Thiết lập, Chơi và Học lại.
-- `about.html`: giới thiệu mục tiêu học tập, cách chơi và ba chế độ.
-- `contact.html`: biểu mẫu chuẩn bị nội dung góp ý.
-- `login.html`: đăng nhập bằng tài khoản cục bộ.
-- `register.html`: tạo tài khoản người chơi.
-- `user.html`: thông tin tài khoản, thống kê, biểu đồ và thư viện từ đã quên.
-- `privacy.html`: chính sách lưu trữ dữ liệu cục bộ, cookie và quyền kiểm soát của người dùng.
-- `404.html`: thông báo khi đường dẫn không tồn tại.
+- Hệ thống tài khoản và dữ liệu học tập hoạt động hoàn toàn phía client (trình duyệt), chưa hỗ trợ đồng bộ đa thiết bị qua máy chủ.
+- Lịch sử học tập và danh sách ôn tập sẽ bị xóa nếu người dùng xóa dữ liệu duyệt web.
+- Trạng thái ván chơi đang diễn ra chưa được lưu lại nếu tải lại trang (`F5`).
+- Dữ liệu từ vựng hiện chỉ hỗ trợ cặp `kanji - hiragana`, chưa bao gồm nghĩa tiếng Việt, ví dụ hoặc âm thanh.
+- Biểu mẫu tại trang Liên hệ đóng gói nội dung và sao chép vào clipboard để người dùng tự gửi, chưa tích hợp dịch vụ gửi email tự động.
 
-Giao diện hiện có:
+## Công nghệ sử dụng
 
-- Bố cục responsive cho desktop, tablet và mobile với các mốc 900 px và 680 px.
-- Sử dụng Flexbox và CSS Grid cho bố cục.
-- `css/style.css` chứa token giao diện, quy tắc tổng thể, button, form, header, footer và các component dùng chung.
-- Mỗi nhóm trang nạp thêm stylesheet riêng: `index.css`, `about.css`, `contact.css`, `auth.css`, `user.css`, `privacy.css` và `404.css`.
-- Canvas tự thay đổi kích thước và giới hạn tỉ lệ điểm ảnh để hiển thị sắc nét nhưng không tiêu tốn quá nhiều tài nguyên.
-- Hỗ trợ `prefers-reduced-motion` để giảm chuyển động theo cài đặt hệ điều hành.
-- Dùng HTML semantic, nhãn `aria`, trạng thái `aria-live`, tiêu đề trang, meta description, favicon và Open Graph image.
-- Icon giao diện dùng SVG sprite nội tuyến, kế thừa `currentColor` và có kích thước mặc định để hoạt động nhất quán ở cả theme sáng/tối.
-- Không tải font, script hoặc stylesheet từ dịch vụ bên ngoài.
-
-Biểu mẫu Liên hệ hiện **không gửi dữ liệu lên máy chủ**. Khi gửi form, website chỉ ghép nội dung và sao chép vào clipboard để người dùng tự dán vào kênh liên hệ phù hợp.
-
-### 8. Tài khoản frontend và trang cá nhân
-
-- Cho phép đăng ký, đăng nhập và đăng xuất ngay trên trình duyệt.
-- Mỗi email chỉ tạo được một tài khoản trên cùng thiết bị và trình duyệt.
-- Mật khẩu được băm trước khi lưu, nhưng đây vẫn chỉ là mô phỏng frontend và không thay thế hệ thống xác thực có máy chủ.
-- Phiên đăng nhập được giữ bằng Local Storage.
-- Trang cá nhân dùng bố cục sidebar giống một trang quản lý tài khoản thông thường.
-- Cho phép cập nhật tên người dùng, email, ngày sinh và ảnh đại diện; ngày tham gia chỉ được xem, không thể chỉnh sửa.
-- Có bốn chỉ số tổng quan: số phiên học, số từ đã luyện, độ chính xác và chuỗi ngày học liên tiếp.
-- Biểu đồ đường hiển thị số từ đã luyện trong 7 ngày hoặc 30 ngày gần nhất.
-- Thống kê được ghi lại khi người chơi đã đăng nhập; lượt chơi ở chế độ khách không được cộng vào hồ sơ.
-- Mục Cài đặt cho phép chọn theme sáng/tối, ngôn ngữ Việt/Anh/Nhật, giảm chuyển động, ẩn phím tắt và bật/tắt xác nhận trước khi xóa.
-- Tùy chọn giao diện được lưu và áp dụng lại trên các trang của website.
-
-### 9. Thư viện từ đã quên và trang 404
-
-- Danh sách Học lại được tách theo từng tài khoản cục bộ; người chưa đăng nhập dùng một vùng dữ liệu khách riêng.
-- Trang cá nhân có thư viện nhỏ hiển thị Kanji, Hiragana và số lần quên.
-- Thanh tìm kiếm chấp nhận Kanji, Hiragana hoặc Romaji; kết quả được xếp theo độ gần giống và kết quả phù hợp nhất nằm đầu danh sách.
-- Có thể xóa từng từ, xóa toàn bộ thư viện hoặc bắt đầu ngay một wave ôn tập từ thư viện.
-- `404.html` hiển thị thông báo thân thiện và đường dẫn quay lại trang chơi hoặc trang cá nhân.
-
-## Cách chơi
-
-1. Dùng bộ 12 từ mẫu hoặc chọn **Nạp CSV** để dùng dữ liệu riêng.
-2. Chọn Study, Challenge hoặc Endless.
-3. Chọn tốc độ và cấu hình HP nếu chế độ yêu cầu.
-4. Nhấn **Bắt đầu nhiệm vụ**.
-5. Đọc Kanji trên mục tiêu được tô sáng.
-6. Gõ Hiragana hoặc Romaji, sau đó nhấn `Enter` để xác nhận.
-7. Nhấn `Tab` khi muốn chuyển sang mục tiêu khác và `Escape` khi muốn tạm dừng.
-8. Mở mục **Học lại** để xem hoặc chơi riêng các từ đã trả lời sai/bỏ lỡ.
-
-## Giới hạn hiện tại
-
-- Tài khoản chỉ là mô phỏng frontend, không có backend và không đồng bộ dữ liệu giữa nhiều thiết bị.
-- Dữ liệu Học lại phụ thuộc vào trình duyệt và tên miền hiện tại; xóa dữ liệu trình duyệt sẽ làm mất lịch sử.
-- Cấu hình và ván đang chơi không được khôi phục sau khi tải lại trang.
-- Chưa có nghĩa từ, câu ví dụ, gợi ý, phát âm hoặc âm thanh hiệu ứng.
-- Biểu đồ chỉ tổng hợp số từ đã luyện; chưa đo thời gian phản hồi cho từng từ.
-- Form Liên hệ chỉ sao chép nội dung, chưa gửi email hoặc lưu góp ý.
-
-## Phạm vi sản phẩm
-
-Các chức năng hiện tại đã đáp ứng phạm vi sản phẩm đã chốt. Dự án không đặt thêm lộ trình tính năng mới ngoài việc sửa lỗi, cải thiện khả năng truy cập, tối ưu hiệu năng và hoàn thiện kiểm thử.
-
-## Công nghệ và API trình duyệt
-
-| Thành phần | Vai trò |
+| Công nghệ / API | Vai trò trong dự án |
 | --- | --- |
-| HTML5 semantic | Cấu trúc tám trang, biểu mẫu, điều hướng và ô nhập hỗ trợ IME |
-| CSS3 | Theme, component giao diện, Flexbox, Grid và responsive |
-| Canvas 2D | Phi thuyền, mục tiêu, Vạch phòng thủ, laser và particle |
-| JavaScript ES6+ | State game, game loop, CSV, Romaji, sự kiện và DOM |
-| File API / Blob API | Đọc CSV, nhận ảnh đại diện và tạo CSV mẫu để tải xuống |
-| Local Storage | Lưu tài khoản, phiên đăng nhập, cài đặt, thống kê và danh sách Học lại |
-| Web Crypto API | Băm mật khẩu của tài khoản mô phỏng trước khi lưu |
-| Clipboard API | Sao chép nội dung từ form Liên hệ |
-| ResizeObserver | Đồng bộ kích thước Canvas với vùng chơi |
+| HTML5 Semantic | Xây dựng cấu trúc 8 trang, điều hướng và tối ưu hỗ trợ tiếp cận (ARIA) |
+| CSS3 | Hệ thống biến màu (Theme), bố cục Flexbox/Grid và thiết kế Responsive |
+| HTML5 Canvas 2D | Vẽ phi thuyền, mục tiêu, Vạch phòng thủ, tia laser và hiệu ứng hạt |
+| JavaScript (ES6+) | Quản lý state, game loop, bộ chuyển đổi Romaji và bộ đọc CSV |
+| Local Storage | Lưu trữ thông tin tài khoản, cài đặt giao diện, thống kê và danh sách Học lại |
+| File API & Blob API | Đọc file CSV, tải lên ảnh đại diện và xuất file CSV mẫu |
+| Web Crypto API | Băm mật khẩu người dùng trước khi lưu xuống bộ nhớ trình duyệt |
+| Clipboard API | Sao chép nhanh nội dung góp ý tại trang Liên hệ |
+| ResizeObserver | Tự động cập nhật kích thước Canvas khi vùng hiển thị thay đổi |
 
 ## Cấu trúc thư mục
 
-Toàn bộ workspace khi phát triển có cấu trúc như sau:
-
 ```text
-kanji_game/
-├── ref/
-│   ├── IE104_Project_Guide.pdf       # Yêu cầu và tiêu chí của đồ án IE104
-│   └── Báo cáo CK Web_Final.pdf      # Báo cáo mẫu tham khảo cách trình bày
-├── kanji_sky_defense_gdd.md          # Game Design Document và lộ trình sản phẩm
-├── og-generated.png                  # Ảnh Open Graph bản nguồn
-└── web/                              # Git repository và mã website triển khai
-    ├── .openai/
-    │   └── hosting.json              # Cấu hình hosting, phục vụ thư mục dist/
-    ├── css/
-    │   ├── style.css                 # Theme và component dùng chung
-    │   ├── index.css                 # Thiết lập, game và Học lại
-    │   ├── about.css                 # Trang Giới thiệu
-    │   ├── contact.css               # Trang Liên hệ
-    │   ├── auth.css                  # Trang Đăng nhập và Đăng ký
-    │   ├── user.css                  # Trang tài khoản và cài đặt
-    │   ├── privacy.css               # Trang chính sách lưu trữ dữ liệu
-    │   └── 404.css                   # Trang không tìm thấy
-    ├── assets/
-    │   └── icons/                    # Các file SVG nguồn của bộ icon giao diện
-    ├── images/
-    │   ├── favicon.svg               # Biểu tượng trên tab trình duyệt
-    │   └── og.png                    # Ảnh xem trước khi chia sẻ liên kết
-    ├── js/
-    │   ├── app.js                    # Điều phối màn hình và vòng lặp game chính
-    │   ├── auth.js                   # Giao diện đăng nhập/đăng ký/đăng xuất
-    │   ├── icons.js                  # SVG sprite và hàm tạo icon dùng chung
-    │   ├── preferences.js            # Theme, ngôn ngữ và tùy chọn giao diện
-    │   ├── site.js                   # Logic dùng cho trang thông tin/liên hệ
-    │   ├── storage.js                # Tài khoản, thống kê và Học lại cục bộ
-    │   ├── user.js                   # Trang cá nhân, biểu đồ và thư viện từ quên
-    │   └── utils.js                  # CSV, Romaji, chuẩn hóa và hàm tiện ích
-    ├── dist/                         # Bản sao tĩnh để xuất bản, không phải source of truth
-    ├── .gitignore                    # Các file/thư mục không đưa lên Git
-    ├── 404.html                      # Trang không tìm thấy
-    ├── index.html                    # Trang chính: Thiết lập, Chơi, Học lại
-    ├── about.html                    # Trang Giới thiệu
-    ├── contact.html                  # Trang Liên hệ
-    ├── login.html                    # Trang Đăng nhập
-    ├── register.html                 # Trang Đăng ký
-    ├── user.html                     # Tài khoản và tiến độ người học
-    ├── privacy.html                  # Chính sách localStorage và cookie
-    └── README.md                     # Tài liệu dự án
+├── css/
+│   ├── style.css                 # Theme và component dùng chung
+│   ├── index.css                 # Thiết lập, game và Học lại
+│   ├── about.css                 # Trang Giới thiệu
+│   ├── contact.css               # Trang Liên hệ
+│   ├── auth.css                  # Trang Đăng nhập và Đăng ký
+│   ├── user.css                  # Trang tài khoản và cài đặt
+│   ├── privacy.css               # Trang chính sách lưu trữ dữ liệu
+│   └── 404.css                   # Trang không tìm thấy
+├── assets/
+│   └── icons/                    # Các file SVG nguồn của bộ icon giao diện
+├── images/
+│   ├── favicon.svg               # Biểu tượng trên tab trình duyệt
+│   └── og.png                    # Ảnh xem trước khi chia sẻ liên kết
+├── js/
+│   ├── app.js                    # Điều phối màn hình và vòng lặp game chính
+│   ├── auth.js                   # Giao diện đăng nhập/đăng ký/đăng xuất
+│   ├── icons.js                  # SVG sprite và hàm tạo icon dùng chung
+│   ├── preferences.js            # Theme, ngôn ngữ và tùy chọn giao diện
+│   ├── site.js                   # Logic dùng cho trang thông tin/liên hệ
+│   ├── storage.js                # Tài khoản, thống kê và Học lại cục bộ
+│   ├── user.js                   # Trang cá nhân, biểu đồ và thư viện từ quên
+│   └── utils.js                  # CSV, Romaji, chuẩn hóa và hàm tiện ích
+├── .gitignore                    # Các file/thư mục không đưa lên Git
+├── 404.html                      # Trang không tìm thấy
+├── index.html                    # Trang chính: Thiết lập, Chơi, Học lại
+├── about.html                    # Trang Giới thiệu
+├── contact.html                  # Trang Liên hệ
+├── login.html                    # Trang Đăng nhập
+├── register.html                 # Trang Đăng ký
+├── user.html                     # Tài khoản và tiến độ người học
+├── privacy.html                  # Chính sách localStorage và cookie
+└── README.md                     # Tài liệu dự án
 ```
 
-`web/` là thư mục gốc của Git repository. Khi chỉnh sửa, hãy thay đổi các file nguồn trực tiếp dưới `web/`, không chỉnh tay trong `dist/` vì thư mục này chỉ là bản xuất bản được tạo lại và đã bị bỏ qua bởi Git.
+### Phân chia module JavaScript
+- `js/app.js`: Quản lý trạng thái màn chơi, vòng lặp game, sinh mục tiêu, kiểm tra va chạm, tính điểm và vẽ Canvas.
+- `js/utils.js`: Chuyển đổi Romaji/Katakana sang Hiragana, chuẩn hóa chuỗi, phân tích cú pháp CSV, tìm kiếm gần đúng và xử lý ảnh đại diện.
+- `js/storage.js`: Quản lý dữ liệu `localStorage` cho tài khoản, phiên đăng nhập, lịch sử luyện tập và danh sách từ cần ôn.
+- `js/auth.js`: Xử lý giao diện và logic biểu mẫu đăng nhập, đăng ký, đăng xuất.
+- `js/preferences.js`: Lưu trữ và áp dụng các tùy chọn giao diện (theme, ngôn ngữ, hiệu ứng chuyển động, phím tắt).
+- `js/user.js`: Xử lý thông tin cá nhân, tổng hợp dữ liệu thống kê, vẽ biểu đồ tiến độ và quản lý thư viện từ đã quên.
+- `js/icons.js`: Khởi tạo hệ thống icon SVG dùng chung trên toàn trang.
+- `js/site.js`: Xử lý các tiện ích trên các trang thông tin và sao chép nội dung biểu mẫu Liên hệ.
 
-### Trách nhiệm của các file JavaScript
+## Hướng dẫn chạy dự án
 
-`js/app.js` chỉ giữ phần điều phối chính:
+Dự án không yêu cầu cài đặt thư viện hay bước build phức tạp.
 
-- State cấu hình, game và Học lại.
-- Điều hướng giữa Thiết lập, Chơi và Học lại.
-- Sinh mục tiêu, cập nhật game loop, xử lý va chạm Vạch phòng thủ.
-- Chấm đáp án, tính điểm/combo/HP và lưu từ sai.
-- Vẽ toàn bộ game Canvas và hiệu ứng.
+**Cách 1: Mở trực tiếp**
+Mở file `index.html` bằng trình duyệt web (Chrome, Edge, Firefox...).
 
-Các phần dùng lại đã được tách riêng:
-
-- `js/utils.js`: truy vấn DOM, chuyển Romaji/Katakana sang Hiragana, chuẩn hóa đáp án, đọc CSV, tìm kiếm gần đúng, xử lý ảnh đại diện, xáo trộn danh sách và định dạng ngày.
-- `js/storage.js`: thao tác Local Storage cho tài khoản, phiên đăng nhập, thông tin người dùng, lịch sử hoạt động và thư viện từ đã quên.
-- `js/auth.js`: hiển thị trạng thái tài khoản trên header và xử lý form đăng nhập/đăng ký.
-- `js/preferences.js`: lưu và áp dụng theme, ngôn ngữ, chuyển động, phím tắt và xác nhận xóa.
-- `js/user.js`: cập nhật tài khoản/ảnh đại diện, điều phối sidebar, tổng hợp chỉ số, vẽ biểu đồ, cài đặt và tìm kiếm thư viện từ quên.
-
-`js/site.js` phụ trách:
-
-- Điền năm hiện tại ở footer của các trang thông tin.
-- Kiểm tra form Liên hệ bằng ràng buộc HTML.
-- Ghép tên, email, nội dung góp ý và sao chép vào clipboard.
-
-## Chạy dự án
-
-Không cần cài dependency hoặc chạy bước build.
-
-### Cách nhanh nhất
-
-Mở trực tiếp `index.html` bằng trình duyệt hiện đại.
-
-### Chạy bằng máy chủ tĩnh cục bộ
-
-Cách này giúp Clipboard API và việc tải file hoạt động ổn định hơn. Tại thư mục `web/`, chạy:
+**Cách 2: Chạy qua máy chủ tĩnh cục bộ (Khuyến nghị)**
+Chạy qua HTTP server giúp các API như Clipboard hoạt động ổn định hơn. Tại thư mục gốc của dự án, mở terminal và chạy:
 
 ```bash
 python -m http.server 8080
 ```
 
-Sau đó mở:
+Sau đó mở trình duyệt và truy cập địa chỉ `http://localhost:8080`.
 
-```text
-http://localhost:8080
-```
+## Quy ước mã nguồn
 
-## Yêu cầu trình duyệt
-
-Khuyến nghị dùng phiên bản mới của Chrome, Edge hoặc Firefox. Trình duyệt cần hỗ trợ Canvas 2D, ES6+, Local Storage, File API, `ResizeObserver` và Clipboard API. Nếu Clipboard API bị chặn, các phần còn lại của game vẫn hoạt động; riêng form Liên hệ sẽ yêu cầu người dùng sao chép thủ công.
-
-## Quy ước phát triển
-
-- Giữ dự án ở dạng Vanilla HTML/CSS/JavaScript theo yêu cầu môn học.
-- Dùng tên biến và hàm JavaScript theo `camelCase`.
-- Đặt tên class CSS theo BEM: block dùng `kebab-case`, element dùng `block__element`, modifier dùng `block--modifier` hoặc `block__element--modifier`.
-- Khi JavaScript thay đổi trạng thái giao diện, chỉ thêm/xóa modifier BEM tương ứng, ví dụ `mode-card--active` và `answer-form--correct`.
-- Mỗi trang phải có một `id` riêng trên thẻ `body`; mọi selector trong stylesheet riêng của trang phải bắt đầu bằng `#page-id` tương ứng.
-- Chỉ đặt style dùng chung hoặc quy tắc giao diện tổng thể trong `css/style.css`; style độc quyền của trang nằm trong file CSS mở rộng của trang đó.
-- Không chỉnh sửa `reset.css` nếu dự án bổ sung hoặc sử dụng file reset chuẩn.
-- Tách logic dùng chung và logic riêng theo trách nhiệm file.
-- Ưu tiên HTML semantic, khả năng truy cập và giao diện responsive.
-- Tạo nhánh riêng cho từng tính năng hoặc bản sửa lỗi; mô tả rõ thay đổi trong Pull Request.
-- Không commit nội dung tạo tạm hoặc bản sao xuất bản trong `dist/`.
-
-## Tài liệu tham khảo nội bộ
-
-- `../ref/IE104_Project_Guide.pdf`: yêu cầu đồ án, tiêu chí đánh giá và cấu trúc repository được khuyến nghị.
-- `../ref/Báo cáo CK Web_Final.pdf`: báo cáo mẫu dùng để tham khảo cách mô tả công nghệ, component, tính năng, kiểm thử và hướng phát triển. Nội dung MyTicket trong báo cáo mẫu không phải tính năng của Kanji Sky Defense.
-- `../kanji_sky_defense_gdd.md`: đặc tả gameplay, kiến trúc kỹ thuật và lộ trình sau MVP của Kanji Sky Defense.
+- **JavaScript:** Sử dụng chuẩn ES6+, đặt tên biến và hàm theo quy tắc `camelCase`.
+- **CSS:** Áp dụng quy tắc đặt tên class theo chuẩn BEM (`block__element--modifier`).
+- **Phân tách style:** Các quy tắc dùng chung đặt tại `css/style.css`. Mỗi trang HTML có một `id` riêng trên thẻ `<body>` và sử dụng stylesheet riêng biệt để tránh xung đột CSS.
+- **Tổ chức mã nguồn:** Tách biệt rõ ràng giữa logic giao diện, xử lý dữ liệu lưu trữ và vòng lặp trò chơi.
 
 ## Quyền riêng tư
 
-Website không gửi file CSV, tài khoản, hồ sơ, thống kê, lịch sử Học lại hoặc nội dung gameplay lên máy chủ. File CSV chỉ được đọc trong trình duyệt; toàn bộ dữ liệu người dùng chỉ được lưu trên thiết bị bằng Local Storage. Không nên dùng mật khẩu thật cho tài khoản mô phỏng này.
+Ứng dụng không thu thập hay gửi bất kỳ dữ liệu cá nhân, file CSV hoặc lịch sử học tập nào ra bên ngoài. Toàn bộ thông tin được lưu cục bộ trên trình duyệt của người dùng thông qua `localStorage`. *(Lưu ý: Không sử dụng mật khẩu thật cho tính năng tài khoản mô phỏng trên trình duyệt).*
