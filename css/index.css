@@ -240,5 +240,5 @@
   #home-page .button--target { width: 48px; min-height: 72px; padding: 0; }
   #home-page .answer-form__feedback { max-width: 55%; }
   #home-page .review-list__word { gap: .65rem; }
-  #home-page .review-list__kanji { min-width: 4.8rem; }
+  #home-page .review-list__kanji { min-width: 4.8rem; } 
 }
